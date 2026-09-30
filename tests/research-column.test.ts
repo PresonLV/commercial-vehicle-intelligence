@@ -25,10 +25,10 @@ test("deep research forces the research column and tracked companies have topics
 
 test("a four-part case is not compacted into a short lead", () => {
   const summary = [
-    "业务模式概述：这家车队把轮胎改成按公里收费，合同里包含巡检和翻新。",
-    "关键数据与做法：原文写了合同年限和单公里价格，门店按枢纽辐射配送。",
-    "竞争与风险：独立维修店仍用一次性采购，价格敏感会拖慢切换。",
-    "对国内的启示：国内车队更分散，先从干线合同客户试点，不要假设个体司机接受翻新胎。",
+    "业务模式概述：这家车队把轮胎从一次性采购改成按公里收费，合同里包含巡检、应急换胎和翻新，车队不再自己管库存。",
+    "关键数据与做法：原文写了合同年限、单公里价格和枢纽仓的配送时效，门店按枢纽辐射把轮胎送到干线停车场。",
+    "竞争与风险：独立维修店仍用一次性采购，价格敏感和翻新胎接受度会拖慢切换，短合同也难以摊薄巡检成本。",
+    "对国内的启示：国内车队更分散，个体司机多，先从干线合同客户试点，不要假设所有人接受翻新胎和按公里付费。",
   ].join("\n");
   assert.equal(keepsResearchShape(summary), true);
   const copy = finalizeCopy(
