@@ -10,6 +10,10 @@
    - rigid / straight truck = 载货车
    - dump / tipper = 自卸车
    - pay-per-kilometre / pay-per-mile / tires-as-a-service = 按公里付费（轮胎即服务）
+   - hub-and-spoke = 枢纽辐射
+   - commercial program / fleet program = 商用客户项目 / 车队项目
+   - battery-swap heavy truck = 换电重卡
+   - digital freight = 数字货运
    - retread = 翻新胎
    - uptime contract / full-service lease = 出勤率合同 / 全包租赁
    - tractor-trailer 里的 trailer = 挂车（不是“预告片”）

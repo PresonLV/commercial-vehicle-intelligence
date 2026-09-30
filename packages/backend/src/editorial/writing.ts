@@ -264,10 +264,18 @@ function answerFirstSummaryLengthOk(summary: string, input: TranslateInput): boo
 
 export const isShortTweetInput = (input: TranslateInput) => input.sourceKind === "x_search" && isShortTweet(input.mainText || input.title);
 
+const RESEARCH_LABELS = ["业务模式概述", "关键数据与做法", "竞争与风险", "对国内的启示", "模式要点与可借鉴之处"];
+
+/** A long case keeps its four labeled parts. Short news still goes through the length rule. */
+export function keepsResearchShape(summary: string): boolean {
+  return RESEARCH_LABELS.filter((label) => summary.includes(label)).length >= 2;
+}
+
 /** The length rule (compacted without another call) and the identity guard, for any writing model. */
 export function finalizeCopy(input: TranslateInput, copy: { titleZh: string; summaryZh: string }) {
   let summaryZh = copy.summaryZh;
-  if (!isShortTweetInput(input) && summaryZh && !answerFirstSummaryLengthOk(summaryZh, input)) summaryZh = compactAnswerFirstSummary(summaryZh);
+  if (keepsResearchShape(summaryZh)) summaryZh = summaryZh.trim().slice(0, 1200);
+  else if (!isShortTweetInput(input) && summaryZh && !answerFirstSummaryLengthOk(summaryZh, input)) summaryZh = compactAnswerFirstSummary(summaryZh);
   return enforceIdentity(input, { titleZh: copy.titleZh, summaryZh });
 }
 

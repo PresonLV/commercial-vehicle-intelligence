@@ -619,6 +619,820 @@
       "tags": ["媒体", "海外"],
       "site_fulltext": false,
       "syndicate_fulltext": false
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "girteka",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-girteka",
+      "name": "吉尔泰卡 · 新闻",
+      "kind": "rss",
+      "tags": [
+        "官方",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://www.girteka.eu/feed/",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "old-dominion",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-odfl",
+      "name": "老道明 · 投资者关系",
+      "kind": "rss",
+      "tags": [
+        "官方",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://ir.odfl.com/rss",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "to Webcast",
+            "Conference Call"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "oreilly",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-oreilly",
+      "name": "奥莱利 · 公司新闻",
+      "kind": "rss",
+      "tags": [
+        "官方",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://corporate.oreillyauto.com/feed/",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "Sharing Important Moments",
+            "Back to School",
+            "Get Road Trip Ready",
+            "Developing the Next Generation"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "ryder",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-ryder",
+      "name": "莱德 · 洞察",
+      "kind": "rss",
+      "tags": [
+        "官方",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://www.ryder.com/en-us/api/rssfeed/showrssfeed",
+        "sortByPublishedAt": true,
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "Ryder Insights |",
+            "Blogs | Ryder Insights"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-hda-truck-pride",
+      "name": "HDA Truck Pride",
+      "kind": "rss",
+      "tags": [
+        "协会",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://www.hdatruckpride.com/feed",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-fleetowner",
+      "name": "Fleet Owner",
+      "kind": "rss",
+      "tags": [
+        "媒体",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://www.fleetowner.com/__rss/website-scheduled-content.xml?input=%7B%22sectionAlias%22%3A%22home%22%7D",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-truckingdive",
+      "name": "Trucking Dive",
+      "kind": "rss",
+      "tags": [
+        "媒体",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://www.truckingdive.com/feeds/news/",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-aftermarketnews",
+      "name": "aftermarketNews",
+      "kind": "rss",
+      "tags": [
+        "媒体",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://www.aftermarketnews.com/feed/",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-aftermarketmatters",
+      "name": "Aftermarket Matters",
+      "kind": "rss",
+      "tags": [
+        "媒体",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://www.aftermarketmatters.com/feed/",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-gn-tires",
+      "name": "Google 新闻 · 轮胎即服务与翻新",
+      "kind": "rss",
+      "tags": [
+        "聚合",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22tires+as+a+service%22+OR+%22retread%22+fleet&hl=en-US&gl=US&ceid=US:en",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-gn-michelin-fleet",
+      "name": "Google 新闻 · 米其林车队",
+      "kind": "rss",
+      "tags": [
+        "聚合",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22Michelin%22+%22fleet%22&hl=en-US&gl=US&ceid=US:en",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-gn-parts",
+      "name": "Google 新闻 · 汽配连锁与重载配件",
+      "kind": "rss",
+      "tags": [
+        "聚合",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=AutoZone+Commercial+OR+%22NAPA+AutoCare%22+OR+%22FleetPride%22&hl=en-US&gl=US&ceid=US:en",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-gn-swap",
+      "name": "Google 新闻 · 换电重卡",
+      "kind": "rss",
+      "tags": [
+        "聚合",
+        "下游"
+      ],
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E6%8D%A2%E7%94%B5%E9%87%8D%E5%8D%A1%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-gn-cass",
+      "name": "Google 新闻 · 开思汽配",
+      "kind": "rss",
+      "tags": [
+        "聚合",
+        "下游"
+      ],
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E5%BC%80%E6%80%9D%22+%E6%B1%BD%E9%85%8D&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "jb-hunt",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "web-jbhunt",
+      "name": "亨特运输 · 新闻室",
+      "kind": "web_list",
+      "tags": [
+        "官方",
+        "海外"
+      ],
+      "config": {
+        "url": "https://www.jbhunt.com/our-company/newsroom",
+        "itemSelector": ".cmp-article-teaser",
+        "linkSelector": "a[href*='/our-company/newsroom/20']",
+        "titleSelector": "h4.cmp-article-teaser__title",
+        "publishedAtSelector": ".cmp-article-teaser__date",
+        "publishedAtUtcOffset": "-05:00",
+        "allowUrlPrefixes": [
+          "https://www.jbhunt.com/our-company/newsroom/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "g7",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "web-g7",
+      "name": "G7易流 · 新闻",
+      "kind": "web_list",
+      "tags": [
+        "官方",
+        "下游"
+      ],
+      "config": {
+        "url": "https://www.g7.com.cn/News-center.html",
+        "itemSelector": "a[href*='news_detail']",
+        "publishedAtRegex": "(\\d{4}/\\d{2}/\\d{2})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": [
+          "https://www.g7.com.cn/news_detail/"
+        ],
+        "sortByPublishedAt": true,
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "sinoiov",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "web-sinoiov",
+      "name": "中交兴路 · 官方动态",
+      "kind": "web_list",
+      "tags": [
+        "官方",
+        "下游"
+      ],
+      "config": {
+        "url": "https://www.sinoiov.com/news/official/",
+        "itemSelector": "a[href*='/news/official/']",
+        "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": [
+          "https://www.sinoiov.com/news/official/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "plus-ai",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "web-plusai",
+      "name": "智加 · 新闻",
+      "kind": "web_list",
+      "tags": [
+        "官方",
+        "技术"
+      ],
+      "config": {
+        "url": "https://www.plus.ai/news-and-insights",
+        "itemSelector": "a[href*='/news-and-insights/20']",
+        "allowUrlPrefixes": [
+          "https://www.plus.ai/news-and-insights/20"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "sf-express",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "json-cninfo-sf",
+      "name": "顺丰控股 · 巨潮公告",
+      "kind": "json_list",
+      "tags": [
+        "官方",
+        "下游"
+      ],
+      "config": {
+        "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+        "method": "POST",
+        "headers": {
+          "Referer": "https://www.cninfo.com.cn/",
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        "bodyEncoding": "form",
+        "bodyJson": {
+          "pageNum": "1",
+          "pageSize": "30",
+          "column": "szse",
+          "tabName": "fulltext",
+          "plate": "",
+          "stock": "002352,9900010448",
+          "searchkey": "",
+          "secid": "",
+          "category": "",
+          "trade": "",
+          "seDate": "",
+          "sortName": "",
+          "sortType": "",
+          "isHLtitle": "true"
+        },
+        "itemsPath": "announcements",
+        "titlePaths": [
+          "announcementTitle"
+        ],
+        "publishedAtPath": "announcementTime",
+        "publishedAtUnit": "epoch_ms",
+        "urlTemplate": "http://static.cninfo.com.cn/{raw:adjunctUrl}",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "独立董事",
+            "监事会",
+            "法律意见书",
+            "股票交易异常波动",
+            "提示性公告",
+            "无偿捐赠",
+            "一致行动人"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "yto-express",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "json-cninfo-yto",
+      "name": "圆通速递 · 巨潮公告",
+      "kind": "json_list",
+      "tags": [
+        "官方",
+        "下游"
+      ],
+      "config": {
+        "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+        "method": "POST",
+        "headers": {
+          "Referer": "https://www.cninfo.com.cn/",
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        "bodyEncoding": "form",
+        "bodyJson": {
+          "pageNum": "1",
+          "pageSize": "30",
+          "column": "sse",
+          "tabName": "fulltext",
+          "plate": "",
+          "stock": "600233,gssh0600233",
+          "searchkey": "",
+          "secid": "",
+          "category": "",
+          "trade": "",
+          "seDate": "",
+          "sortName": "",
+          "sortType": "",
+          "isHLtitle": "true"
+        },
+        "itemsPath": "announcements",
+        "titlePaths": [
+          "announcementTitle"
+        ],
+        "publishedAtPath": "announcementTime",
+        "publishedAtUnit": "epoch_ms",
+        "urlTemplate": "http://static.cninfo.com.cn/{raw:adjunctUrl}",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "独立董事",
+            "监事会",
+            "法律意见书",
+            "股票交易异常波动",
+            "提示性公告",
+            "无偿捐赠",
+            "一致行动人"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "yunda",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "json-cninfo-yunda",
+      "name": "韵达股份 · 巨潮公告",
+      "kind": "json_list",
+      "tags": [
+        "官方",
+        "下游"
+      ],
+      "config": {
+        "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+        "method": "POST",
+        "headers": {
+          "Referer": "https://www.cninfo.com.cn/",
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        "bodyEncoding": "form",
+        "bodyJson": {
+          "pageNum": "1",
+          "pageSize": "30",
+          "column": "szse",
+          "tabName": "fulltext",
+          "plate": "",
+          "stock": "002120,9900002261",
+          "searchkey": "",
+          "secid": "",
+          "category": "",
+          "trade": "",
+          "seDate": "",
+          "sortName": "",
+          "sortType": "",
+          "isHLtitle": "true"
+        },
+        "itemsPath": "announcements",
+        "titlePaths": [
+          "announcementTitle"
+        ],
+        "publishedAtPath": "announcementTime",
+        "publishedAtUnit": "epoch_ms",
+        "urlTemplate": "http://static.cninfo.com.cn/{raw:adjunctUrl}",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "独立董事",
+            "监事会",
+            "法律意见书",
+            "股票交易异常波动",
+            "提示性公告",
+            "无偿捐赠",
+            "一致行动人"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "sto-express",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "json-cninfo-sto",
+      "name": "申通快递 · 巨潮公告",
+      "kind": "json_list",
+      "tags": [
+        "官方",
+        "下游"
+      ],
+      "config": {
+        "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+        "method": "POST",
+        "headers": {
+          "Referer": "https://www.cninfo.com.cn/",
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        "bodyEncoding": "form",
+        "bodyJson": {
+          "pageNum": "1",
+          "pageSize": "30",
+          "column": "szse",
+          "tabName": "fulltext",
+          "plate": "",
+          "stock": "002468,9900014251",
+          "searchkey": "",
+          "secid": "",
+          "category": "",
+          "trade": "",
+          "seDate": "",
+          "sortName": "",
+          "sortType": "",
+          "isHLtitle": "true"
+        },
+        "itemsPath": "announcements",
+        "titlePaths": [
+          "announcementTitle"
+        ],
+        "publishedAtPath": "announcementTime",
+        "publishedAtUnit": "epoch_ms",
+        "urlTemplate": "http://static.cninfo.com.cn/{raw:adjunctUrl}",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "独立董事",
+            "监事会",
+            "法律意见书",
+            "股票交易异常波动",
+            "提示性公告",
+            "无偿捐赠",
+            "一致行动人"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "sinotrans",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "json-cninfo-sinotrans",
+      "name": "中国外运 · 巨潮公告",
+      "kind": "json_list",
+      "tags": [
+        "官方",
+        "下游"
+      ],
+      "config": {
+        "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+        "method": "POST",
+        "headers": {
+          "Referer": "https://www.cninfo.com.cn/",
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        "bodyEncoding": "form",
+        "bodyJson": {
+          "pageNum": "1",
+          "pageSize": "30",
+          "column": "sse",
+          "tabName": "fulltext",
+          "plate": "",
+          "stock": "601598,gshk0000598",
+          "searchkey": "",
+          "secid": "",
+          "category": "",
+          "trade": "",
+          "seDate": "",
+          "sortName": "",
+          "sortType": "",
+          "isHLtitle": "true"
+        },
+        "itemsPath": "announcements",
+        "titlePaths": [
+          "announcementTitle"
+        ],
+        "publishedAtPath": "announcementTime",
+        "publishedAtUnit": "epoch_ms",
+        "urlTemplate": "http://static.cninfo.com.cn/{raw:adjunctUrl}",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "独立董事",
+            "监事会",
+            "法律意见书",
+            "股票交易异常波动",
+            "提示性公告",
+            "无偿捐赠",
+            "一致行动人"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "cjl-logistics",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "json-cninfo-cjl",
+      "name": "长久物流 · 巨潮公告",
+      "kind": "json_list",
+      "tags": [
+        "官方",
+        "下游"
+      ],
+      "config": {
+        "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+        "method": "POST",
+        "headers": {
+          "Referer": "https://www.cninfo.com.cn/",
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        "bodyEncoding": "form",
+        "bodyJson": {
+          "pageNum": "1",
+          "pageSize": "30",
+          "column": "sse",
+          "tabName": "fulltext",
+          "plate": "",
+          "stock": "603569,9900026446",
+          "searchkey": "",
+          "secid": "",
+          "category": "",
+          "trade": "",
+          "seDate": "",
+          "sortName": "",
+          "sortType": "",
+          "isHLtitle": "true"
+        },
+        "itemsPath": "announcements",
+        "titlePaths": [
+          "announcementTitle"
+        ],
+        "publishedAtPath": "announcementTime",
+        "publishedAtUnit": "epoch_ms",
+        "urlTemplate": "http://static.cninfo.com.cn/{raw:adjunctUrl}",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "独立董事",
+            "监事会",
+            "法律意见书",
+            "股票交易异常波动",
+            "提示性公告",
+            "无偿捐赠",
+            "一致行动人"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
     }
   ]
 }

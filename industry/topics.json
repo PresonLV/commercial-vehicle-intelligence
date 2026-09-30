@@ -9,7 +9,7 @@
     {
       "key": "field",
       "name": "产业链方向",
-      "blurb": "按上游、中游、下游和海外市场看：新能源、出海、可借鉴做法、后市场、政策"
+      "blurb": "按上游、中游、下游、海外市场和深度研究看：新能源、出海、新业态、可借鉴做法、后市场、政策"
     },
     {
       "key": "genre",
@@ -212,6 +212,24 @@
       "related": ["overseas-practice", "aftermarket", "lubricants"]
     },
     {
+      "slug": "bridgestone",
+      "name": "普利司通",
+      "group": "company",
+      "entityId": "bridgestone",
+      "tags": ["普利司通", "entity:bridgestone"],
+      "definition": "普利司通的车队轮胎、翻新和按公里服务。",
+      "related": ["michelin", "overseas-practice", "aftermarket"]
+    },
+    {
+      "slug": "goodyear",
+      "name": "固特异",
+      "group": "company",
+      "entityId": "goodyear",
+      "tags": ["固特异", "entity:goodyear"],
+      "definition": "固特异的车队轮胎和商用服务合同。",
+      "related": ["michelin", "overseas-practice", "aftermarket"]
+    },
+    {
       "slug": "export",
       "name": "出海",
       "group": "field",
@@ -290,6 +308,365 @@
       "tags": ["技术路线"],
       "definition": "会改变选型的动力、底盘和自动驾驶技术说明。",
       "related": ["autonomous", "powertrain", "hydrogen"]
+    },
+    {
+      "slug": "new-ecosystem",
+      "name": "新业态",
+      "group": "field",
+      "tags": ["新业态"],
+      "definition": "换电与能源运营、氢能重卡、自动驾驶干线、车联网与数字货运、汽配连锁平台、商车金融租赁和轮胎即服务。短新闻仍在上中下游，长文进深度研究。",
+      "related": ["fleet", "aftermarket", "swap", "autonomous"]
+    },
+    {
+      "slug": "autozone",
+      "name": "奥驰",
+      "group": "company",
+      "entityId": "autozone",
+      "tags": ["奥驰", "entity:autozone"],
+      "definition": "AutoZone 的门店网络、商用客户项目和配件分销做法。",
+      "related": ["overseas-practice", "aftermarket", "new-ecosystem"]
+    },
+    {
+      "slug": "oreilly",
+      "name": "奥莱利",
+      "group": "company",
+      "entityId": "oreilly",
+      "tags": ["奥莱利", "entity:oreilly"],
+      "definition": "O'Reilly 的汽配连锁、枢纽配送和专业客户项目。",
+      "related": ["overseas-practice", "aftermarket", "autozone"]
+    },
+    {
+      "slug": "advance-auto",
+      "name": "前进汽配",
+      "group": "company",
+      "entityId": "advance-auto",
+      "tags": ["前进汽配", "entity:advance-auto"],
+      "definition": "Advance Auto Parts 的门店、专业配送和独立维修渠道。",
+      "related": ["overseas-practice", "aftermarket", "oreilly"]
+    },
+    {
+      "slug": "genuine-parts",
+      "name": "真配件",
+      "group": "company",
+      "entityId": "genuine-parts",
+      "tags": ["真配件", "entity:genuine-parts"],
+      "definition": "Genuine Parts 与 NAPA 的车队配件网络和分销。",
+      "related": ["overseas-practice", "aftermarket", "autozone"]
+    },
+    {
+      "slug": "lkq",
+      "name": "LKQ",
+      "group": "company",
+      "entityId": "lkq",
+      "tags": ["LKQ", "entity:lkq"],
+      "definition": "LKQ 的拆车件、再制造和替代件分销。",
+      "related": ["overseas-practice", "aftermarket", "genuine-parts"]
+    },
+    {
+      "slug": "fleetpride",
+      "name": "FleetPride",
+      "group": "company",
+      "entityId": "fleetpride",
+      "tags": ["FleetPride", "entity:fleetpride"],
+      "definition": "FleetPride 的重载配件门店和车队配送。",
+      "related": ["overseas-practice", "aftermarket", "truckpro"]
+    },
+    {
+      "slug": "truckpro",
+      "name": "TruckPro",
+      "group": "company",
+      "entityId": "truckpro",
+      "tags": ["TruckPro", "entity:truckpro"],
+      "definition": "TruckPro 的重卡配件分销和车队服务。",
+      "related": ["overseas-practice", "aftermarket", "fleetpride"]
+    },
+    {
+      "slug": "ryder",
+      "name": "莱德",
+      "group": "company",
+      "entityId": "ryder",
+      "tags": ["莱德", "entity:ryder"],
+      "definition": "Ryder 的租赁、维保和专用车队服务。",
+      "related": ["overseas-practice", "fleet", "penske"]
+    },
+    {
+      "slug": "penske",
+      "name": "潘世奇",
+      "group": "company",
+      "entityId": "penske",
+      "tags": ["潘世奇", "entity:penske"],
+      "definition": "Penske 的卡车租赁、物流和维保合同。",
+      "related": ["overseas-practice", "fleet", "ryder"]
+    },
+    {
+      "slug": "knight-swift",
+      "name": "Knight-Swift",
+      "group": "company",
+      "entityId": "knight-swift",
+      "tags": ["Knight-Swift", "entity:knight-swift"],
+      "definition": "Knight-Swift 的干线车队、运价和运力做法。",
+      "related": ["overseas-practice", "fleet", "jb-hunt"]
+    },
+    {
+      "slug": "jb-hunt",
+      "name": "亨特运输",
+      "group": "company",
+      "entityId": "jb-hunt",
+      "tags": ["亨特运输", "entity:jb-hunt"],
+      "definition": "J.B. Hunt 的多式联运、专用车队和经纪业务。",
+      "related": ["overseas-practice", "fleet", "knight-swift"]
+    },
+    {
+      "slug": "girteka",
+      "name": "吉尔泰卡",
+      "group": "company",
+      "entityId": "girteka",
+      "tags": ["吉尔泰卡", "entity:girteka"],
+      "definition": "Girteka 的欧洲干线车队、运力和新能源卡车采购。",
+      "related": ["overseas-practice", "fleet", "jb-hunt"]
+    },
+    {
+      "slug": "old-dominion",
+      "name": "老道明",
+      "group": "company",
+      "entityId": "old-dominion",
+      "tags": ["老道明", "entity:old-dominion"],
+      "definition": "Old Dominion 的零担网络、运价和服务密度。",
+      "related": ["overseas-practice", "fleet", "knight-swift"]
+    },
+    {
+      "slug": "sf-express",
+      "name": "顺丰",
+      "group": "company",
+      "entityId": "sf-express",
+      "tags": ["顺丰", "entity:sf-express"],
+      "definition": "顺丰的快运网络、运力和商用车相关投入。",
+      "related": ["fleet", "new-ecosystem", "jdl"]
+    },
+    {
+      "slug": "jdl",
+      "name": "京东物流",
+      "group": "company",
+      "entityId": "jdl",
+      "tags": ["京东物流", "entity:jdl"],
+      "definition": "京东物流的仓配网络、运力和新能源车辆。",
+      "related": ["fleet", "new-ecosystem", "sf-express"]
+    },
+    {
+      "slug": "zto-express",
+      "name": "中通快递",
+      "group": "company",
+      "entityId": "zto-express",
+      "tags": ["中通快递", "entity:zto-express"],
+      "definition": "中通快递的转运网络和干线运力。",
+      "related": ["fleet", "yto-express", "sf-express"]
+    },
+    {
+      "slug": "yto-express",
+      "name": "圆通",
+      "group": "company",
+      "entityId": "yto-express",
+      "tags": ["圆通", "entity:yto-express"],
+      "definition": "圆通速递的网络、运价和运力投入。",
+      "related": ["fleet", "zto-express", "sto-express"]
+    },
+    {
+      "slug": "sto-express",
+      "name": "申通",
+      "group": "company",
+      "entityId": "sto-express",
+      "tags": ["申通", "entity:sto-express"],
+      "definition": "申通快递的转运和干线车队。",
+      "related": ["fleet", "yto-express", "yunda"]
+    },
+    {
+      "slug": "yunda",
+      "name": "韵达",
+      "group": "company",
+      "entityId": "yunda",
+      "tags": ["韵达", "entity:yunda"],
+      "definition": "韵达的网络运营和运力。",
+      "related": ["fleet", "sto-express", "zto-express"]
+    },
+    {
+      "slug": "jtexpress",
+      "name": "极兔",
+      "group": "company",
+      "entityId": "jtexpress",
+      "tags": ["极兔", "entity:jtexpress"],
+      "definition": "极兔的快递网络和运力。",
+      "related": ["fleet", "zto-express", "sf-express"]
+    },
+    {
+      "slug": "debang",
+      "name": "德邦",
+      "group": "company",
+      "entityId": "debang",
+      "tags": ["德邦", "entity:debang"],
+      "definition": "德邦的大件与零担网络。公告源已退市，主题仍用于媒体稿归类。",
+      "related": ["fleet", "ane", "sf-express"]
+    },
+    {
+      "slug": "ane",
+      "name": "安能",
+      "group": "company",
+      "entityId": "ane",
+      "tags": ["安能", "entity:ane"],
+      "definition": "安能快运的网络和运力。",
+      "related": ["fleet", "yimidida", "debang"]
+    },
+    {
+      "slug": "yimidida",
+      "name": "壹米滴答",
+      "group": "company",
+      "entityId": "yimidida",
+      "tags": ["壹米滴答", "entity:yimidida"],
+      "definition": "壹米滴答的快运网络和加盟运力。",
+      "related": ["fleet", "ane", "fuyou"]
+    },
+    {
+      "slug": "fuyou",
+      "name": "福佑",
+      "group": "company",
+      "entityId": "fuyou",
+      "tags": ["福佑", "entity:fuyou"],
+      "definition": "福佑卡车的整车经纪和运力组织。",
+      "related": ["fleet", "full-truck-alliance", "new-ecosystem"]
+    },
+    {
+      "slug": "sinotrans",
+      "name": "中外运",
+      "group": "company",
+      "entityId": "sinotrans",
+      "tags": ["中外运", "entity:sinotrans"],
+      "definition": "中国外运的合同物流和公路运力。",
+      "related": ["fleet", "cjl-logistics", "cmst"]
+    },
+    {
+      "slug": "cjl-logistics",
+      "name": "长久物流",
+      "group": "company",
+      "entityId": "cjl-logistics",
+      "tags": ["长久物流", "entity:cjl-logistics"],
+      "definition": "长久物流的商品车运输和整车物流。",
+      "related": ["fleet", "sinotrans", "cmst"]
+    },
+    {
+      "slug": "full-truck-alliance",
+      "name": "满帮",
+      "group": "company",
+      "entityId": "full-truck-alliance",
+      "tags": ["满帮", "entity:full-truck-alliance"],
+      "definition": "满帮、运满满和货车帮的数字货运与绿色运力。",
+      "related": ["fleet", "new-ecosystem", "lalamove"]
+    },
+    {
+      "slug": "lalamove",
+      "name": "货拉拉",
+      "group": "company",
+      "entityId": "lalamove",
+      "tags": ["货拉拉", "entity:lalamove"],
+      "definition": "货拉拉的同城货运和运力平台。",
+      "related": ["fleet", "new-ecosystem", "full-truck-alliance"]
+    },
+    {
+      "slug": "cmst",
+      "name": "中储",
+      "group": "company",
+      "entityId": "cmst",
+      "tags": ["中储", "entity:cmst"],
+      "definition": "中储股份与中储智运的大宗物流和网络货运。",
+      "related": ["fleet", "sinotrans", "new-ecosystem"]
+    },
+    {
+      "slug": "cass-time",
+      "name": "开思",
+      "group": "company",
+      "entityId": "cass-time",
+      "tags": ["开思", "entity:cass-time"],
+      "definition": "开思的汽配交易平台和商用车配件供应链。",
+      "related": ["new-ecosystem", "aftermarket", "tuhu"]
+    },
+    {
+      "slug": "tuhu",
+      "name": "途虎",
+      "group": "company",
+      "entityId": "tuhu",
+      "tags": ["途虎", "entity:tuhu"],
+      "definition": "途虎养车里和商用车、轮胎与养护相关的做法。",
+      "related": ["new-ecosystem", "aftermarket", "cass-time"]
+    },
+    {
+      "slug": "g7",
+      "name": "G7易流",
+      "group": "company",
+      "entityId": "g7",
+      "tags": ["G7易流", "entity:g7"],
+      "definition": "G7易流的车联网、数字货运和车队管理。",
+      "related": ["new-ecosystem", "fleet", "sinoiov"]
+    },
+    {
+      "slug": "sinoiov",
+      "name": "中交兴路",
+      "group": "company",
+      "entityId": "sinoiov",
+      "tags": ["中交兴路", "entity:sinoiov"],
+      "definition": "中交兴路的货运车辆数据和车队服务。",
+      "related": ["new-ecosystem", "fleet", "g7"]
+    },
+    {
+      "slug": "plus-ai",
+      "name": "智加",
+      "group": "company",
+      "entityId": "plus-ai",
+      "tags": ["智加", "entity:plus-ai"],
+      "definition": "智加的自动驾驶干线物流。",
+      "related": ["autonomous", "new-ecosystem", "tusimple"]
+    },
+    {
+      "slug": "tusimple",
+      "name": "图森",
+      "group": "company",
+      "entityId": "tusimple",
+      "tags": ["图森", "entity:tusimple"],
+      "definition": "图森的自动驾驶卡车。",
+      "related": ["autonomous", "new-ecosystem", "plus-ai"]
+    },
+    {
+      "slug": "pony",
+      "name": "小马智卡",
+      "group": "company",
+      "entityId": "pony",
+      "tags": ["小马智卡", "entity:pony"],
+      "definition": "小马智行的卡车自动驾驶。",
+      "related": ["autonomous", "new-ecosystem", "plus-ai"]
+    },
+    {
+      "slug": "qiyuan-power",
+      "name": "启源芯动力",
+      "group": "company",
+      "entityId": "qiyuan-power",
+      "tags": ["启源芯动力", "entity:qiyuan-power"],
+      "definition": "启源芯动力的换电重卡和能源运营。",
+      "related": ["swap", "new-ecosystem", "catl"]
+    },
+    {
+      "slug": "hongjing",
+      "name": "宏景智驾",
+      "group": "company",
+      "entityId": "hongjing",
+      "tags": ["宏景智驾", "entity:hongjing"],
+      "definition": "宏景智驾的干线自动驾驶。",
+      "related": ["autonomous", "new-ecosystem", "plus-ai"]
+    },
+    {
+      "slug": "qiangua",
+      "name": "千挂",
+      "group": "company",
+      "entityId": "qiangua",
+      "tags": ["千挂", "entity:qiangua"],
+      "definition": "千挂的自动驾驶干线物流。",
+      "related": ["autonomous", "new-ecosystem", "hongjing"]
     }
   ]
 }
