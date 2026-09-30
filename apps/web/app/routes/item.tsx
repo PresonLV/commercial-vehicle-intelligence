@@ -1,4 +1,4 @@
-import { SITE, withSubject } from "@aihot/industry/site";
+import { NAV, SITE, withSubject } from "@aihot/industry/site";
 import { policyNoticeLine } from "@aihot/industry/notices";
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLoaderData, useNavigate } from "react-router";
@@ -56,7 +56,7 @@ export function meta({ loaderData }: Route.MetaArgs) {
     noindex: !item.indexable,
     jsonLd: breadcrumbLd([
       { name: SITE.name, path: "/" },
-      { name: item.selected ? "精选" : "全部动态", path: item.selected ? "/" : "/all" },
+      { name: item.selected ? NAV.selected : NAV.all, path: item.selected ? "/" : "/all" },
       { name: item.title, path: `/items/${item.id}` },
     ]),
   });

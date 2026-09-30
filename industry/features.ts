@@ -6,4 +6,6 @@ export const FEATURES = {
   leaderboard: false,
   /** Codex 重置监控：盯 OpenAI Codex 负责人在 X 上的额度重置公告（/codex-reset）。商用车站不使用。 */
   codexResetMonitor: false,
+  /** 读者收藏。关掉以后侧栏和卡片上的收藏入口消失，/starred 返回 404。收藏代码仍留在本地状态里。 */
+  readerBookmarks: false,
 } as const;

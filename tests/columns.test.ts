@@ -30,6 +30,24 @@ test("a policy title keeps the document number and does not invent one", () => {
   assert.equal(policyNotice("通知", "财政部", "2026-09-20T16:00:00.000Z").date, "2026-09-21");
 });
 
+test("reader navigation uses the renamed labels and hides bookmarks and the changelog", () => {
+  const read = (path: string) => readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
+  const nav = read("apps/web/app/components/shell/nav.ts");
+  const routes = read("apps/web/app/routes.ts");
+  const admin = read("apps/web/app/routes/admin/layout.tsx");
+  assert.match(nav, /NAV\.selected/);
+  assert.match(nav, /NAV\.all/);
+  assert.match(nav, /NAV\.hot/);
+  assert.match(nav, /NAV\.daily/);
+  assert.match(nav, /NAV\.topics/);
+  assert.doesNotMatch(nav, /label: "精选"/);
+  assert.doesNotMatch(nav, /to: "\/changelog"/);
+  assert.match(nav, /FEATURES\.readerBookmarks \? \[\{ to: "\/starred"/);
+  assert.match(routes, /route\("changelog", "routes\/changelog-public\.tsx"\)/);
+  assert.match(routes, /route\("admin\/changelog", "routes\/changelog\.tsx"\)/);
+  assert.match(admin, /to: "\/admin\/changelog", label: "更新日志"/);
+});
+
 test("the data page is routed, and the retired export feed opens overseas", () => {
   const read = (path: string) => readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
   assert.match(read("apps/web/app/routes.ts"), /route\("data", "routes\/data\.tsx"\)/);

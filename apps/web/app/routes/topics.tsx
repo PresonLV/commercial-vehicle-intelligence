@@ -1,4 +1,4 @@
-import { withSubject } from "@aihot/industry/site";
+import { NAV } from "@aihot/industry/site";
 import { Link, useLoaderData } from "react-router";
 import { apiGet } from "../lib/api.server";
 import { pageMeta } from "../lib/seo";
@@ -19,7 +19,7 @@ export async function loader({ request }: { request: Request }) {
 }
 
 export function meta() {
-  return pageMeta({ title: "主题", description: `按企业、产业链方向和内容形态聚合的${withSubject("主题")}：整车与动力、新能源、出海、后市场、销量与政策。`, path: "/topics", image: "/og/pages/topics.png" });
+  return pageMeta({ title: NAV.topics, description: `按企业、产业链方向和内容形态聚合的${NAV.topics}：整车与动力、新能源、出海、后市场、销量与政策。`, path: "/topics", image: "/og/pages/topics.png" });
 }
 
 export function headers() {
@@ -37,7 +37,7 @@ export default function TopicsPage() {
   return (
     <div className="pb-10">
       <header className="pb-2 pt-5 lg:pt-1">
-        <h1 className="text-[24px] font-semibold leading-[1.3] text-ink">按主题看{withSubject("动态")}</h1>
+        <h1 className="text-[24px] font-semibold leading-[1.3] text-ink">{NAV.topics}</h1>
         <p className="mt-1.5 text-[13px] leading-relaxed text-ink-3">
           按企业、产业链方向、内容形态浏览 <span className="num">{topics.length}</span> 个主题，持续汇集近期焦点与精选。
         </p>

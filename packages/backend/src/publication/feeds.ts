@@ -3,7 +3,7 @@
 // sources that explicitly allow redistribution. Titles come from the site's name and categories.
 import { CATEGORY_LABELS, PUBLIC_API_CATEGORY_KEYS, type PublicApiCategoryKey } from "@aihot/contracts/taxonomy";
 import { canonicalCategory } from "@aihot/industry/taxonomy";
-import { SITE, withSubject } from "@aihot/industry/site";
+import { NAV, SITE } from "@aihot/industry/site";
 import { config } from "../config.ts";
 import { sql } from "../db.ts";
 import { escapeXml } from "../lib/text.ts";
@@ -23,10 +23,10 @@ interface FeedMeta {
 }
 
 const FEEDS: Record<"selected" | "selectedFull" | "all" | "daily", FeedMeta> = {
-  selected: { id: "selected", path: "/feed.xml", title: `${SITE.name} — 精选`, description: `最新 50 条 ${SITE.name} 精选摘要，保留标题、站内阅读与原文入口；需要阅读器内全文可改订 /feed/full.xml。`, homePath: "/", pollHintMinutes: 30 },
-  selectedFull: { id: "selected-full", path: "/feed/full.xml", title: `${SITE.name} — 精选全文`, description: "与精选摘要相同的最新 50 条；仅对明确允许再分发的来源内联正文，其余仍提供摘要和阅读入口。", homePath: "/", pollHintMinutes: 30 },
-  all: { id: "all", path: "/feed/all.xml", title: `${SITE.name} — 全部动态`, description: "最近 7 天公开动态，按真实发布时间倒序；不含未审内容、低相关条目和已合并的重复条目。", homePath: "/all", pollHintMinutes: 30 },
-  daily: { id: "daily", path: "/feed/daily.xml", title: `${SITE.name} ${withSubject("日报")}`, description: `${SITE.name} 每天 08:00 北京时间发布的${withSubject("日报")}，保留最近 30 期。`, homePath: "/daily", pollHintMinutes: 30 },
+  selected: { id: "selected", path: "/feed.xml", title: `${SITE.name} — ${NAV.selected}`, description: `最新 50 条 ${SITE.name} ${NAV.selected}摘要，保留标题、站内阅读与原文入口；需要阅读器内全文可改订 /feed/full.xml。`, homePath: "/", pollHintMinutes: 30 },
+  selectedFull: { id: "selected-full", path: "/feed/full.xml", title: `${SITE.name} — ${NAV.selected}全文`, description: `与${NAV.selected}摘要相同的最新 50 条；仅对明确允许再分发的来源内联正文，其余仍提供摘要和阅读入口。`, homePath: "/", pollHintMinutes: 30 },
+  all: { id: "all", path: "/feed/all.xml", title: `${SITE.name} — ${NAV.all}`, description: "最近 7 天公开动态，按真实发布时间倒序；不含未审内容、低相关条目和已合并的重复条目。", homePath: "/all", pollHintMinutes: 30 },
+  daily: { id: "daily", path: "/feed/daily.xml", title: `${SITE.name} ${NAV.daily}`, description: `${SITE.name} 每天 08:00 北京时间发布的${NAV.daily}，保留最近 30 期。`, homePath: "/daily", pollHintMinutes: 30 },
 };
 
 /** RSS <author> needs an address; a no-reply one on the site's own domain. */
@@ -139,8 +139,8 @@ export async function itemFeed(kind: ItemFeedKind, category: PublicApiCategoryKe
     meta = {
       title: includeContent ? `${SITE.name} — ${label}全文` : `${SITE.name} — ${label}`,
       description: includeContent
-        ? `${SITE.name} 每日精选「${label}」分类全文源。仅对明确允许再分发的来源内联正文。`
-        : `${SITE.name} 每日精选「${label}」分类摘要，按分类订阅、不被全量精选刷屏。`,
+        ? `${SITE.name} 每日${NAV.selected}「${label}」分类全文源。仅对明确允许再分发的来源内联正文。`
+        : `${SITE.name} 每日${NAV.selected}「${label}」分类摘要，按分类订阅、不被全量刷屏。`,
       homePath: "/",
       selfPath: includeContent ? `/feed/full/category/${category}.xml` : `/feed/category/${category}.xml`,
       ttl: 30,
@@ -160,7 +160,7 @@ export async function dailyFeed(): Promise<string> {
   const items = rows.map((r) => {
     const url = dailyUrl(r.key);
     const lead = reportHeadline(r.content, "daily", gone);
-    const title = lead ? `${SITE.name} ${withSubject("日报")} · ${r.key} — ${lead}` : `${SITE.name} ${withSubject("日报")} · ${r.key}`;
+    const title = lead ? `${SITE.name} ${NAV.daily} · ${r.key} — ${lead}` : `${SITE.name} ${NAV.daily} · ${r.key}`;
     const description = `<p>${escapeXml(r.content.lead?.leadParagraph ?? lead ?? "")} — 点击查看完整日报</p>\n<p>via ${escapeXml(SITE.name)} · <a href="${url}">${url}</a></p>`;
     return `    <item>
       <title>${cdata(title)}</title>

@@ -1,5 +1,5 @@
 // Site navigation, one place for the desktop sidebar, the mobile tab bar and the mobile "更多" page.
-import { withSubject } from "@aihot/industry/site";
+import { NAV } from "@aihot/industry/site";
 import { FEATURES } from "@aihot/industry/features";
 import type { ReactNode } from "react";
 import {
@@ -20,12 +20,12 @@ export const SIDEBAR: Array<{ title: string; items: NavItem[] }> = [
   {
     title: "内容",
     items: [
-      { to: "/", label: "精选", icon: IconBolt, end: true },
-      { to: "/all", label: `全部${withSubject("动态")}`, icon: IconList },
-      { to: "/hot", label: "热点榜", icon: IconFlame },
-      { to: "/daily", label: withSubject("日报"), icon: IconDoc },
-      { to: "/topics", label: "主题", icon: IconGrid },
-      { to: "/starred", label: "收藏", icon: IconBookmark },
+      { to: "/", label: NAV.selected, icon: IconBolt, end: true },
+      { to: "/all", label: NAV.all, icon: IconList },
+      { to: "/hot", label: NAV.hot, icon: IconFlame },
+      { to: "/daily", label: NAV.daily, icon: IconDoc },
+      { to: "/topics", label: NAV.topics, icon: IconGrid },
+      ...(FEATURES.readerBookmarks ? [{ to: "/starred", label: "收藏", icon: IconBookmark }] : []),
       { to: "/data", label: "数据", icon: IconChart },
       { to: "/research", label: "深度研究", icon: IconChart },
     ],
@@ -47,21 +47,20 @@ export const SIDEBAR: Array<{ title: string; items: NavItem[] }> = [
     items: [
       { to: "/agent", label: "Agent 接入", icon: IconPlug },
       { to: "/about", label: "关于", icon: IconHeart },
-      { to: "/changelog", label: "更新日志", icon: IconHistory, changelog: true },
       { to: "/feedback", label: "反馈", icon: IconMessage },
     ],
   },
 ];
 
 export const TABBAR: NavItem[] = [
-  { to: "/", label: "精选", icon: IconBolt, end: true },
-  { to: "/all", label: "全部", icon: IconList },
-  { to: "/daily", label: "日报", icon: IconDoc },
-  { to: "/more", label: "更多", icon: IconApps, changelog: true },
+  { to: "/", label: NAV.selected, icon: IconBolt, end: true },
+  { to: "/all", label: NAV.all, icon: IconList },
+  { to: "/daily", label: NAV.daily, icon: IconDoc },
+  { to: "/more", label: "更多", icon: IconApps },
 ];
 
 /** Pages reached from the mobile "更多" tab keep that tab highlighted. */
-export const MORE_PATHS = ["/more", "/hot", "/data", "/research", "/topics", "/starred", "/leaderboard", "/codex-reset", "/agent", "/about", "/changelog", "/feedback", "/terms", "/privacy"];
+export const MORE_PATHS = ["/more", "/hot", "/data", "/research", "/topics", "/leaderboard", "/codex-reset", "/agent", "/about", "/feedback", "/terms", "/privacy", ...(FEATURES.readerBookmarks ? ["/starred"] : [])];
 
 export function tabIsActive(item: NavItem, pathname: string): boolean {
   if (item.end) return pathname === item.to;

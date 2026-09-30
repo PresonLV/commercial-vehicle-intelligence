@@ -5,7 +5,7 @@
 // Rules are hairlines in two weights: line-strong closes the masthead and underlines a page's heading
 // and the neighbours; line parts stories, columns and list rows. Nothing is set in solid ink. Stories
 // sit in rows of two whose rules run across the page, each story as tall as its neighbour.
-import { SITE, withSubject } from "@aihot/industry/site";
+import { NAV, SITE, withSubject } from "@aihot/industry/site";
 import { CHANNEL_LABELS } from "@aihot/contracts/taxonomy";
 import { useState, type ReactNode } from "react";
 import { Link } from "react-router";
@@ -40,7 +40,7 @@ function Masthead({ report, index }: { report: ReportDetail; index: ReportNaviga
         <div className="flex min-w-0 flex-col justify-center">
           <h1 id="report-start">
             <span className="sr-only">
-              {withSubject(KIND_LABEL[report.kind])} · {dateLine(report.kind, report.key)}
+              {(report.kind === "daily" ? NAV.daily : withSubject(KIND_LABEL[report.kind]))} · {dateLine(report.kind, report.key)}
             </span>
             <Nameplate which={report.kind} className="block h-[54px] w-auto @[520px]:h-[74px] @[880px]:h-[98px] @[1040px]:h-[112px]" />
           </h1>
@@ -309,7 +309,8 @@ export function SectionPage({ id, no, label, children }: { id: string; no?: numb
 const COLUMNS = "@[760px]:columns-2 @[760px]:gap-x-12 @[760px]:[column-rule:1px_solid_var(--line)]";
 
 function Neighbours({ report, index }: { report: ReportDetail; index: ReportNavigationEntry[] }) {
-  const titleOf = (key: string) => index.find((e) => e.key === key)?.title ?? `${withSubject(KIND_LABEL[report.kind])} · ${key}`;
+  const issueName = report.kind === "daily" ? NAV.daily : withSubject(KIND_LABEL[report.kind]);
+  const titleOf = (key: string) => index.find((e) => e.key === key)?.title ?? `${issueName} · ${key}`;
   const cell = "group flex min-w-0 flex-col py-6";
   const title = "mt-2.5 line-clamp-2 text-[16px] font-bold leading-[1.5] text-ink transition-colors group-hover:text-accent @[880px]:text-[18px]";
   return (
@@ -343,7 +344,7 @@ function History({ report, index }: { report: ReportDetail; index: ReportNavigat
   if (others.length === 0) return null;
   return (
     <section id="report-history" className="scroll-mt-6 pt-12">
-      <Kicker>往期{withSubject(KIND_LABEL[report.kind])}</Kicker>
+      <Kicker>往期{report.kind === "daily" ? NAV.daily : withSubject(KIND_LABEL[report.kind])}</Kicker>
       <ul className="mt-3">
         {others.map((e) => (
           <li key={e.key}>
@@ -413,7 +414,7 @@ export function ReportPaper({ report, index }: { report: ReportDetail; index: Re
         <p className="mt-3 text-[12px] text-ink-4">
           {SITE.name} {KIND_LABEL[report.kind]}由编辑系统根据公开来源自动{daily ? "编辑" : "综合"}，每条均附原文 ·{" "}
           <Link to={daily ? "/daily/archive" : "#report-history"} className="font-medium text-ink-3 transition-colors hover:text-accent">
-            {daily ? "日报合订本" : `往期${KIND_LABEL[report.kind]}`}
+            {daily ? `${NAV.daily}合订本` : `往期${KIND_LABEL[report.kind]}`}
           </Link>
         </p>
       </footer>

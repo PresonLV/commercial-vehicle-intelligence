@@ -1,4 +1,5 @@
 // Small building blocks shared by feed items, detail pages and lists.
+import { FEATURES } from "@aihot/industry/features";
 import { useState } from "react";
 import type { FeedItemSummary, MediaView } from "@aihot/contracts/site";
 import { IconBookmark } from "../../components/icons";
@@ -51,11 +52,12 @@ export function MediaThumbs({ media, className = "" }: { media: MediaView[]; cla
   );
 }
 
-/** Bookmark toggle kept in this browser (收藏). */
+/** Bookmark toggle kept in this browser. Hidden while reader bookmarks are off. */
 export function StarButton({ item, size = 26, className = "" }: { item: Pick<FeedItemSummary, "id" | "title" | "summary" | "source" | "publishedAt" | "score" | "selected">; size?: number; className?: string }) {
   const starred = useIsStarred(item.id);
   const [pulse, setPulse] = useState(0);
   const on = starred;
+  if (!FEATURES.readerBookmarks) return null;
   return (
     <button
       type="button"

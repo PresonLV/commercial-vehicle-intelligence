@@ -1,9 +1,7 @@
-import { SITE } from "@aihot/industry/site";
+import { NAV, SITE } from "@aihot/industry/site";
 import { FEATURES } from "@aihot/industry/features";
 import type { ReactNode } from "react";
-import { Link, useRouteLoaderData } from "react-router";
-import type { loader as rootLoader } from "../root";
-import { useChangelogDot } from "../components/shell/Sidebar";
+import { Link } from "react-router";
 import { pageMeta } from "../lib/seo";
 import { ThemeSwitch } from "../components/shell/ThemeSwitch";
 import { IconBookmark, IconChart, IconChevronRight, IconFlame, IconGrid, IconHeart, IconHistory, IconMessage, IconMoon, IconPlug } from "../components/icons";
@@ -23,7 +21,7 @@ const GROUPS: Array<{ title: string; rows: Row[] }> = [
   {
     title: "内容",
     rows: [
-      { to: "/topics", label: "主题索引", icon: <IconGrid size={18} /> },
+      { to: "/topics", label: NAV.topics, icon: <IconGrid size={18} /> },
       ...(FEATURES.leaderboard ? [{ to: "/leaderboard", label: "模型榜", icon: <IconChart size={18} /> }] : []),
       ...(FEATURES.codexResetMonitor ? [{ to: "/codex-reset", label: "Tibo重置监控", icon: <IconHistory size={18} /> }] : []),
       { to: "/agent", label: "Agent 接入", icon: <IconPlug size={18} /> },
@@ -34,15 +32,14 @@ const GROUPS: Array<{ title: string; rows: Row[] }> = [
   {
     title: "偏好",
     rows: [
-      { to: "/hot", label: "热点榜", icon: <IconFlame size={18} /> },
-      { to: "/starred", label: "收藏", icon: <IconBookmark size={18} /> },
+      { to: "/hot", label: NAV.hot, icon: <IconFlame size={18} /> },
+      ...(FEATURES.readerBookmarks ? [{ to: "/starred", label: "收藏", icon: <IconBookmark size={18} /> }] : []),
     ],
   },
   {
     title: "关于",
     rows: [
       { to: "/about", label: `关于 ${SITE.name}`, icon: <IconHeart size={18} /> },
-      { to: "/changelog", label: "更新日志", icon: <IconHistory size={18} /> },
       { to: "/feedback", label: "意见反馈", icon: <IconMessage size={18} /> },
     ],
   },
@@ -58,8 +55,6 @@ function Group({ title, children }: { title: string; children: ReactNode }) {
 }
 
 export default function MorePage() {
-  const root = useRouteLoaderData<typeof rootLoader>("root");
-  const changelogDot = useChangelogDot(root?.changelogVersion ?? null);
   return (
     <div className="mx-auto max-w-[var(--page-max-reading)] pb-8">
       <h1 className="pb-4 pt-5 text-[22px] font-bold text-ink lg:pt-1">更多</h1>
@@ -70,7 +65,7 @@ export default function MorePage() {
               <li key={r.to}>
                 <Link to={r.to} className="flex h-[50px] items-center gap-3 px-4 text-[15px] font-medium text-ink transition-colors active:bg-bg-sunk lg:hover:bg-bg-sunk">
                   <span className="text-ink-3">{r.icon}</span>
-                  <span className="flex flex-1 items-center gap-2">{r.label}{r.to === "/changelog" && changelogDot && <span className="size-1.5 rounded-full bg-hot" aria-label="有新的更新" />}</span>
+                  <span className="flex flex-1 items-center gap-2">{r.label}</span>
                   <IconChevronRight size={16} className="text-ink-4" />
                 </Link>
               </li>

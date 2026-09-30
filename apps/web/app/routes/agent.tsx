@@ -1,7 +1,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useLoaderData, useNavigate, useSearchParams } from "react-router";
 import type { Route } from "./+types/agent";
-import { SITE, withSubject } from "@aihot/industry/site";
+import { NAV, SITE } from "@aihot/industry/site";
 import { FEATURES } from "@aihot/industry/features";
 import { CATEGORY_KEYS } from "@aihot/contracts/taxonomy";
 import { MCP_TOOL_NAMES as T } from "@aihot/contracts/mcp";
@@ -90,9 +90,9 @@ function McpTab({ base }: { base: string }) {
         <Bullets items={[
           <><Mono>{T.latest}</Mono>：过去 24 小时或最近 7 天的精选／全部资讯</>,
           <><Mono>{T.search}</Mono>：搜索最近 7 天的公司、产品、人物或话题</>,
-          <><Mono>{T.hot}</Mono>：当前热点榜与事件排名</>,
+          <><Mono>{T.hot}</Mono>：当前{NAV.hot}与事件排名</>,
           <><Mono>{T.story}</Mono>：一个热点事件的时间线与持续更新的综述</>,
-          <><Mono>{T.daily}</Mono>：最新或指定日期的{withSubject("日报")}</>,
+          <><Mono>{T.daily}</Mono>：最新或指定日期的{NAV.daily}</>,
         ]} />
         <p className="mt-4">验证一次真实调用：<span className="font-medium text-ink">请调用 {T.latest}，告诉我过去 24 小时最重要的 5 条动态，并附链接。</span></p>
       </Section>
@@ -109,10 +109,10 @@ function McpTab({ base }: { base: string }) {
 
 function RssTab({ base }: { base: string }) {
   const feeds = [
-    ["精选摘要（推荐）", "最新 50 条精选摘要，保留标题、站内阅读与原文入口。", "/feed.xml"],
-    ["精选全文", "与精选摘要相同的最新 50 条；只对明确允许再分发的来源内联正文。", "/feed/full.xml"],
-    ["最近 7 天全部动态", "最近 7 天公开动态，按真实发布时间倒序。", "/feed/all.xml"],
-    [withSubject("日报"), `每天 08:00 北京时间发布的${withSubject("日报")}，保留最近 30 期。`, "/feed/daily.xml"],
+    [`${NAV.selected}摘要（推荐）`, `最新 50 条${NAV.selected}摘要，保留标题、站内阅读与原文入口。`, "/feed.xml"],
+    [`${NAV.selected}全文`, `与${NAV.selected}摘要相同的最新 50 条；只对明确允许再分发的来源内联正文。`, "/feed/full.xml"],
+    [`最近 7 天${NAV.all}`, "最近 7 天公开动态，按真实发布时间倒序。", "/feed/all.xml"],
+    [NAV.daily, `每天 08:00 北京时间发布的${NAV.daily}，保留最近 30 期。`, "/feed/daily.xml"],
   ];
   const categories = CATEGORY_KEYS.join("|");
   return (
@@ -156,11 +156,11 @@ function ApiTab({ base }: { base: string }) {
           ["/api/v1/codex-resets", "Codex 重置与发卡的完整历史"],
         ] as Array<[string, string]>)
       : []),
-    ["/api/v1/hot-topics", "当前热点榜与事件排名"],
+    ["/api/v1/hot-topics", `当前${NAV.hot}与事件排名`],
     ["/api/v1/stories/{publicId}", "事件详情：报道时间线、综述与关联事件"],
-    ["/api/v1/dailies", `${withSubject("日报")}日期索引`],
-    ["/api/v1/dailies/latest", `最新${withSubject("日报")}`],
-    ["/api/v1/dailies/{date}", `指定日期的${withSubject("日报")}`],
+    ["/api/v1/dailies", `${NAV.daily}日期索引`],
+    ["/api/v1/dailies/latest", `最新${NAV.daily}`],
+    ["/api/v1/dailies/{date}", `指定日期的${NAV.daily}`],
     ["/api/v1/selected/snapshot", "当前全部精选；首次完整同步（分页）"],
     ["/api/v1/selected/changes", "精选的新增、修改和撤选；之后只取变化"],
   ];
