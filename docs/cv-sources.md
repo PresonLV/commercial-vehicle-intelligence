@@ -14,7 +14,7 @@
 | 宁德时代 · 新闻 | web_list | T1 | `https://www.catl.com/news/` | 200。乘用车向的稿件靠预筛和评分压住 |
 | 卡车之家 · 行业新闻 | web_list | T2 | `https://www.360che.com/news/` | 200，页面为 GB2312，抓取端按页面声明解码 |
 | 中国卡车网 · 资讯 | web_list | T2 | `https://www.chinatruck.org/news/` | 200。偶发超时，列表结构可用 |
-| 方得网 · 卡车 / 客车 / 零部件 / 数据 / 政策 | web_list | T2 | `https://www.find800.cn/list?cid=33\|35\|213\|248\|205` | 五个栏目都返回过带日期的卡片。卡车栏目有时响应慢 |
+| 方得网 · 卡车 / 客车 / 零部件 / 数据 / 政策 | web_list | T2 | `https://www.find800.cn/list?cid=33\|35\|213\|248\|205` | 五个栏目都解析出过带日期的稿件。站点偶发超时；空页上的“页面未找到”在入库前丢掉 |
 | Transport Topics | rss | T2 | `https://www.ttnews.com/rss.xml` | 200，站点写明 RSS 可被引用。混有海运等非卡车稿，靠预筛 |
 | TruckingInfo | rss | T2 | `https://www.truckinginfo.com/rss` | 200 |
 | Sustainable Bus | rss | T2 | `https://www.sustainable-bus.com/feed/` | 200，客车与新能源公交 |

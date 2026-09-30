@@ -154,6 +154,7 @@
         "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
         "publishedAtUtcOffset": "+08:00",
         "allowUrlPrefixes": ["https://www.find800.cn/news/", "http://www.find800.cn/news/"],
+        "ingestNoiseFilter": { "dropMarkersTitleOnly": ["页面未找到"] },
         "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
@@ -177,6 +178,7 @@
         "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
         "publishedAtUtcOffset": "+08:00",
         "allowUrlPrefixes": ["https://www.find800.cn/news/", "http://www.find800.cn/news/"],
+        "ingestNoiseFilter": { "dropMarkersTitleOnly": ["页面未找到"] },
         "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
@@ -200,6 +202,7 @@
         "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
         "publishedAtUtcOffset": "+08:00",
         "allowUrlPrefixes": ["https://www.find800.cn/news/", "http://www.find800.cn/news/"],
+        "ingestNoiseFilter": { "dropMarkersTitleOnly": ["页面未找到"] },
         "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
@@ -223,6 +226,7 @@
         "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
         "publishedAtUtcOffset": "+08:00",
         "allowUrlPrefixes": ["https://www.find800.cn/news/", "http://www.find800.cn/news/"],
+        "ingestNoiseFilter": { "dropMarkersTitleOnly": ["页面未找到"] },
         "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
@@ -246,6 +250,7 @@
         "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
         "publishedAtUtcOffset": "+08:00",
         "allowUrlPrefixes": ["https://www.find800.cn/news/", "http://www.find800.cn/news/"],
+        "ingestNoiseFilter": { "dropMarkersTitleOnly": ["页面未找到"] },
         "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
