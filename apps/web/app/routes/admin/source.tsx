@@ -223,7 +223,7 @@ export default function SourceDetail({ loaderData }: Route.ComponentProps) {
               </Field>
               <div className="flex flex-col justify-end gap-2 text-[13px] text-ink-2">
                 {([
-                  ["first_party", "一手信源（官方账号或官网）"],
+                  ["first_party", "官方信源（账号或官网）"],
                   ["site_fulltext", "站内可展示全文"],
                   ["syndicate_fulltext", "对外接口可带全文"],
                 ] as const).map(([k, label]) => (

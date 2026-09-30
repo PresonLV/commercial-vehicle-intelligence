@@ -6,6 +6,7 @@
 // and the neighbours; line parts stories, columns and list rows. Nothing is set in solid ink. Stories
 // sit in rows of two whose rules run across the page, each story as tall as its neighbour.
 import { SITE, withSubject } from "@aihot/industry/site";
+import { CHANNEL_LABELS } from "@aihot/contracts/taxonomy";
 import { useState, type ReactNode } from "react";
 import { Link } from "react-router";
 import type { ReportCitation, ReportDetail, ReportNavigationEntry } from "@aihot/contracts/site";
@@ -73,13 +74,13 @@ function Masthead({ report, index }: { report: ReportDetail; index: ReportNaviga
   );
 }
 
-/** Source face and name, and the site's 一手 mark when first-hand. */
+/** Source face and name, and the site's 官方 mark when first-hand. */
 function Source({ c, size = 16 }: { c: ReportCitation; size?: number }) {
   return (
     <span className="inline-flex min-w-0 items-center gap-1.5">
       <SourceAvatar name={c.sourceName} iconUrl={c.sourceIconUrl} iconSrcSet={c.sourceIconSrcSet} size={size} />
       <span className="truncate">{shortSourceName(c.sourceName)}</span>
-      {c.firstParty && <Badge tone="accent">一手</Badge>}
+      {c.firstParty && <Badge tone="accent">{CHANNEL_LABELS.firstParty}</Badge>}
     </span>
   );
 }

@@ -27,7 +27,7 @@ export const CHANNEL_LABELS: Record<ChannelKey, string> = {
   all: "全部",
   news: "资讯",
   x: "X",
-  firstParty: "一手",
+  firstParty: "官方",
 };
 
 export function isChannelKey(value: unknown): value is ChannelKey {

@@ -44,7 +44,7 @@ export default function NewSource() {
   };
 
   return (
-    <AdminPage title="新建信源" subtitle="先判重、先预览：优先 RSS/JSON 等稳定协议；首抓成功且有真实条目才算接入完成。一手身份要有运营主体或官方交叉链接证据。">
+    <AdminPage title="新建信源" subtitle="先判重、先预览：优先 RSS/JSON 等稳定协议；首抓成功且有真实条目才算接入完成。标成官方要有运营主体或交叉链接证据。">
       <div className="grid gap-5 xl:grid-cols-[1fr_420px]">
         <Card title="信源定义">
           <div className="grid gap-4 sm:grid-cols-2">
@@ -84,7 +84,7 @@ export default function NewSource() {
             </Field>
             <div className="flex flex-col justify-end gap-2 text-[13px] text-ink-2">
               {([
-                ["first_party", "一手信源"],
+                ["first_party", "官方信源"],
                 ["site_fulltext", "站内可展示全文"],
                 ["syndicate_fulltext", "对外接口可带全文"],
               ] as const).map(([k, label]) => (

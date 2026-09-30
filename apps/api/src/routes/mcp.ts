@@ -184,7 +184,7 @@ export function buildMcpServer(): McpServer {
       const lines = [`${SITE.name} 事件：${story.title}`, `状态：${story.status === "active" ? "持续更新" : "历史事件"}｜${story.reportCount} 篇报道｜${story.sourceCount} 个来源`, `最新进展：${story.latest}`];
       if (story.digest) lines.push("", `事件综述：${story.digest}`);
       lines.push("", "报道时间线：");
-      story.reports.forEach((r, i) => lines.push(`${i + 1}. ${r.publishedAt}｜${r.source.name}${r.source.firstParty ? "（一手）" : ""}｜${r.title}｜${r.links.aihot}`));
+      story.reports.forEach((r, i) => lines.push(`${i + 1}. ${r.publishedAt}｜${r.source.name}${r.source.firstParty ? "（官方）" : ""}｜${r.title}｜${r.links.aihot}`));
       lines.push("", `事件页：${story.links.aihot}`);
       return ok(lines.join("\n"), { schemaVersion: 1, story });
     }),
