@@ -9,7 +9,7 @@
     {
       "key": "field",
       "name": "产业链方向",
-      "blurb": "按上游、中游、下游和横切主题看：新能源、出海、后市场、政策"
+      "blurb": "按上游、中游、下游和海外市场看：新能源、出海、可借鉴做法、后市场、政策"
     },
     {
       "key": "genre",
@@ -167,12 +167,65 @@
       "related": ["lubricants", "fleet", "powertrain"]
     },
     {
+      "slug": "daimler-truck",
+      "name": "戴姆勒卡车",
+      "group": "company",
+      "entityId": "daimler-truck",
+      "tags": ["戴姆勒卡车", "entity:daimler-truck"],
+      "definition": "戴姆勒卡车、奔驰卡车和 Setra 的产品、车队订单和出勤率服务。",
+      "related": ["volvo-group", "overseas-practice", "fleet"]
+    },
+    {
+      "slug": "volvo-group",
+      "name": "沃尔沃集团",
+      "group": "company",
+      "entityId": "volvo-group",
+      "tags": ["沃尔沃集团", "entity:volvo-group"],
+      "definition": "沃尔沃卡车及集团的新能源、服务合同和海外产能。",
+      "related": ["scania", "overseas-practice", "new-energy"]
+    },
+    {
+      "slug": "paccar",
+      "name": "帕卡",
+      "group": "company",
+      "entityId": "paccar",
+      "tags": ["帕卡", "entity:paccar"],
+      "definition": "PACCAR、彼得比尔特和肯沃斯的财务、经销商和供应商体系。",
+      "related": ["daimler-truck", "overseas-practice"]
+    },
+    {
+      "slug": "scania",
+      "name": "斯堪尼亚",
+      "group": "company",
+      "entityId": "scania",
+      "tags": ["斯堪尼亚", "entity:scania"],
+      "definition": "斯堪尼亚的车队服务、燃气和电动干线案例。",
+      "related": ["volvo-group", "overseas-practice", "fleet"]
+    },
+    {
+      "slug": "michelin",
+      "name": "米其林",
+      "group": "company",
+      "entityId": "michelin",
+      "tags": ["米其林", "entity:michelin"],
+      "definition": "米其林车队轮胎方案，包括按公里付费和翻新。",
+      "related": ["overseas-practice", "aftermarket", "lubricants"]
+    },
+    {
       "slug": "export",
       "name": "出海",
       "group": "field",
       "tags": ["出海", "出口市场"],
       "definition": "整车和零部件出口，重点看俄罗斯、中亚，以及中东、非洲、东南亚和拉美。",
       "related": ["sinotruk", "sales-data", "policy"]
+    },
+    {
+      "slug": "overseas-practice",
+      "name": "海外借鉴",
+      "group": "field",
+      "tags": ["海外借鉴"],
+      "definition": "海外轮胎、主机厂和车队的计价、服务合同和商业模式，看能不能用到国内。中国车出口数字仍看出海。",
+      "related": ["michelin", "aftermarket", "fleet", "export"]
     },
     {
       "slug": "policy",

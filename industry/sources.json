@@ -346,6 +346,279 @@
       "tags": ["媒体", "车队"],
       "site_fulltext": false,
       "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-ata",
+      "name": "美国卡车运输协会 ATA",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.trucking.org/rss.xml",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["协会", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-iru",
+      "name": "国际道路运输联盟 IRU",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.iru.org/rss.xml",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["协会", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-fmcsa-fr",
+      "name": "美国联邦公报 · FMCSA",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.federalregister.gov/api/v1/documents.rss?conditions%5Bagencies%5D%5B%5D=federal-motor-carrier-safety-administration&per_page=20",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": ["Exemption", "Hearing", "Information Collection"]
+        },
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": ["官方", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-paccar",
+      "name": "帕卡 · 新闻",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.paccar.com/rss",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "paccar",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-man",
+      "name": "曼恩 · 新闻",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://press.mantruckandbus.com/corporate/feed/en",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "man-truck",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-traton",
+      "name": "传拓 · 新闻",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://traton.com/rss/?generatorName=elastic&locale=en",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "traton",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-international",
+      "name": "国际卡车 International · 新闻",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.international.com/news?pagetemplate=rss",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-daimler-news",
+      "name": "戴姆勒卡车 · 新闻室",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.daimlertruck.com/en/newsroom",
+        "itemSelector": "a.card",
+        "titleSelector": ".card__caption",
+        "publishedAtRegex": "(\\d{2}\\.\\d{2}\\.\\d{4})",
+        "publishedAtUtcOffset": "+02:00",
+        "allowUrlPrefixes": ["https://www.daimlertruck.com/en/newsroom/pressrelease/"],
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "daimler-truck",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-volvo-news",
+      "name": "沃尔沃集团 · 新闻",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.volvogroup.com/en/news-and-media.html",
+        "itemSelector": "li.articlelist__item",
+        "linkSelector": "h3 a",
+        "titleSelector": "h3.articlelist__headerTitle",
+        "publishedAtSelector": ".articlelist__headerTimeDate",
+        "publishedAtUtcOffset": "+02:00",
+        "allowUrlPrefixes": ["https://www.volvogroup.com/en/news-and-media/news/"],
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "volvo-group",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-scania-news",
+      "name": "斯堪尼亚 · 新闻室",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.scania.com/group/en/home/newsroom.html",
+        "itemSelector": "article.cmp-list__item-wrapper",
+        "linkSelector": "a.cmp-list__item-link",
+        "titleSelector": "a.cmp-list__item-link",
+        "allowUrlPrefixes": ["https://www.scania.com/group/en/home/newsroom/news/"],
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "scania",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-freightwaves",
+      "name": "FreightWaves",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.freightwaves.com/feed",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": ["媒体", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-truck-bus-news",
+      "name": "Truck & Bus News",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.truckandbusnews.net/feed/",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["媒体", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-cv-india",
+      "name": "Commercial Vehicle India",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.commercialvehicle.in/feed/",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["媒体", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-freightnews-za",
+      "name": "Freight News",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.freightnews.co.za/rss",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["媒体", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-transporte-mx",
+      "name": "Transporte Informativo",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.transporteinformativo.com.mx/feed/",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["媒体", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
     }
   ]
 }

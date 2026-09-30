@@ -9,6 +9,9 @@
    - tractor / tractor unit = 牵引车（货运牵引车；只有农业语境才写拖拉机）
    - rigid / straight truck = 载货车
    - dump / tipper = 自卸车
+   - pay-per-kilometre / pay-per-mile / tires-as-a-service = 按公里付费（轮胎即服务）
+   - retread = 翻新胎
+   - uptime contract / full-service lease = 出勤率合同 / 全包租赁
    - tractor-trailer 里的 trailer = 挂车（不是“预告片”）
    - coach = 公路客车；city bus = 城市公交；school bus 保留“校车”
    - pickup = 皮卡
