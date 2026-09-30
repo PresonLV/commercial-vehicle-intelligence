@@ -275,7 +275,7 @@
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 120,
-      "tags": ["媒体", "出海"],
+      "tags": ["媒体", "海外市场"],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
@@ -292,7 +292,7 @@
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 120,
-      "tags": ["媒体", "出海"],
+      "tags": ["媒体", "海外市场"],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
@@ -1432,6 +1432,181 @@
         "_aihot": {
           "initialBackfillLimit": 8
         }
+      }
+    },
+    {
+      "id": "web-miit-notices",
+      "name": "工业和信息化部 · 通知公告",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "政策"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.miit.gov.cn/api-gateway/jpaas-publish-server/front/page/build/unit?parseType=buildstatic&webId=8d828e408d90447786ddbe128d495e9e&tplSetId=209741b2109044b5b7695700b2bec37e&pageType=column&tagId=%E5%8F%B3%E4%BE%A7%E5%86%85%E5%AE%B9&editType=null&pageId=3e3ad1a3bec74939890a0d3e54815141",
+        "baseUrl": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/tz/index.html",
+        "htmlJsonPath": "data.html",
+        "itemSelector": "li.cf",
+        "linkSelector": "a.fl",
+        "titleSelector": "a.fl",
+        "publishedAtSelector": "span.fr",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.miit.gov.cn/zwgk/zcwj/"],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": ["商用车", "货车", "卡车", "客车", "挂车", "重卡", "轻卡", "微卡", "新能源", "换电", "氢能", "排放", "以旧换新", "报废", "路权", "治超", "超限", "收费公路", "物流", "出口", "购置税", "国六", "国七", "电池", "车辆", "汽车"]
+        },
+        "_aihot": { "initialBackfillLimit": 8 }
+      }
+    },
+    {
+      "id": "web-ndrc-notices",
+      "name": "国家发展改革委 · 通知",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "政策"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.ndrc.gov.cn/xxgk/zcfb/tz/index.html",
+        "itemSelector": "a[href*='/t20']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{6})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.ndrc.gov.cn/xxgk/zcfb/"],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": ["商用车", "货车", "卡车", "客车", "挂车", "重卡", "轻卡", "新能源", "换电", "氢能", "排放", "以旧换新", "报废", "路权", "治超", "收费公路", "物流", "出口", "购置税", "国六", "电池", "汽车", "车辆"]
+        },
+        "_aihot": { "initialBackfillLimit": 8 }
+      }
+    },
+    {
+      "id": "web-mof-notices",
+      "name": "财政部 · 政策发布",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "政策"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.mof.gov.cn/zhengwuxinxi/zhengcefabu/index.htm",
+        "itemSelector": "a[href*='zhengcefabu']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{6})",
+        "publishedAtUtcOffset": "+08:00",
+        "ingestNoiseFilter": {
+          "requireTitleMatch": ["商用车", "货车", "卡车", "客车", "汽车", "车辆", "新能源", "以旧换新", "报废", "购置税", "物流", "公路", "排放"]
+        },
+        "_aihot": { "initialBackfillLimit": 8 }
+      }
+    },
+    {
+      "id": "web-ciceia-sales",
+      "name": "中国内燃机工业协会 · 销量综述",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["机构", "数据"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.ciceia.org.cn/",
+        "itemSelector": "a[href*='/xinwendongtai/']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "allowUrlPrefixes": ["https://www.ciceia.org.cn/xinwendongtai/"],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": ["销量", "产量", "产销", "进出口"]
+        },
+        "_aihot": { "initialBackfillLimit": 8 }
+      }
+    },
+    {
+      "id": "web-cada",
+      "name": "中国汽车流通协会",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["机构", "政策"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "http://www.cada.cn/",
+        "itemSelector": "a[href*='info_']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "allowUrlPrefixes": ["http://www.cada.cn/", "https://www.cada.cn/"],
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": ["乘用车"],
+          "requireTitleMatch": ["商用车", "货车", "客车", "二手车", "经销商", "库存", "挂车"]
+        },
+        "_aihot": { "initialBackfillLimit": 8 }
+      }
+    },
+    {
+      "id": "json-cninfo-weichai",
+      "name": "潍柴动力 · 巨潮公告",
+      "kind": "json_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "weichai",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "数据"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+        "method": "POST",
+        "headers": {
+          "Referer": "https://www.cninfo.com.cn/",
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        "bodyEncoding": "form",
+        "bodyJson": {
+          "pageNum": "1",
+          "pageSize": "30",
+          "column": "szse",
+          "tabName": "fulltext",
+          "plate": "",
+          "stock": "000338,9900002961",
+          "searchkey": "",
+          "secid": "",
+          "category": "",
+          "trade": "",
+          "seDate": "",
+          "sortName": "",
+          "sortType": "",
+          "isHLtitle": "true"
+        },
+        "itemsPath": "announcements",
+        "titlePaths": ["announcementTitle"],
+        "publishedAtPath": "announcementTime",
+        "publishedAtUnit": "epoch_ms",
+        "urlTemplate": "http://static.cninfo.com.cn/{raw:adjunctUrl}",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": ["独立董事", "监事会", "法律意见书", "股票交易异常波动", "提示性公告", "无偿捐赠", "一致行动人"]
+        },
+        "_aihot": { "initialBackfillLimit": 8 }
       }
     }
   ]

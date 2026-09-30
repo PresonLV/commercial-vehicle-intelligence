@@ -7,11 +7,14 @@ import { finalizeCopy, keepsResearchShape } from "@aihot/backend/editorial/writi
 
 test("deep research forces the research column and tracked companies have topics", () => {
   const keys = CATEGORIES.map((c) => c.key);
+  assert.deepEqual(keys, ["upstream", "oem", "downstream", "policy", "data", "tech", "overseas", "research"]);
   assert.equal(keys.at(-1), "research");
-  assert.equal(keys[keys.indexOf("tech") + 1], "research");
+  assert.equal(keys[keys.indexOf("overseas") + 1], "research");
   assert.equal(columnForItemType("deep_research", "overseas"), "research");
   assert.equal(columnForItemType("deep_research", "downstream"), "research");
   assert.equal(columnForItemType("overseas_practice", "overseas"), "overseas");
+  assert.equal(columnForItemType("industry_event", "export"), "overseas");
+  assert.equal(columnForItemType("explainer", "tech"), "tech");
   assert.equal(columnForItemType("industry_event", "downstream"), "downstream");
   assert.ok((TOPIC_TAGS as readonly string[]).includes("新业态"));
   const topics = JSON.parse(readFileSync(new URL("../industry/topics.json", import.meta.url), "utf8")) as { topics: Array<{ slug: string }> };

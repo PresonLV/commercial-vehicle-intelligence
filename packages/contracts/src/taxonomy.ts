@@ -1,6 +1,6 @@
 // Public vocabularies shared by the website, the API and the worker. The categories themselves belong to
 // the industry pack (industry/taxonomy.ts); their keys are external identities (URLs, API, RSS).
-import { CATEGORIES } from "@aihot/industry/taxonomy";
+import { CATEGORIES, canonicalCategory } from "@aihot/industry/taxonomy";
 
 export type CategoryKey = (typeof CATEGORIES)[number]["key"];
 export const CATEGORY_KEYS = CATEGORIES.map((c) => c.key) as unknown as readonly [CategoryKey, ...CategoryKey[]];
@@ -13,7 +13,8 @@ export const PUBLIC_API_CATEGORY_KEYS = CATEGORY_KEYS;
 export type PublicApiCategoryKey = CategoryKey;
 
 export function toPublicApiCategory(category: string | null): PublicApiCategoryKey | null {
-  return isCategoryKey(category) ? category : null;
+  const key = canonicalCategory(category);
+  return isCategoryKey(key) ? key : null;
 }
 
 export function isCategoryKey(value: unknown): value is CategoryKey {

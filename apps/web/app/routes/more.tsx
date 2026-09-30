@@ -27,6 +27,7 @@ const GROUPS: Array<{ title: string; rows: Row[] }> = [
       ...(FEATURES.leaderboard ? [{ to: "/leaderboard", label: "模型榜", icon: <IconChart size={18} /> }] : []),
       ...(FEATURES.codexResetMonitor ? [{ to: "/codex-reset", label: "Tibo重置监控", icon: <IconHistory size={18} /> }] : []),
       { to: "/agent", label: "Agent 接入", icon: <IconPlug size={18} /> },
+      { to: "/data", label: "数据", icon: <IconChart size={18} /> },
       { to: "/research", label: "深度研究", icon: <IconChart size={18} /> },
     ],
   },

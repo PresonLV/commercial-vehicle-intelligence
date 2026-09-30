@@ -12,11 +12,10 @@ export const CATEGORIES = [
   { key: "upstream", label: "上游", section: "上游", guide: "原材料与钢材、轮胎橡胶价格，发动机与动力总成，电驱、动力电池、氢燃料电池，车桥、变速箱、制动、滤清、后处理，润滑油与油液" },
   { key: "oem", label: "中游", section: "中游", guide: "重卡、中轻卡、皮卡、客车、专用车和新能源商用车整车厂的产量、销量、新车型、新平台、价格和产能" },
   { key: "downstream", label: "下游", section: "下游", guide: "经销与流通、后市场配件与服务、物流车队、融资租赁、二手商用车、充换电与加氢、公路运价和货运需求" },
-  { key: "overseas", label: "海外市场", section: "海外市场", guide: "海外整车、轮胎和车队的商业模式与做法：按公里付费、轮胎服务合同、翻新、预测性维保、主机厂出勤率服务、配件分销和经销商模式、二手车再营销、租赁与全周期成本、润滑油车队项目。看的是能不能借鉴到国内，不是海外本地花絮，也不是中国车出口本身。短新闻放这里；投资者日、年报战略和长案例放深度研究" },
-  { key: "policy", label: "政策", section: "政策与数据", guide: "排放标准、新能源补贴、以旧换新和报废更新、工信部车辆公告、道路货运规则和其他监管变化" },
-  { key: "data", label: "数据", section: "政策与数据", guide: "中汽协等机构的月度产销、市场份额、出口量和能改变判断的行业统计" },
-  { key: "export", label: "出海", section: "出海与技术", guide: "商用车及零部件出口，俄罗斯、中亚、中东、非洲、东南亚、拉美等海外市场的需求、认证、渠道和本地组装" },
-  { key: "tech", label: "技术", section: "出海与技术", guide: "自动驾驶卡车、智能网联、线控底盘，以及会改变产品路线的动力和补能技术节点" },
+  { key: "policy", label: "政策", section: "政策", guide: "部委、省市主管部门和行业协会发布的政策文件、通知和公告。优先保留文号、发文机关和日期。范围包括以旧换新、报废更新补贴、排放标准、路权、新能源商用车、换电、氢能、治超、高速费和出口管理。乘用车专用政策、与货运无关的政务不要放这里" },
+  { key: "data", label: "数据", section: "数据", guide: "已经公布且能核对的产销、上牌和保险数字：内燃机按用途和燃料，商用车按重卡、中卡、轻卡、微卡、客车和新能源，以及终端上牌量、交强险。只有标题、正文没有数字的解读不要放这里" },
+  { key: "tech", label: "技术", section: "技术", guide: "换电、氢燃料、自动驾驶、线控底盘、新型动力、车联网、轮胎即服务等新技术和新业态的解释或新品技术发布。把路线讲清楚的说明放这里。新业态可以同时作为主题标签。讲透商业模式的长案例放深度研究" },
+  { key: "overseas", label: "海外市场", section: "海外市场", guide: "两件事都放这里。一是海外整车、轮胎、汽配和车队的短做法：按公里付费、轮胎服务合同、翻新、预测性维保、主机厂出勤率服务、配件分销、二手车再营销、租赁与全周期成本，短新闻要能写对国内的启示。二是中国商用车及零部件出口，包括俄罗斯、中亚、中东、非洲、东南亚、拉美的需求、认证、渠道和本地组装。投资者日、年报战略和长案例放深度研究" },
   { key: "research", label: "深度研究", section: "深度研究", guide: "对标公司的长文：投资者日、年报或 10-K 里的战略、业绩会里讲清楚的商业模式、咨询或分析长文、车队和后市场案例。短新闻不要放这里。海外对标看能不能用到国内；国内车队、换电、氢能、自动驾驶干线、车联网和汽配平台看模式要点" },
 ] as const;
 
@@ -84,9 +83,16 @@ export const CATEGORY_BY_ITEM_TYPE: Readonly<Record<string, string>> = {
  * 长文走深度研究栏目。短新闻仍用结构化那一步给出的栏目。
  * 内容理解判成 deep_research 时，以这里为准，避免把年报战略留在海外市场或下游。
  */
+/** 出海并入海外市场。旧的 export 只作为读旧数据时的别名，不再单独成栏。 */
+export function canonicalCategory(category: string | null | undefined): string | null {
+  if (!category) return null;
+  if (category === "export") return "overseas";
+  return category;
+}
+
 export function columnForItemType(itemType: string | null | undefined, structureCategory: string | null): string | null {
   if (itemType === "deep_research") return "research";
-  return structureCategory;
+  return canonicalCategory(structureCategory);
 }
 
 /** 深度研究页和主题页要能按公司浏览的对标名单。增删只改这一份，并在 topics.json 里放同 id 的主题。 */

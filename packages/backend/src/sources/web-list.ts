@@ -27,6 +27,7 @@ export function parseLooseDate(value: string | null | undefined, utcOffset = "+0
   if (!value) return null;
   const v = value.trim();
   if (!v) return null;
+  if (/^\d{8}$/.test(v)) return atOffset(v.slice(0, 4), v.slice(4, 6), v.slice(6, 8), "00", "00", "00", utcOffset);
   if (EXPLICIT_ZONE.test(v) || /^\d{4}-\d{2}-\d{2}$/.test(v)) {
     const direct = Date.parse(v);
     if (Number.isFinite(direct) && /\d{4}/.test(v)) return new Date(direct);
@@ -121,7 +122,26 @@ async function fetchListingText(source: SourceRow): Promise<{ text: string; viaJ
   }
   const res = await guardedFetch(url, { headers: { accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8" }, timeoutMs: 25_000 });
   if (res.status !== 200) throw new FetchError(`HTTP ${res.status}`, res.status);
-  return { text: res.text(), viaJina: false, base: source.config.baseUrl ?? url };
+  const raw = res.text();
+  const path = source.config.htmlJsonPath;
+  if (typeof path === "string" && path) return { text: htmlAtJsonPath(raw, path), viaJina: false, base: source.config.baseUrl ?? url };
+  return { text: raw, viaJina: false, base: source.config.baseUrl ?? url };
+}
+
+/** A listing wrapped as JSON, used when a ministry page renders its list from an HTML field. */
+export function htmlAtJsonPath(raw: string, path: string): string {
+  let cur: unknown;
+  try {
+    cur = JSON.parse(raw);
+  } catch {
+    throw new FetchError("htmlJsonPath: response is not JSON");
+  }
+  for (const part of path.split(".")) {
+    if (!cur || typeof cur !== "object") throw new FetchError("htmlJsonPath did not resolve to HTML");
+    cur = (cur as Record<string, unknown>)[part];
+  }
+  if (typeof cur !== "string" || !cur.trim()) throw new FetchError("htmlJsonPath did not resolve to HTML");
+  return cur;
 }
 
 export function fromMarkdown(md: string, base: string, source: SourceRow): Candidate[] {

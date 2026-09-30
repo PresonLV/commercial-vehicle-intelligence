@@ -2,6 +2,7 @@
 // publication time. Summary feeds never carry content:encoded; full feeds inline bodies only for
 // sources that explicitly allow redistribution. Titles come from the site's name and categories.
 import { CATEGORY_LABELS, PUBLIC_API_CATEGORY_KEYS, type PublicApiCategoryKey } from "@aihot/contracts/taxonomy";
+import { canonicalCategory } from "@aihot/industry/taxonomy";
 import { SITE, withSubject } from "@aihot/industry/site";
 import { config } from "../config.ts";
 import { sql } from "../db.ts";
@@ -173,6 +174,12 @@ export async function dailyFeed(): Promise<string> {
   return channel({ title: m.title, description: m.description, homePath: m.homePath, selfPath: m.path, ttl: m.pollHintMinutes }, items);
 }
 
-export function isFeedCategory(v: string): v is PublicApiCategoryKey {
-  return (PUBLIC_API_CATEGORY_KEYS as readonly string[]).includes(v);
+/** 旧的出海订阅地址仍打开合并后的海外市场。 */
+export function feedCategory(slug: string): PublicApiCategoryKey | null {
+  const key = canonicalCategory(slug);
+  return key && (PUBLIC_API_CATEGORY_KEYS as readonly string[]).includes(key) ? (key as PublicApiCategoryKey) : null;
+}
+
+export function isFeedCategory(v: string): boolean {
+  return feedCategory(v) !== null;
 }

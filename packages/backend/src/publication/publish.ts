@@ -9,6 +9,7 @@ import { sha256, stableJson } from "../lib/ids.ts";
 import { collapseWhitespace } from "../lib/text.ts";
 import { itemUrl } from "./links.ts";
 import { enqueue, QUEUES, shutdownSignal } from "../jobs/queue.ts";
+import { syncMetricPoints } from "../metrics/store.ts";
 import {
   bodyModeOf, channelOf, displayTags, isIndexable, isPoolEligible, isSelectable, mayRedistribute, type SourceFacts,
 } from "./rules.ts";
@@ -321,6 +322,15 @@ export async function publishArticleTx(tx: Tx, articleId: string, options: Publi
     await tx`UPDATE selected_state SET in_set = false, payload_hash = NULL, last_seq = ${seq} WHERE article_id = ${articleId}`;
     ledger = "remove";
   }
+
+  await syncMetricPoints(tx, {
+    articleId,
+    category,
+    tags,
+    text: [next.title, summary, article.body_text].filter(Boolean).join("\n"),
+    sourceName: source.name,
+    url: article.url,
+  });
 
   const wasPublic = !!previous && previous.visibility !== "withdrawn" && previous.eligible;
   const reduced =

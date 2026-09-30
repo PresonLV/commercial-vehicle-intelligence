@@ -17,6 +17,7 @@ export default [
   route("monthly", "routes/report-latest.tsx", { id: "monthly-latest" }),
   route("monthly/:key", "routes/report-detail.tsx", { id: "monthly-detail" }),
   route("research", "routes/research.tsx"),
+  route("data", "routes/data.tsx"),
   route("topics", "routes/topics.tsx"),
   route("topics/:slug", "routes/topic.tsx", { id: "topic" }),
   route("topics/:slug/page/:page", "routes/topic.tsx", { id: "topic-page" }),

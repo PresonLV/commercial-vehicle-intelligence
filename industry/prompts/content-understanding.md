@@ -18,11 +18,11 @@
 - `market_report`：行业报告、标准或调研
 - `industry_event`：政策、补贴、召回、订单、并购、产能、价格战、出口市场变化
 - `opinion_analysis`：观点、访谈、复盘
-- `explainer`：把政策、数据或技术路线讲清楚的说明
+- `explainer`：把一条技术或新业态讲清楚的说明，或新品技术发布。换电、氢燃料、自动驾驶、线控底盘、新型动力、车联网、轮胎即服务都算。可以同时打主题标签“新业态”
 - `overseas_practice`：海外轮胎、汽配连锁、主机厂或车队的短新闻，写清了计价、门店网络、配送或服务合同，但不是长案例
 - `deep_research`：投资者日、年报或招股书里的战略、业绩会里讲清楚的商业模式、咨询或分析长文、车队和后市场案例。短新闻不要选这个类型
 
-优先级：有产销或份额数字选 sales_data；正式政策或大额订单选 industry_event；新平台选 product_launch；海外短做法选 overseas_practice；材料在讲一种商业模式怎么成立、并且篇幅足以分成模式、数据、竞争和启示四段时，选 deep_research。股权捐赠、已完成发债、独立董事、股东大会通知、法律意见书和纯每股收益，不要选 deep_research。
+优先级：有产销、上牌或交强险数字选 sales_data；正式政策文件或大额订单选 industry_event；整车新平台选 product_launch；换电、氢能、自动驾驶、线控底盘、车联网、轮胎即服务的技术说明或技术发布选 explainer，并可以再打“新业态”；海外短做法和中国车出口短新闻里，写清了海外做法的选 overseas_practice，出口事件本身选 industry_event 并打“出海”；材料在讲一种商业模式怎么成立、并且篇幅足以分成模式、数据、竞争和启示四段时，选 deep_research。股权捐赠、已完成发债、独立董事、股东大会通知、法律意见书和纯每股收益，不要选 deep_research。中国车出口和海外借鉴都归到海外市场栏目，不要再单列出海栏目。
 
 输出前检查 `itemType` 与第一个分类标签是否自洽：`sales_data` 对应“销量数据”，`product_launch` 对应“新车与平台”，`channel_practice` 对应“后市场”，`market_report` 对应“数据解读”，`industry_event` 对应“行业动态”或“政策法规”或“出海”或“车队物流”，`opinion_analysis` 对应“观点解读”或“现象趋势”，`explainer` 对应“技术路线”，`overseas_practice` 对应“海外借鉴”，`deep_research` 对应“深度研究”。如果二者冲突，按当前材料的核心事件修正后再输出。
 
