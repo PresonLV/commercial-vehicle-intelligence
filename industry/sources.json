@@ -1,386 +1,344 @@
 {
-  "$comment": "示范信源：首次启动时导入（scripts/seed.ts），已存在的不会被覆盖。之后在后台“信源”里增删改。字段说明见 docs/customize.md。",
+  "$comment": "商用车示范信源：首次启动时导入（scripts/seed.ts），已存在的不会被覆盖。只收录在 2026-09-30 从公网确认能返回列表或 RSS 的地址。打不开、反爬、或主要靠公众号的源见 docs/cv-sources.md。字段说明见 docs/customize.md。",
   "sources": [
     {
-      "id": "rss-openai-news",
-      "name": "OpenAI News",
-      "kind": "rss",
+      "id": "web-caam-sales",
+      "name": "中汽协 · 产销数据",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://openai.com/news/rss.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": "openai",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-google-deepmind",
-      "name": "Google DeepMind",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://deepmind.google/blog/rss.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": "google",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-google-research",
-      "name": "Google Research",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://research.google/blog/rss/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": "google",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方",
-        "研究"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-hugging-face",
-      "name": "Hugging Face Blog",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://huggingface.co/blog/feed.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": "hugging-face",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方",
-        "开源"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-microsoft-research",
-      "name": "Microsoft Research",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://www.microsoft.com/en-us/research/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": "microsoft",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方",
-        "研究"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-nvidia-blog",
-      "name": "NVIDIA Blog",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://blogs.nvidia.com/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": "nvidia",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-aws-ml",
-      "name": "AWS Machine Learning Blog",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://aws.amazon.com/blogs/machine-learning/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方",
-        "教程"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-github-ai",
-      "name": "GitHub Blog · AI & ML",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://github.blog/ai-and-ml/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-mistral",
-      "name": "Mistral AI",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://mistral.ai/rss.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-bair",
-      "name": "Berkeley AI Research",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://bair.berkeley.edu/blog/feed.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "url": "http://www.caam.org.cn/",
+        "itemSelector": ".DataStatisticsList li",
+        "linkSelector": "a",
+        "titleSelector": "span.cont",
+        "allowUrlPrefixes": [
+          "http://www.caam.org.cn/chn/5/cate_39/",
+          "https://www.caam.org.cn/chn/5/cate_39/"
+        ],
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": ["乘用车"]
+        },
+        "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T1",
       "first_party": true,
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 180,
-      "tags": [
-        "研究"
-      ],
+      "tags": ["机构", "数据"],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-the-verge-ai",
-      "name": "The Verge · AI",
-      "kind": "rss",
+      "id": "web-mot-news",
+      "name": "交通运输部 · 交通要闻",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "url": "https://www.mot.gov.cn/xinwen/jiaotongyaowen/index.html",
+        "itemSelector": "li.news-item",
+        "linkSelector": "a.news-link",
+        "titleSelector": ".news-title",
+        "publishedAtSelector": ".news-date",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.mot.gov.cn/xinwen/jiaotongyaowen/"],
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": ["官方", "政策"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-weichai-news",
+      "name": "潍柴 · 新闻与事件",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.weichai.com/group/weichai/cn/media-hub/news2/index.html",
+        "itemSelector": "a.simple-box",
+        "titleSelector": ".simple-title",
+        "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.weichai.com/group/weichai/cn/media-hub/news2/"],
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "weichai",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "上游"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-catl-news",
+      "name": "宁德时代 · 新闻",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.catl.com/news/",
+        "itemSelector": "li.mc_e1_li",
+        "linkSelector": "a",
+        "titleSelector": ".mc_e1_txt",
+        "publishedAtSelector": ".mc_e1_date",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.catl.com/news/"],
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "catl",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "上游"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-360che-news",
+      "name": "卡车之家 · 行业新闻",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.360che.com/news/",
+        "itemSelector": ".news_dk",
+        "linkSelector": ".news_dk1 a",
+        "titleSelector": ".news_dk1 a",
+        "publishedAtSelector": ".news_dk3a",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.360che.com/news/"],
+        "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
       "first_party": false,
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
+      "tags": ["媒体"],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-techcrunch-ai",
-      "name": "TechCrunch · AI",
-      "kind": "rss",
+      "id": "web-chinatruck-news",
+      "name": "中国卡车网 · 资讯",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://techcrunch.com/category/artificial-intelligence/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "url": "https://www.chinatruck.org/news/",
+        "itemSelector": ".article-lists",
+        "linkSelector": "a",
+        "titleSelector": "h2",
+        "publishedAtSelector": ".atr-column span",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.chinatruck.org/news/"],
+        "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
       "first_party": false,
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
+      "tags": ["媒体"],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-ars-technica-ai",
-      "name": "Ars Technica · AI",
-      "kind": "rss",
+      "id": "web-find800-truck",
+      "name": "方得网 · 卡车新闻",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://arstechnica.com/ai/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "url": "https://www.find800.cn/list?cid=33&page=1",
+        "itemSelector": "ul.card > li",
+        "linkSelector": "span.card_info > a",
+        "titleSelector": "span.card_info > a",
+        "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.find800.cn/news/", "http://www.find800.cn/news/"],
+        "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
       "first_party": false,
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
+      "tags": ["媒体", "中游"],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-mit-tech-review-ai",
-      "name": "MIT Technology Review · AI",
-      "kind": "rss",
+      "id": "web-find800-bus",
+      "name": "方得网 · 客车新闻",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://www.technologyreview.com/topic/artificial-intelligence/feed",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "url": "https://www.find800.cn/list?cid=35&page=1",
+        "itemSelector": "ul.card > li",
+        "linkSelector": "span.card_info > a",
+        "titleSelector": "span.card_info > a",
+        "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.find800.cn/news/", "http://www.find800.cn/news/"],
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 90,
+      "tags": ["媒体", "中游"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-find800-parts",
+      "name": "方得网 · 零部件新闻",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.find800.cn/list?cid=213&page=1",
+        "itemSelector": "ul.card > li",
+        "linkSelector": "span.card_info > a",
+        "titleSelector": "span.card_info > a",
+        "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.find800.cn/news/", "http://www.find800.cn/news/"],
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 90,
+      "tags": ["媒体", "上游"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-find800-data",
+      "name": "方得网 · 数据分析",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.find800.cn/list?cid=248&page=1",
+        "itemSelector": "ul.card > li",
+        "linkSelector": "span.card_info > a",
+        "titleSelector": "span.card_info > a",
+        "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.find800.cn/news/", "http://www.find800.cn/news/"],
+        "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
       "first_party": false,
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 120,
-      "tags": [
-        "媒体"
-      ],
+      "tags": ["媒体", "数据"],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-the-decoder",
-      "name": "The Decoder",
-      "kind": "rss",
+      "id": "web-find800-policy",
+      "name": "方得网 · 政策新闻",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://the-decoder.com/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "first_party": false,
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-simon-willison",
-      "name": "Simon Willison",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://simonwillison.net/atom/everything/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "url": "https://www.find800.cn/list?cid=205&page=1",
+        "itemSelector": "ul.card > li",
+        "linkSelector": "span.card_info > a",
+        "titleSelector": "span.card_info > a",
+        "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.find800.cn/news/", "http://www.find800.cn/news/"],
+        "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
       "first_party": false,
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 120,
-      "tags": [
-        "个人"
-      ],
+      "tags": ["媒体", "政策"],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-import-ai",
-      "name": "Import AI",
+      "id": "rss-transport-topics",
+      "name": "Transport Topics",
       "kind": "rss",
       "config": {
-        "feedUrl": "https://importai.substack.com/feed",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "feedUrl": "https://www.ttnews.com/rss.xml",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": ["媒体", "出海"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-truckinginfo",
+      "name": "TruckingInfo",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.truckinginfo.com/rss",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": ["媒体", "出海"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-sustainable-bus",
+      "name": "Sustainable Bus",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.sustainable-bus.com/feed/",
+        "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
       "first_party": false,
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 180,
-      "tags": [
-        "个人",
-        "周刊"
-      ],
+      "tags": ["媒体", "客车"],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-latent-space",
-      "name": "Latent Space",
+      "id": "rss-electrek-trucks",
+      "name": "Electrek · Electric Trucks",
       "kind": "rss",
       "config": {
-        "feedUrl": "https://www.latent.space/feed",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "feedUrl": "https://electrek.co/guides/electric-trucks/feed/",
+        "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
       "first_party": false,
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 180,
-      "tags": [
-        "个人"
-      ],
+      "tags": ["媒体", "新能源"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-fleet-equipment",
+      "name": "Fleet Equipment",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.fleetequipmentmag.com/feed/",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["媒体", "车队"],
       "site_fulltext": false,
       "syndicate_fulltext": false
     }
