@@ -1,5 +1,12 @@
 // Article body extraction: readable text from the article page, or "unconfirmed" — never a wrong body.
 // Jina Reader is the budgeted fallback for pages that only render in a browser.
+// A PDF announcement is read with pdftotext when that program is installed. A missing program
+// leaves the body unconfirmed; it does not invent a transcription.
+import { execFile } from "node:child_process";
+import { mkdtemp, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import { promisify } from "node:util";
 import { Readability } from "@mozilla/readability";
 import { parseHTML } from "linkedom";
 import { sql } from "../db.ts";
@@ -17,7 +24,7 @@ export interface ExtractedBody {
   html: string;
   text: string;
   images: Array<{ kind: "image"; url: string; width: number | null; height: number | null }>;
-  via: "readability" | "jina";
+  via: "readability" | "jina" | "pdf";
 }
 
 const MIN_BODY_CHARS = 200;
@@ -46,10 +53,31 @@ export function readable(html: string, url: string): ExtractedBody | null {
   return { html: clean, text, images, via: "readability" };
 }
 
+const execFileAsync = promisify(execFile);
+
+export async function pdfToText(buf: Buffer): Promise<string | null> {
+  const dir = await mkdtemp(path.join(tmpdir(), "cvpdf-"));
+  const file = path.join(dir, "in.pdf");
+  try {
+    await writeFile(file, buf);
+    const { stdout } = await execFileAsync("pdftotext", ["-layout", file, "-"], { timeout: 20_000, maxBuffer: 2_000_000 });
+    const text = stdout.replace(/\f/g, "\n").trim();
+    return text.length >= 40 ? text : null;
+  } catch {
+    return null;
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+}
+
 export async function extractFromUrl(url: string, opts: { allowJina: boolean; subject: string }): Promise<ExtractedBody | null> {
   try {
     const res = await guardedFetch(url, { timeoutMs: 20_000, maxBytes: 6 * 1024 * 1024 });
     const type = res.headers.get("content-type") ?? "";
+    if (res.status === 200 && (/pdf/.test(type) || /\.pdf($|\?)/i.test(res.url))) {
+      const text = await pdfToText(res.body);
+      if (text && text.length >= MIN_BODY_CHARS) return { html: "", text, images: [], via: "pdf" };
+    }
     if (res.status === 200 && /html/.test(type)) {
       const got = readable(res.text(), res.url);
       if (got) return got;

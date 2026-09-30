@@ -7,12 +7,14 @@ import { pageMeta } from "../lib/seo";
 interface Point {
   metric: string;
   segment: string;
+  brand: string;
   period: string;
   value: number;
   unit: string;
   sourceName: string;
   url: string;
   sample: boolean;
+  method: string;
 }
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -84,18 +86,22 @@ export default function DataPage() {
       <div className="mt-6 space-y-8">
         {metrics.map((metric) => {
           const rows = points.filter((point) => point.metric === metric);
-          const byKey = new Map(rows.map((point) => [`${point.segment}|${point.period}|${point.unit}`, point]));
-          const chartKey = rows.reduce<{ segment: string; unit: string; count: number } | null>((best, point) => {
-            const count = rows.filter((row) => row.segment === point.segment && row.unit === point.unit).length;
+          const byKey = new Map(rows.map((point) => [`${point.sample}|${point.segment}|${point.brand}|${point.period}|${point.unit}`, point]));
+          const series = rows.some((point) => !point.sample) ? rows.filter((point) => !point.sample) : rows;
+          const totals = series.filter((point) => !point.brand);
+          const chartRows = totals.length >= 2 ? totals : series;
+          const chartKey = chartRows.reduce<{ segment: string; unit: string; count: number } | null>((best, point) => {
+            const count = chartRows.filter((row) => row.segment === point.segment && row.unit === point.unit && !row.brand === !point.brand).length;
             return !best || count > best.count ? { segment: point.segment, unit: point.unit, count } : best;
           }, null);
           const chart = chartKey
-            ? rows.filter((point) => point.segment === chartKey.segment && point.unit === chartKey.unit).sort((a, b) => a.period.localeCompare(b.period))
+            ? chartRows.filter((point) => !point.brand && point.segment === chartKey.segment && point.unit === chartKey.unit).sort((a, b) => a.period.localeCompare(b.period))
             : [];
+          const chartPeriods = new Set(chart.map((point) => point.period));
           return (
             <section key={metric}>
               <h2 className="text-[18px] font-semibold text-ink">{METRIC_LABELS[metric] ?? metric}</h2>
-              {chart.length >= 2 && (
+              {chartPeriods.size >= 2 && (
                 <div>
                   <div className="mt-1 text-[12px] text-ink-4">{chartKey?.segment} · {chartKey?.unit}</div>
                   <Trend points={chart} />
@@ -107,6 +113,7 @@ export default function DataPage() {
                     <tr className="border-b border-line text-ink-4">
                       <th className="py-2 pr-3 font-medium">期间</th>
                       <th className="py-2 pr-3 font-medium">细分</th>
+                      <th className="py-2 pr-3 font-medium">品牌</th>
                       <th className="py-2 pr-3 font-medium">数值</th>
                       <th className="py-2 pr-3 font-medium">单位</th>
                       <th className="py-2 pr-3 font-medium">环比</th>
@@ -116,19 +123,20 @@ export default function DataPage() {
                   </thead>
                   <tbody>
                     {rows.map((point) => {
-                      const previous = byKey.get(`${point.segment}|${shiftPeriod(point.period, -1)}|${point.unit}`);
-                      const yearAgo = byKey.get(`${point.segment}|${shiftPeriod(point.period, -12)}|${point.unit}`);
+                      const previous = byKey.get(`${point.sample}|${point.segment}|${point.brand}|${shiftPeriod(point.period, -1)}|${point.unit}`);
+                      const yearAgo = byKey.get(`${point.sample}|${point.segment}|${point.brand}|${shiftPeriod(point.period, -12)}|${point.unit}`);
                       return (
-                        <tr key={`${point.segment}-${point.period}-${point.url}`} className="border-b border-line-soft">
+                        <tr key={`${point.sample}-${point.segment}-${point.brand}-${point.period}-${point.url}`} className="border-b border-line-soft">
                           <td className="py-2 pr-3 num">{point.period}</td>
                           <td className="py-2 pr-3">{point.segment}</td>
+                          <td className="py-2 pr-3">{point.brand}</td>
                           <td className="py-2 pr-3 num">{point.value}</td>
                           <td className="py-2 pr-3">{point.unit}</td>
                           <td className="py-2 pr-3 num">{change(point.value, previous?.value)}</td>
                           <td className="py-2 pr-3 num">{change(point.value, yearAgo?.value)}</td>
                           <td className="py-2">
                             <a href={point.url} className="text-accent hover:underline" target="_blank" rel="noreferrer">
-                              {point.sample ? "【样例】" : ""}{point.sourceName}
+                              {point.sample ? "【样例】" : ""}{point.sourceName}{point.method === "manual" ? " · 人工" : ""}
                             </a>
                           </td>
                         </tr>

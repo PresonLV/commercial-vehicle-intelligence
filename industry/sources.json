@@ -1608,6 +1608,644 @@
         },
         "_aihot": { "initialBackfillLimit": 8 }
       }
+    },
+    {
+      "id": "web-mot-normative",
+      "name": "交通运输部 · 行政规范性文件",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://xxgk.mot.gov.cn/xzgfxwj/",
+        "itemSelector": "a[href*='t20'][href$='.html']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{6})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": [
+          "https://xxgk.mot.gov.cn/xzgfxwj/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "道路",
+            "货运",
+            "货车",
+            "营运",
+            "客车",
+            "客运",
+            "公交",
+            "挂车",
+            "汽车",
+            "车辆",
+            "物流",
+            "超限",
+            "治超",
+            "出租",
+            "新能源",
+            "公路",
+            "运输车"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-mee-standards",
+      "name": "生态环境部 · 标准发布",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.mee.gov.cn/ywgz/fgbz/bz/bzfb/",
+        "itemSelector": "a[href*='/xxgk2018/']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{6})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": [
+          "https://www.mee.gov.cn/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "汽车",
+            "机动车",
+            "货车",
+            "柴油",
+            "重型",
+            "轻型汽车",
+            "非道路"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-mee-normative",
+      "name": "生态环境部 · 行政规范性文件",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xzgfxwj/",
+        "itemSelector": "a[href*='xxgk0']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{6})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": [
+          "https://www.mee.gov.cn/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "汽车",
+            "机动车",
+            "货车",
+            "柴油",
+            "重型",
+            "轻型汽车",
+            "非道路"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-samr-recall",
+      "name": "市场监管总局召回中心 · 汽车召回",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.samrdprc.org.cn/qczh/qczhgg1/",
+        "itemSelector": "a[href*='t20']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{6})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": [
+          "https://www.samrdprc.org.cn/qczh/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "货车",
+            "客车",
+            "牵引",
+            "挂车",
+            "商用",
+            "重卡",
+            "轻卡",
+            "专用",
+            "半挂",
+            "仓栅",
+            "自卸",
+            "校车",
+            "载货",
+            "冷藏",
+            "卡车"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-mofcom-policy",
+      "name": "商务部 · 政策发布",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.mofcom.gov.cn/zcfb/index.html",
+        "itemSelector": "a[href*='/art/20']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "https://www.mofcom.gov.cn/zcfb/",
+          "http://www.mofcom.gov.cn/zcfb/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "汽车",
+            "车辆",
+            "商用",
+            "货车",
+            "摩托车",
+            "二手车",
+            "出口许可"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-crta-notices",
+      "name": "中国道路运输协会 · 通知公告",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "机构",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.crta.org.cn/news.html?id=28",
+        "baseUrl": "https://www.crta.org.cn/news.html?id=28",
+        "itemSelector": "a[href*='details.html']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "https://www.crta.org.cn/",
+          "http://www.crta.org.cn/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-sd-gxt-notices",
+      "name": "山东省工业和信息化厅 · 通知",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "http://gxt.shandong.gov.cn/module/web/jpage/dataproxy.jsp",
+        "method": "POST",
+        "headers": {
+          "Referer": "http://gxt.shandong.gov.cn/col/col15201/index.html"
+        },
+        "bodyEncoding": "form",
+        "bodyJson": {
+          "col": "1",
+          "webid": "78",
+          "path": "http://gxt.shandong.gov.cn/",
+          "columnid": "15201",
+          "unitid": "586830",
+          "permissiontype": "0",
+          "startrecord": "1",
+          "endrecord": "45",
+          "perpage": "15"
+        },
+        "unwrapCdata": true,
+        "baseUrl": "http://gxt.shandong.gov.cn/col/col15201/index.html",
+        "itemSelector": "a[href*='/art/']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "art/(20\\d{2}/\\d{1,2}/\\d{1,2})/",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": [
+          "http://gxt.shandong.gov.cn/art/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "商用车",
+            "货车",
+            "卡车",
+            "客车",
+            "挂车",
+            "重卡",
+            "轻卡",
+            "微卡",
+            "新能源",
+            "汽车",
+            "车辆",
+            "物流",
+            "货运",
+            "道路运输",
+            "营运"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-gd-gxt-notices",
+      "name": "广东省工业和信息化厅 · 通知公告",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://gdii.gd.gov.cn/zwgk/tzgg1011/index.html",
+        "itemSelector": "a[href*='/content/post_']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "https://gdii.gd.gov.cn/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "商用车",
+            "货车",
+            "卡车",
+            "客车",
+            "挂车",
+            "重卡",
+            "轻卡",
+            "微卡",
+            "新能源",
+            "汽车",
+            "车辆",
+            "物流",
+            "货运",
+            "道路运输",
+            "营运"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-jl-gxt-notices",
+      "name": "吉林省工业和信息化厅 · 通知公告",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "http://gxt.jl.gov.cn/xxgk/tzgg/",
+        "itemSelector": "a[href*='t20']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "http://gxt.jl.gov.cn/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "商用车",
+            "货车",
+            "卡车",
+            "客车",
+            "挂车",
+            "重卡",
+            "轻卡",
+            "微卡",
+            "新能源",
+            "汽车",
+            "车辆",
+            "物流",
+            "货运",
+            "道路运输",
+            "营运"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-hb-gxt-notices",
+      "name": "湖北省经济和信息化厅 · 公文发布",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "http://jxt.hubei.gov.cn/fbjd/zc/qtzdgkwj/gwfb/",
+        "itemSelector": "a[href*='t20']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "http://jxt.hubei.gov.cn/",
+          "https://jxt.hubei.gov.cn/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "商用车",
+            "货车",
+            "卡车",
+            "客车",
+            "挂车",
+            "重卡",
+            "轻卡",
+            "微卡",
+            "新能源",
+            "汽车",
+            "车辆",
+            "物流",
+            "货运",
+            "道路运输",
+            "营运"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-bj-jxj-notices",
+      "name": "北京市经济和信息化局 · 通知公告",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://jxj.beijing.gov.cn/jxdt/tzgg/",
+        "itemSelector": "a[href*='t20']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{6})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": [
+          "https://jxj.beijing.gov.cn/",
+          "http://jxj.beijing.gov.cn/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "商用车",
+            "货车",
+            "卡车",
+            "客车",
+            "挂车",
+            "重卡",
+            "轻卡",
+            "微卡",
+            "新能源",
+            "汽车",
+            "车辆",
+            "物流",
+            "货运",
+            "道路运输",
+            "营运"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "json-gov-truck-policy",
+      "name": "中国政府网政策库 · 标题含货车",
+      "kind": "json_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://sousuo.www.gov.cn/search-gov/data?t=zhengcelibrary&q=%E8%B4%A7%E8%BD%A6&sort=pubtime&sortType=1&searchfield=title&p=1&n=20&type=gwyzcwjk",
+        "itemsPath": "searchVO.catMap.bumenfile.listVO",
+        "titlePaths": [
+          "title"
+        ],
+        "urlTemplate": "{raw:url}",
+        "publishedAtPath": "ptime",
+        "publishedAtUnit": "epoch_ms",
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "货车"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "json-cninfo-foton",
+      "name": "福田汽车 · 产销快报",
+      "kind": "json_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 720,
+      "tags": [
+        "官方",
+        "数据"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+        "method": "POST",
+        "headers": {
+          "Referer": "https://www.cninfo.com.cn/",
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        "bodyEncoding": "form",
+        "bodyJson": {
+          "pageNum": "1",
+          "pageSize": "20",
+          "column": "sse",
+          "tabName": "fulltext",
+          "plate": "",
+          "stock": "600166,gssh0600166",
+          "searchkey": "产销",
+          "secid": "",
+          "category": "",
+          "trade": "",
+          "seDate": "",
+          "sortName": "",
+          "sortType": "",
+          "isHLtitle": "true"
+        },
+        "itemsPath": "announcements",
+        "titlePaths": [
+          "announcementTitle"
+        ],
+        "publishedAtPath": "announcementTime",
+        "publishedAtUnit": "epoch_ms",
+        "urlTemplate": "http://static.cninfo.com.cn/{raw:adjunctUrl}",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "独立董事",
+            "监事会",
+            "法律意见书",
+            "股票交易异常波动",
+            "提示性公告"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "rss-gnews-mps",
+      "name": "Google 新闻 · 公安部交管（转载）",
+      "kind": "rss",
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "政策",
+        "转载"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=site%3Amps.gov.cn%20%E8%B4%A7%E8%BD%A6%20OR%20%E6%9C%BA%E5%8A%A8%E8%BD%A6%20OR%20%E6%8C%82%E8%BD%A6%20OR%20%E6%B2%BB%E8%B6%85&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "货车",
+            "机动车",
+            "挂车",
+            "交管",
+            "治超",
+            "超限",
+            "商用车"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
     }
   ]
 }

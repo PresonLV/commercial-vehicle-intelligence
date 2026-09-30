@@ -9,6 +9,7 @@ import { extractArticleBody, pageFetchable } from "../content/extract.ts";
 import { analyzeArticle, AnalysisInterruptedError } from "../editorial/analyze.ts";
 import { isHistorical } from "../content/materials.ts";
 import { publishArticle } from "../publication/publish.ts";
+import { fillMetricFallback } from "../metrics/fallback.ts";
 import { BudgetExceededError, ProviderRejectedError, ReceiptBusyError, ReceiptUnknownError } from "../providers/receipts.ts";
 import { ModelOutputError } from "../providers/llm.ts";
 import { ensureQueue, enqueue, QUEUES, shutdownSignal } from "./queue.ts";
@@ -115,6 +116,8 @@ export async function processArticle(articleId: string, opts: { attemptTag?: str
     }
     if (result.stale) return { state: "stale" }; // the newer revision has its own job
     await publishArticle(articleId);
+    try { await fillMetricFallback(articleId); }
+    catch { /* A model outage must not fail an article that already published. */ }
     // History is archived but founds no event (isHistorical).
     if (result.output.relevance === "pass" && !row.historical) await enqueue(QUEUES.group, { articleId }, { singletonKey: articleId, priority: PRIORITY.live });
     return { state: result.output.relevance };

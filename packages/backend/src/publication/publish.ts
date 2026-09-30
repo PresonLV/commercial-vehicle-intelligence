@@ -26,6 +26,7 @@ interface ArticleRow {
   backfill: boolean;
   body_status: string;
   body_text: string | null;
+  body_html: string | null;
   x_post: unknown;
   grouped_at: Date | null;
 }
@@ -149,7 +150,7 @@ export async function publishArticle(articleId: string, options: PublishOptions 
 export async function publishArticleTx(tx: Tx, articleId: string, options: PublishOptions = {}): Promise<PublishResult | null> {
   const [article] = await tx<ArticleRow[]>`
     SELECT id, source_id, url, title, language, published_at, discovered_at, timeline_at, backfill, body_status,
-           body_text, x_post, grouped_at
+           body_text, body_html, x_post, grouped_at
     FROM articles WHERE id = ${articleId} FOR UPDATE`;
   if (!article) return null;
   // Reports take this lock exclusively while reading candidates. Hold it through commit so a
@@ -328,6 +329,7 @@ export async function publishArticleTx(tx: Tx, articleId: string, options: Publi
     category,
     tags,
     text: [next.title, summary, article.body_text].filter(Boolean).join("\n"),
+    html: article.body_html ?? "",
     sourceName: source.name,
     url: article.url,
   });

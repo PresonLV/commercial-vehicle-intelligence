@@ -120,12 +120,34 @@ async function fetchListingText(source: SourceRow): Promise<{ text: string; viaJ
     const page = await jinaRead(target, { purpose: "source_listing", subject: `source:${source.id}`, cacheToleranceSeconds: source.config.cacheToleranceSeconds, perRead: true });
     return { text: page.markdown, viaJina: true, base: source.config.baseUrl ?? target };
   }
-  const res = await guardedFetch(url, { headers: { accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8" }, timeoutMs: 25_000 });
+  const form = source.config.bodyEncoding === "form" && source.config.bodyJson && typeof source.config.bodyJson === "object";
+  const body = source.config.bodyJson
+    ? form
+      ? new URLSearchParams(Object.entries(source.config.bodyJson as Record<string, unknown>).map(([k, v]) => [k, v == null ? "" : String(v)])).toString()
+      : JSON.stringify(source.config.bodyJson)
+    : undefined;
+  const res = await guardedFetch(url, {
+    method: source.config.method ?? "GET",
+    headers: {
+      accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
+      ...(source.config.headers ?? {}),
+      ...(body ? { "content-type": form ? "application/x-www-form-urlencoded" : "application/json" } : {}),
+    },
+    body,
+    timeoutMs: 25_000,
+  });
   if (res.status !== 200) throw new FetchError(`HTTP ${res.status}`, res.status);
-  const raw = res.text();
+  let raw = res.text();
+  if (source.config.unwrapCdata === true) raw = unwrapCdata(raw);
   const path = source.config.htmlJsonPath;
   if (typeof path === "string" && path) return { text: htmlAtJsonPath(raw, path), viaJina: false, base: source.config.baseUrl ?? url };
   return { text: raw, viaJina: false, base: source.config.baseUrl ?? url };
+}
+
+/** Hanweb list proxies return the rows as CDATA, which a selector cannot see until they are unwrapped. */
+export function unwrapCdata(raw: string): string {
+  const parts = [...raw.matchAll(/<!\[CDATA\[([\s\S]*?)\]\]>/g)].map((match) => match[1]!).filter(Boolean);
+  return parts.length ? parts.join("\n") : raw;
 }
 
 /** A listing wrapped as JSON, used when a ministry page renders its list from an HTML field. */
