@@ -7,7 +7,8 @@ import { finalizeCopy, keepsResearchShape } from "@aihot/backend/editorial/writi
 
 test("deep research forces the research column and tracked companies have topics", () => {
   const keys = CATEGORIES.map((c) => c.key);
-  assert.equal(keys[keys.indexOf("overseas") + 1], "research");
+  assert.equal(keys.at(-1), "research");
+  assert.equal(keys[keys.indexOf("tech") + 1], "research");
   assert.equal(columnForItemType("deep_research", "overseas"), "research");
   assert.equal(columnForItemType("deep_research", "downstream"), "research");
   assert.equal(columnForItemType("overseas_practice", "overseas"), "overseas");
