@@ -3,7 +3,7 @@ import { Link, useLoaderData } from "react-router";
 import type { SiteStats } from "@aihot/contracts/site";
 import { apiGet } from "../lib/api.server";
 import { shortSourceName } from "../lib/format";
-import { ABOUT, SITE, withSubject } from "@aihot/industry/site";
+import { ABOUT, NAV, SITE } from "@aihot/industry/site";
 import { organizationLd, pageMeta } from "../lib/seo";
 import { Kicker } from "../components/ui/Kicker";
 import { buttonClass } from "../components/ui/Controls";
@@ -100,7 +100,7 @@ function stagesOf(stats: SiteStats | null): Stage[] {
     },
     {
       no: "03",
-      title: "精选",
+      title: NAV.selected,
       figure: stats && <Figure n={stats.selected} unit="条精选" />,
       text: ABOUT.steps.select,
       note: stats && <>过去 24 小时 {stats.day.selected} 条进了精选</>,
@@ -156,11 +156,7 @@ function Maker({ maker, contact }: { maker: NonNullable<typeof ABOUT.maker>; con
             <p key={line}>{line}</p>
           ))}
           <p className="text-ink-3">
-            它一直在改，改了什么都写在
-            <Link to="/changelog" className="text-accent hover:underline">
-              更新日志
-            </Link>
-            里；有想法、遇到问题，去
+            有想法、遇到问题，去
             <Link to="/feedback" className="text-accent hover:underline">
               反馈页
             </Link>
@@ -229,10 +225,10 @@ export default function AboutPage() {
         </div>
         <div className="flex flex-wrap gap-3 lg:pb-2">
           <Link to="/" prefetch="intent" className={buttonClass("primary", "lg")}>
-            看今天的精选 <IconArrowRight size={15} />
+            看今天的{NAV.selected} <IconArrowRight size={15} />
           </Link>
           <Link to="/daily" prefetch="intent" className={buttonClass("secondary", "lg")}>
-            读最新{withSubject("日报")}
+            读最新{NAV.daily}
           </Link>
         </div>
       </header>
@@ -244,7 +240,7 @@ export default function AboutPage() {
         <SignalRiver sources={sources} focus={focus} onArrive={onArrive} className="h-[230px] sm:h-[300px] lg:h-[360px] 2xl:h-[420px]">
           <Latest item={latest[at]} className="absolute left-[75%] top-[calc(42%+42px)] hidden w-[25%] px-6 lg:block" />
         </SignalRiver>
-        <p className="sr-only">示意图：每条线是一个信源；线汇成一束束，代表同一件事的多篇报道；经过精选的闸门，只有少数几束通过，汇入每天的{withSubject("日报")}。</p>
+        <p className="sr-only">示意图：每条线是一个信源；线汇成一束束，代表同一件事的多篇报道；经过精选的闸门，只有少数几束通过，汇入每天的{NAV.daily}。</p>
         <Latest item={latest[at]} className="mt-2 border-t border-line pt-4 lg:hidden" />
         <ol className="mt-4 grid grid-cols-1 border-t border-line-strong sm:grid-cols-2 lg:mt-0 lg:grid-cols-4">
           {stages.map((s, i) => (

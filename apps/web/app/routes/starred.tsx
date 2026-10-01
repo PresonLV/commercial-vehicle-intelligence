@@ -1,15 +1,20 @@
 import { SITE } from "@aihot/industry/site";
+import { FEATURES } from "@aihot/industry/features";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router";
+import { data, Link } from "react-router";
 import { Presence } from "../components/ui/Presence";
 import { pageMeta } from "../lib/seo";
 import { exportBundle, importBundle, removeStar, useStarred, type ImportReport } from "../lib/local-state";
 import { fullDateTime, shortSourceName } from "../lib/format";
 import { IconBookmark, IconDownload, IconClose } from "../components/icons";
 
-/** Shared caches may keep this page for five minutes. */
+export function loader() {
+  if (!FEATURES.readerBookmarks) throw data({ message: "not_found" }, { status: 404 });
+  return null;
+}
+
 export function headers() {
-  return { "Cache-Control": "public, max-age=0, s-maxage=300, stale-while-revalidate=600" };
+  return { "Cache-Control": FEATURES.readerBookmarks ? "public, max-age=0, s-maxage=300, stale-while-revalidate=600" : "private, no-store" };
 }
 
 export function meta() {

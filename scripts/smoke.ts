@@ -7,7 +7,8 @@ import { FEATURES } from "@aihot/industry/features";
 const at = process.argv.indexOf("--base");
 const base = (at > 0 ? process.argv[at + 1] : process.env.SITE_URL) ?? "http://localhost:3000";
 
-const PAGES = ["/", "/all", "/hot", "/daily", "/daily/archive", "/topics", "/starred", "/agent", "/about", "/changelog", "/feedback", "/terms", "/privacy", "/more", "/admin/login"];
+const PAGES = ["/", "/all", "/hot", "/daily", "/daily/archive", "/topics", "/data", "/agent", "/about", "/feedback", "/terms", "/privacy", "/more", "/admin/login"];
+const GONE = ["/changelog", ...(FEATURES.readerBookmarks ? [] : ["/starred"])];
 const MACHINE: Array<[path: string, type: RegExp]> = [
   ["/api/health", /json/],
   ["/api/v1/items", /json/],
@@ -49,6 +50,17 @@ async function check(path: string, expect: (res: Response, body: string) => stri
 }
 
 for (const path of PAGES) await check(path, (_res, body) => (body.includes(SITE.name) ? null : `the page does not name ${SITE.name}`));
+for (const path of GONE) {
+  try {
+    const res = await fetch(base + path, { redirect: "manual", signal: AbortSignal.timeout(30_000) });
+    const problem = res.status === 404 ? null : `expected 404, got ${res.status}`;
+    console.log(`${problem ? "✗" : "✓"} ${path}${problem ? `  ${problem}` : "  404"}`);
+    if (problem) failed += 1;
+  } catch (error) {
+    console.log(`✗ ${path}  ${String(error)}`);
+    failed += 1;
+  }
+}
 for (const [path, type] of MACHINE) await check(path, (res) => (type.test(res.headers.get("content-type") ?? "") ? null : `content-type ${res.headers.get("content-type")}`));
 // MCP: the handshake answers with the site's server name.
 const mcp = await fetch(`${base}/api/mcp`, {

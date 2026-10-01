@@ -1,4 +1,4 @@
-import { SITE, withSubject } from "@aihot/industry/site";
+import { NAV, SITE } from "@aihot/industry/site";
 import { Link, useLoaderData } from "react-router";
 import type { ReportIndexEntry } from "@aihot/contracts/site";
 import { apiGet } from "../lib/api.server";
@@ -15,7 +15,7 @@ export async function loader({ request }: { request: Request }) {
 }
 
 export function meta() {
-  return pageMeta({ title: `${withSubject("日报")} · 历史存档`, description: `${SITE.name} 历史日报，按日期归档。`, path: "/daily/archive", image: "/og/pages/daily.png" });
+  return pageMeta({ title: `${NAV.daily} · 历史存档`, description: `${SITE.name} 历史${NAV.daily}，按日期归档。`, path: "/daily/archive", image: "/og/pages/daily.png" });
 }
 
 export function headers() {
@@ -30,7 +30,7 @@ export default function DailyArchive() {
       <div className="@container">
         <header className="pt-5 lg:pt-0">
           <div className="flex items-center justify-between gap-4 text-[12px] text-ink-4">
-            <span>{SITE.name} · {withSubject("日报")}</span>
+            <span>{SITE.name} · {NAV.daily}</span>
             <span>
               共 <span className="num">{index.length}</span> 期
             </span>
@@ -53,7 +53,7 @@ export default function DailyArchive() {
                     <span className="mt-1.5 text-[10.5px] leading-none text-ink-4">{beijingWeekday(e.key).replace("星期", "周")}</span>
                   </span>
                   <span className="min-w-0">
-                    <span className="block text-[15px] font-bold leading-[1.55] text-ink transition-colors group-hover:text-accent">{e.title ?? `${withSubject("日报")} ${e.key}`}</span>
+                    <span className="block text-[15px] font-bold leading-[1.55] text-ink transition-colors group-hover:text-accent">{e.title ?? `${NAV.daily} ${e.key}`}</span>
                     <span className="mt-1 block text-[12px] text-ink-4">
                       <span className="num">{e.count}</span> 件大事
                     </span>

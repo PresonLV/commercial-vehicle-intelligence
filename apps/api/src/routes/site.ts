@@ -3,9 +3,11 @@
 import { FEATURES } from "@aihot/industry/features";
 import type { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { isCategoryKey, isChannelKey, type CategoryKey, type ChannelKey } from "@aihot/contracts/taxonomy";
+import { canonicalCategory } from "@aihot/industry/taxonomy";
 import { InvalidCursorError } from "@aihot/backend/lib/cursor";
 import { exportMarkdown, loadItemDetail, siteItemDetail } from "@aihot/backend/publication/detail";
 import { loadPool, SearchBusyError } from "@aihot/backend/publication/pool";
+import { loadMetricPoints } from "@aihot/backend/publication/metrics";
 import { loadTimeline } from "@aihot/backend/publication/timeline";
 import { loadStoryFollowups } from "@aihot/backend/publication/followups";
 import { loadDevelopments, loadGroupReports } from "@aihot/backend/publication/groups";
@@ -67,7 +69,7 @@ export interface FilterParams {
 export async function parseFilters(q: Record<string, string>): Promise<FilterParams> {
   const channel = q.channel ?? "all";
   if (!isChannelKey(channel)) throw new BadRequest("invalid channel");
-  const category = q.category ?? null;
+  const category = canonicalCategory(q.category ?? null);
   if (category !== null && !isCategoryKey(category)) throw new BadRequest("invalid category");
   const tag = q.tag?.trim() ? q.tag.trim().slice(0, 60) : null;
   const topic = q.topic?.trim() || null;
@@ -98,6 +100,11 @@ export function registerSite(app: FastifyInstance) {
     const body = { ...data, hot, generatedAt: new Date().toISOString() };
     const cc = cacheUntil(reply, 60, data.refreshAt);
     return sendJsonWithEtag(req, reply, body, { etagPrefix: "tl", cacheControl: cc, etagOf: { ...data, hot } });
+  }));
+
+  app.get("/api/site/metrics", siteHandler(async (req, reply) => {
+    const points = await loadMetricPoints();
+    return sendJsonWithEtag(req, reply, { points }, { etagPrefix: "metrics", cacheControl: "public, max-age=60, s-maxage=60" });
   }));
 
   app.get("/api/site/pool", siteHandler(async (req, reply) => {

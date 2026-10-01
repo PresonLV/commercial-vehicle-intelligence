@@ -1,4 +1,5 @@
 // Moving between reports: the archive column on desktop, a tab row and recent-issue chips on phones.
+import { NAV } from "@aihot/industry/site";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import type { ReportNavigationEntry, ReportKind } from "@aihot/contracts/site";
@@ -28,7 +29,7 @@ export function ReportArchive({ kind, index, current }: { kind: ReportKind; inde
       </nav>
       {kind === "daily" && (
         <Link to="/daily/archive" className="flex h-12 shrink-0 items-center justify-between border-t border-line pl-1 pr-1.5 text-[12.5px] font-medium text-ink-2 transition-colors hover:text-accent">
-          日报合订本 <IconChevronRight size={14} />
+          {NAV.daily}合订本 <IconChevronRight size={14} />
         </Link>
       )}
     </aside>

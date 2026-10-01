@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import { IntentLink } from "../../components/ui/IntentLink";
 import type { GroupInfo, FeedItemSummary, TimelineFilters } from "@aihot/contracts/site";
 import { CATEGORY_LABELS } from "@aihot/contracts/taxonomy";
+import { policyNoticeLine } from "@aihot/industry/notices";
 import { SelectedBadge } from "../../components/ui/Badge";
 import { ScoreLabel } from "../../components/ui/Score";
 import { MediaThumbs, SourceLine, StarButton } from "./parts";
@@ -64,6 +65,9 @@ export const FeedItem = memo(function FeedItem({ item, group, filters, read = fa
             </IntentLink>
           </h3>
           {item.summary && <p className="mt-1.5 line-clamp-2 text-[14.5px] leading-[1.75] text-ink-3 lg:mt-2 lg:line-clamp-3 lg:text-[15px]">{item.summary}</p>}
+          {item.category === "policy" && (
+            <p className="mt-1.5 text-[12px] leading-relaxed text-ink-4">{policyNoticeLine(item.title, item.source.name, item.publishedAt)}</p>
+          )}
         </>
       )}
 

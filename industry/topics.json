@@ -1,578 +1,672 @@
 {
-  "exportedAt": "2026-09-26",
+  "exportedAt": "2026-09-30",
   "groups": [
     {
       "key": "company",
-      "name": "公司与模型",
-      "blurb": "按厂商与模型系追踪：谁发了什么、又赢了哪一局"
+      "name": "企业",
+      "blurb": "整车厂、动力和电池：谁在放量、降价、换平台"
     },
     {
       "key": "field",
-      "name": "技术方向",
-      "blurb": "按技术领域深挖：Agent、多模态、具身智能……"
+      "name": "产业链方向",
+      "blurb": "按上游、中游、下游、海外市场和深度研究看：新能源、出海、新业态、可借鉴做法、后市场、政策"
     },
     {
       "key": "genre",
       "name": "内容形态",
-      "blurb": "按内容类型浏览：论文、教程、观点、政策……"
+      "blurb": "按读者要拿来用的材料看：销量、新车、车队订单、观点"
     }
   ],
   "topics": [
     {
-      "slug": "openai",
-      "name": "OpenAI / ChatGPT",
+      "slug": "faw-jiefang",
+      "name": "一汽解放",
       "group": "company",
-      "entityId": "openai",
-      "tags": [
-        "OpenAI",
-        "entity:openai"
-      ],
-      "definition": "OpenAI 的全部动态：GPT 系列模型、ChatGPT 与 Sora 产品、公司战略与人事的持续追踪。",
-      "related": [
-        "anthropic",
-        "google",
-        "model-releases"
-      ]
+      "entityId": "faw-jiefang",
+      "tags": ["一汽解放", "entity:faw-jiefang"],
+      "definition": "一汽解放的重卡、中轻卡、新能源和出口：新平台、价格、销量和海外渠道。",
+      "related": ["sinotruk", "dongfeng", "sales-data"]
     },
     {
-      "slug": "anthropic",
-      "name": "Anthropic / Claude",
+      "slug": "dongfeng",
+      "name": "东风商用车",
       "group": "company",
-      "entityId": "anthropic",
-      "tags": [
-        "Anthropic",
-        "entity:anthropic"
-      ],
-      "definition": "Anthropic 的全部动态：Claude 系列模型、Claude Code、安全研究路线与公司进展的持续追踪。",
-      "related": [
-        "openai",
-        "google",
-        "safety"
-      ]
+      "entityId": "dongfeng",
+      "tags": ["东风商用车", "entity:dongfeng"],
+      "definition": "东风商用车及东风柳汽的整车、新能源和海外协同。",
+      "related": ["faw-jiefang", "foton", "new-energy"]
     },
     {
-      "slug": "google",
-      "name": "Google / Gemini",
+      "slug": "sinotruk",
+      "name": "中国重汽",
       "group": "company",
-      "entityId": "google",
-      "tags": [
-        "Google",
-        "DeepMind",
-        "entity:google"
-      ],
-      "definition": "Google 与 DeepMind 的 AI 动态：Gemini 系列、Veo 视频模型、研究成果与产品生态的持续追踪。",
-      "related": [
-        "openai",
-        "anthropic",
-        "multimodal"
-      ]
+      "entityId": "sinotruk",
+      "tags": ["中国重汽", "entity:sinotruk"],
+      "definition": "中国重汽、汕德卡和豪沃的销量、产品与出口，含对俄罗斯和中亚有用的海外动作。",
+      "related": ["faw-jiefang", "shacman", "export"]
     },
     {
-      "slug": "deepseek",
-      "name": "DeepSeek",
+      "slug": "shacman",
+      "name": "陕汽",
       "group": "company",
-      "entityId": "deepseek",
-      "tags": [
-        "DeepSeek",
-        "entity:deepseek"
-      ],
-      "definition": "DeepSeek（深度求索）的模型发布、开源权重与技术报告——开源大模型价格与性能双卷的风向标。",
-      "related": [
-        "qwen",
-        "open-source",
-        "model-releases"
-      ]
+      "entityId": "shacman",
+      "tags": ["陕汽", "entity:shacman"],
+      "definition": "陕汽重卡的产品、工程自卸和出口市场。",
+      "related": ["sinotruk", "xcmg", "export"]
     },
     {
-      "slug": "qwen",
-      "name": "千问 Qwen",
+      "slug": "foton",
+      "name": "福田",
       "group": "company",
-      "entityId": "qwen",
-      "tags": [
-        "entity:qwen"
-      ],
-      "definition": "阿里千问 Qwen 系列的开源发布与迭代：从旗舰模型到端侧小模型的全谱系动态。",
-      "related": [
-        "deepseek",
-        "kimi",
-        "open-source"
-      ]
+      "entityId": "foton",
+      "tags": ["福田", "entity:foton"],
+      "definition": "福田欧曼、中轻卡和福田戴姆勒的产品、销量与海外。",
+      "related": ["dongfeng", "weichai", "new-energy"]
     },
     {
-      "slug": "kimi",
-      "name": "Kimi / 月之暗面",
+      "slug": "weichai",
+      "name": "潍柴",
       "group": "company",
-      "entityId": "kimi",
-      "tags": [
-        "entity:kimi"
-      ],
-      "definition": "月之暗面 Kimi 系列模型与产品动态：K 系列开源模型、长上下文技术与产品演进的追踪。",
-      "related": [
-        "qwen",
-        "deepseek",
-        "minimax"
-      ]
+      "entityId": "weichai",
+      "tags": ["潍柴", "entity:weichai"],
+      "definition": "潍柴动力、燃气和新能源动力总成，以及和整车厂的配套关系。",
+      "related": ["yuchai", "powertrain", "cummins"]
     },
     {
-      "slug": "minimax",
-      "name": "MiniMax",
+      "slug": "yuchai",
+      "name": "玉柴",
       "group": "company",
-      "entityId": "minimax",
-      "tags": [
-        "entity:minimax"
-      ],
-      "definition": "MiniMax 的模型与产品动态：M 系列大模型、语音与多模态能力、开源与商业化进展。",
-      "related": [
-        "kimi",
-        "qwen",
-        "voice"
-      ]
+      "entityId": "yuchai",
+      "tags": ["玉柴", "entity:yuchai"],
+      "definition": "玉柴发动机在商用车、客车和出口配套上的变化。",
+      "related": ["weichai", "cummins", "powertrain"]
     },
     {
-      "slug": "zhipu",
-      "name": "智谱 GLM",
+      "slug": "cummins",
+      "name": "康明斯",
       "group": "company",
-      "entityId": "zhipu",
-      "tags": [
-        "entity:zhipu"
-      ],
-      "definition": "智谱的 GLM 系列模型动态：旗舰开源发布、代码与推理能力迭代、商业化与生态进展的追踪。",
-      "related": [
-        "qwen",
-        "kimi",
-        "open-source"
-      ]
+      "entityId": "cummins",
+      "tags": ["康明斯", "entity:cummins"],
+      "definition": "康明斯中国及在华合资的发动机、后处理和新能源动力。",
+      "related": ["weichai", "powertrain", "aftermarket"]
     },
     {
-      "slug": "xai",
-      "name": "xAI / Grok",
+      "slug": "yutong",
+      "name": "宇通",
       "group": "company",
-      "entityId": "xai",
-      "tags": [
-        "xAI",
-        "entity:xai"
-      ],
-      "definition": "马斯克 xAI 与 Grok 系列的全部动态：模型迭代、算力扩张与 X 平台整合的持续追踪。",
-      "related": [
-        "openai",
-        "meta",
-        "industry"
-      ]
+      "entityId": "yutong",
+      "tags": ["宇通", "entity:yutong"],
+      "definition": "宇通客车的新能源、出口订单和产品平台。",
+      "related": ["new-energy", "export", "new-models"]
     },
     {
-      "slug": "meta",
-      "name": "Meta / Llama",
+      "slug": "catl",
+      "name": "宁德时代",
       "group": "company",
-      "entityId": "meta",
-      "tags": [
-        "Meta",
-        "entity:meta"
-      ],
-      "definition": "Meta 的 AI 动态：Llama 开源模型系列、超级智能实验室与元宇宙之外的 AI 豪赌。",
-      "related": [
-        "xai",
-        "open-source",
-        "industry"
-      ]
+      "entityId": "catl",
+      "tags": ["宁德时代", "entity:catl"],
+      "definition": "宁德时代和商用车相关的动力电池、换电和储能合作。乘用车新品不在这个主题的重点里。",
+      "related": ["new-energy", "swap", "weichai"]
     },
     {
-      "slug": "microsoft",
-      "name": "Microsoft / Copilot",
+      "slug": "xcmg",
+      "name": "徐工",
       "group": "company",
-      "entityId": "microsoft",
-      "tags": [
-        "Microsoft",
-        "entity:microsoft"
-      ],
-      "definition": "微软的 AI 布局：Copilot 全家桶、Azure AI 基础设施与 OpenAI 合作关系的持续追踪。",
-      "related": [
-        "openai",
-        "coding",
-        "product-updates"
-      ]
+      "entityId": "xcmg",
+      "tags": ["徐工", "entity:xcmg"],
+      "definition": "徐工重卡、新能源自卸和海外工程市场。",
+      "related": ["shacman", "export", "new-energy"]
     },
     {
-      "slug": "nvidia",
-      "name": "NVIDIA 英伟达",
+      "slug": "farizon",
+      "name": "远程",
       "group": "company",
-      "entityId": "nvidia",
-      "tags": [
-        "entity:nvidia"
-      ],
-      "definition": "英伟达的 AI 芯片与生态动态：GPU 新品、CUDA 生态、机器人平台与 AI 算力市场的风向。",
-      "related": [
-        "engineering",
-        "industry",
-        "embodied"
-      ]
+      "entityId": "farizon",
+      "tags": ["远程", "entity:farizon"],
+      "definition": "吉利远程的新能源商用车、换电网络和车队合作。",
+      "related": ["new-energy", "swap", "fleet"]
     },
     {
-      "slug": "hugging-face",
-      "name": "Hugging Face",
-      "group": "company",
-      "entityId": "hugging-face",
-      "tags": [
-        "Hugging Face",
-        "entity:hugging-face"
-      ],
-      "definition": "Hugging Face 开源社区动态：热门模型与数据集、排行榜变化与开源生态的晴雨表。",
-      "related": [
-        "open-source",
-        "model-releases",
-        "data-training"
-      ]
-    },
-    {
-      "slug": "cursor",
-      "name": "Cursor",
-      "group": "company",
-      "entityId": "cursor",
-      "tags": [
-        "entity:cursor"
-      ],
-      "definition": "Cursor 编辑器的产品迭代与生态动态——AI 编码工具竞争中最受关注的玩家之一。",
-      "related": [
-        "coding",
-        "agent",
-        "product-updates"
-      ]
-    },
-    {
-      "slug": "openrouter",
-      "name": "OpenRouter",
-      "group": "company",
-      "entityId": "openrouter",
-      "tags": [
-        "entity:openrouter"
-      ],
-      "definition": "OpenRouter 模型路由平台动态：新模型上架、用量排行与开发者选型的真实市场信号。",
-      "related": [
-        "engineering",
-        "model-releases",
-        "open-source"
-      ]
-    },
-    {
-      "slug": "agent",
-      "name": "Agent 智能体",
+      "slug": "new-energy",
+      "name": "新能源商用车",
       "group": "field",
-      "tags": [
-        "Agent"
-      ],
-      "definition": "让模型自主规划、调用工具、完成多步任务的技术方向——从 Claude Code、Manus 到各家 Agent 框架与评测基准的全部动态。",
-      "related": [
-        "mcp",
-        "coding",
-        "reasoning"
-      ]
+      "tags": ["新能源"],
+      "definition": "电动、混动商用车的销量、产品、补能和车队落地。纯乘用车不收。",
+      "related": ["hydrogen", "swap", "catl"]
     },
     {
-      "slug": "coding",
-      "name": "AI 编码",
+      "slug": "hydrogen",
+      "name": "氢能",
       "group": "field",
-      "tags": [
-        "编码"
-      ],
-      "definition": "AI 写代码的一切：编码助手、Vibe Coding、代码模型评测与开发工作流变革。",
-      "related": [
-        "agent",
-        "cursor",
-        "tutorials"
-      ]
+      "tags": ["氢能"],
+      "definition": "氢燃料电池商用车、加氢站和示范运营。",
+      "related": ["new-energy", "powertrain", "policy"]
     },
     {
-      "slug": "reasoning",
-      "name": "推理能力",
+      "slug": "powertrain",
+      "name": "动力总成",
       "group": "field",
-      "tags": [
-        "推理"
-      ],
-      "definition": "模型推理能力的进展：思维链、推理模型、数学与逻辑基准的突破与争议。",
-      "related": [
-        "papers",
-        "model-releases",
-        "agent"
-      ]
+      "tags": ["动力总成"],
+      "definition": "发动机、变速箱、电驱和后处理：上游供给和配套关系。",
+      "related": ["weichai", "lubricants", "aftermarket"]
     },
     {
-      "slug": "multimodal",
-      "name": "多模态",
+      "slug": "lubricants",
+      "name": "润滑油与油液",
       "group": "field",
-      "tags": [
-        "多模态"
-      ],
-      "definition": "文本之外的能力：视觉理解、图文混合、音视频输入输出的模型与产品进展。",
-      "related": [
-        "image-gen",
-        "video",
-        "voice"
-      ]
+      "tags": ["润滑油"],
+      "definition": "商用车润滑油、冷却液和后市场油液的渠道、标准和大客户。",
+      "related": ["aftermarket", "powertrain", "fleet"]
     },
     {
-      "slug": "image-gen",
-      "name": "图像生成",
+      "slug": "aftermarket",
+      "name": "后市场",
       "group": "field",
-      "tags": [
-        "图像生成"
-      ],
-      "definition": "AI 画图的最前线：文生图模型迭代、图像编辑能力与创作工具生态的全部动态。",
-      "related": [
-        "video",
-        "multimodal",
-        "product-updates"
-      ]
+      "tags": ["后市场"],
+      "definition": "配件、服务连锁、OE/OES/IAM 渠道和维保价格。经销商开业剪彩不算。",
+      "related": ["lubricants", "fleet", "powertrain"]
     },
     {
-      "slug": "video",
-      "name": "AI 视频",
+      "slug": "daimler-truck",
+      "name": "戴姆勒卡车",
+      "group": "company",
+      "entityId": "daimler-truck",
+      "tags": ["戴姆勒卡车", "entity:daimler-truck"],
+      "definition": "戴姆勒卡车、奔驰卡车和 Setra 的产品、车队订单和出勤率服务。",
+      "related": ["volvo-group", "overseas-practice", "fleet"]
+    },
+    {
+      "slug": "volvo-group",
+      "name": "沃尔沃集团",
+      "group": "company",
+      "entityId": "volvo-group",
+      "tags": ["沃尔沃集团", "entity:volvo-group"],
+      "definition": "沃尔沃卡车及集团的新能源、服务合同和海外产能。",
+      "related": ["scania", "overseas-practice", "new-energy"]
+    },
+    {
+      "slug": "paccar",
+      "name": "帕卡",
+      "group": "company",
+      "entityId": "paccar",
+      "tags": ["帕卡", "entity:paccar"],
+      "definition": "PACCAR、彼得比尔特和肯沃斯的财务、经销商和供应商体系。",
+      "related": ["daimler-truck", "overseas-practice"]
+    },
+    {
+      "slug": "scania",
+      "name": "斯堪尼亚",
+      "group": "company",
+      "entityId": "scania",
+      "tags": ["斯堪尼亚", "entity:scania"],
+      "definition": "斯堪尼亚的车队服务、燃气和电动干线案例。",
+      "related": ["volvo-group", "overseas-practice", "fleet"]
+    },
+    {
+      "slug": "michelin",
+      "name": "米其林",
+      "group": "company",
+      "entityId": "michelin",
+      "tags": ["米其林", "entity:michelin"],
+      "definition": "米其林车队轮胎方案，包括按公里付费和翻新。",
+      "related": ["overseas-practice", "aftermarket", "lubricants"]
+    },
+    {
+      "slug": "bridgestone",
+      "name": "普利司通",
+      "group": "company",
+      "entityId": "bridgestone",
+      "tags": ["普利司通", "entity:bridgestone"],
+      "definition": "普利司通的车队轮胎、翻新和按公里服务。",
+      "related": ["michelin", "overseas-practice", "aftermarket"]
+    },
+    {
+      "slug": "goodyear",
+      "name": "固特异",
+      "group": "company",
+      "entityId": "goodyear",
+      "tags": ["固特异", "entity:goodyear"],
+      "definition": "固特异的车队轮胎和商用服务合同。",
+      "related": ["michelin", "overseas-practice", "aftermarket"]
+    },
+    {
+      "slug": "export",
+      "name": "出海",
       "group": "field",
-      "tags": [
-        "视频"
-      ],
-      "definition": "AI 视频生成与理解：文生视频模型、视频编辑工具与影视创作变革的追踪。",
-      "related": [
-        "image-gen",
-        "multimodal",
-        "voice"
-      ]
+      "tags": ["出海", "出口市场"],
+      "definition": "整车和零部件出口，重点看俄罗斯、中亚，以及中东、非洲、东南亚和拉美。文章在海外市场栏目里，用这个标签和海外借鉴分开。",
+      "related": ["sinotruk", "sales-data", "policy"]
     },
     {
-      "slug": "voice",
-      "name": "语音与音频",
+      "slug": "overseas-practice",
+      "name": "海外借鉴",
       "group": "field",
-      "tags": [
-        "语音"
-      ],
-      "definition": "AI 语音与音频的进展：语音合成、实时对话、音乐生成与音频理解的模型与产品。",
-      "related": [
-        "multimodal",
-        "video",
-        "product-updates"
-      ]
-    },
-    {
-      "slug": "embodied",
-      "name": "具身智能",
-      "group": "field",
-      "tags": [
-        "具身智能"
-      ],
-      "definition": "AI 走进物理世界：人形机器人、具身基础模型与真实环境操作能力的进展追踪。",
-      "related": [
-        "nvidia",
-        "multimodal",
-        "papers"
-      ]
-    },
-    {
-      "slug": "on-device",
-      "name": "端侧 AI",
-      "group": "field",
-      "tags": [
-        "端侧"
-      ],
-      "definition": "跑在手机、电脑与边缘设备上的 AI：小模型、本地推理与端侧芯片的进展。",
-      "related": [
-        "engineering",
-        "open-source",
-        "model-releases"
-      ]
-    },
-    {
-      "slug": "open-source",
-      "name": "开源生态",
-      "group": "field",
-      "tags": [
-        "开源生态",
-        "开源/仓库"
-      ],
-      "definition": "开源模型、框架与仓库动态：权重开放、社区项目爆火、开源与闭源的力量消长。",
-      "related": [
-        "model-releases",
-        "hugging-face",
-        "coding"
-      ]
-    },
-    {
-      "slug": "engineering",
-      "name": "部署工程",
-      "group": "field",
-      "tags": [
-        "部署/工程"
-      ],
-      "definition": "把模型跑起来的工程实践：推理优化、显存与成本、Serving 架构与基础设施选型。",
-      "related": [
-        "open-source",
-        "data-training",
-        "on-device"
-      ]
-    },
-    {
-      "slug": "data-training",
-      "name": "数据与训练",
-      "group": "field",
-      "tags": [
-        "数据/训练"
-      ],
-      "definition": "训练侧的门道：数据集构建、合成数据、预训练与后训练方法、算力与训练成本。",
-      "related": [
-        "papers",
-        "engineering",
-        "model-releases"
-      ]
-    },
-    {
-      "slug": "safety",
-      "name": "安全对齐",
-      "group": "field",
-      "tags": [
-        "安全/对齐"
-      ],
-      "definition": "AI 安全与对齐：越狱与防御、模型行为研究、安全评测与治理框架的进展。",
-      "related": [
-        "papers",
-        "policy",
-        "reasoning"
-      ]
-    },
-    {
-      "slug": "mcp",
-      "name": "MCP 与工具调用",
-      "group": "field",
-      "tags": [
-        "MCP/工具调用"
-      ],
-      "definition": "模型连接外部世界的协议与实践：MCP 生态、function calling、工具链集成的动态。",
-      "related": [
-        "agent",
-        "coding",
-        "open-source"
-      ]
-    },
-    {
-      "slug": "model-releases",
-      "name": "模型发布",
-      "group": "genre",
-      "tags": [
-        "模型发布"
-      ],
-      "definition": "新模型的发布、开源与迭代：大模型厂商的旗舰更新、开源权重放出、性能与价格变化的第一时间记录。",
-      "related": [
-        "product-updates",
-        "papers",
-        "open-source"
-      ]
-    },
-    {
-      "slug": "product-updates",
-      "name": "产品更新",
-      "group": "genre",
-      "tags": [
-        "产品更新"
-      ],
-      "definition": "AI 产品与应用的功能上新、改版与商业化动态——谁家的产品变强了、变贵了、能用了。",
-      "related": [
-        "model-releases",
-        "industry",
-        "coding"
-      ]
-    },
-    {
-      "slug": "papers",
-      "name": "论文研究",
-      "group": "genre",
-      "tags": [
-        "论文/研究"
-      ],
-      "definition": "值得读的 AI 论文与研究成果：架构创新、训练方法、能力测量与理论进展的精选解读。",
-      "related": [
-        "reasoning",
-        "safety",
-        "data-training"
-      ]
-    },
-    {
-      "slug": "benchmarks",
-      "name": "评测基准",
-      "group": "genre",
-      "tags": [
-        "评测/基准"
-      ],
-      "definition": "模型到底谁强：Benchmark 成绩、评测方法论争议与排行榜变化的持续记录。",
-      "related": [
-        "model-releases",
-        "papers",
-        "reasoning"
-      ]
-    },
-    {
-      "slug": "tutorials",
-      "name": "教程实践",
-      "group": "genre",
-      "tags": [
-        "教程/实践"
-      ],
-      "definition": "拿来就能用的实操内容：提示词技巧、工作流搭建、工具用法与踩坑经验。",
-      "related": [
-        "coding",
-        "agent",
-        "product-updates"
-      ]
-    },
-    {
-      "slug": "opinions",
-      "name": "大佬观点",
-      "group": "genre",
-      "tags": [
-        "大佬观点"
-      ],
-      "definition": "行业关键人物在想什么：创始人访谈、研究者论战、投资人判断的观点集合。",
-      "related": [
-        "trends",
-        "industry"
-      ]
-    },
-    {
-      "slug": "trends",
-      "name": "现象与趋势",
-      "group": "genre",
-      "tags": [
-        "现象/趋势"
-      ],
-      "definition": "正在发生的行业级变化：使用习惯迁移、能力涌现、社会影响与市场格局的观察。",
-      "related": [
-        "opinions",
-        "industry",
-        "safety"
-      ]
-    },
-    {
-      "slug": "industry",
-      "name": "行业动态",
-      "group": "genre",
-      "tags": [
-        "行业动态"
-      ],
-      "definition": "AI 行业的商业脉搏：融资并购、人事变动、合作与竞争、政策与市场信号。",
-      "related": [
-        "trends",
-        "opinions",
-        "policy"
-      ]
+      "tags": ["海外借鉴"],
+      "definition": "海外轮胎、主机厂和车队的计价、服务合同和商业模式，看能不能用到国内。和中国车出口一起放在海外市场栏目。",
+      "related": ["michelin", "aftermarket", "fleet", "export"]
     },
     {
       "slug": "policy",
-      "name": "政策监管",
+      "name": "政策法规",
+      "group": "field",
+      "tags": ["政策法规"],
+      "definition": "部委、省市部门和协会的政策文件。能读出文号、发文机关和日期时会标在条目上。",
+      "related": ["sales-data", "new-energy", "fleet"]
+    },
+    {
+      "slug": "autonomous",
+      "name": "自动驾驶",
+      "group": "field",
+      "tags": ["自动驾驶"],
+      "definition": "干线无人驾驶、港口和矿区自动驾驶卡车的商业化节点。",
+      "related": ["fleet", "new-energy", "tech-notes"]
+    },
+    {
+      "slug": "swap",
+      "name": "换电与补能",
+      "group": "field",
+      "tags": ["换电补能"],
+      "definition": "重卡换电、充电站和加氢网络，看的是车队能不能跑起来。",
+      "related": ["new-energy", "catl", "farizon"]
+    },
+    {
+      "slug": "sales-data",
+      "name": "销量数据",
       "group": "genre",
-      "tags": [
-        "政策/监管"
-      ],
-      "definition": "AI 相关政策法规与政府监管动态：立法进展、出口管制与全球治理框架的追踪。",
-      "related": [
-        "industry",
-        "safety",
-        "trends"
-      ]
+      "tags": ["销量数据"],
+      "definition": "月度产销、份额和出口量，以及能改判断的解读。",
+      "related": ["policy", "export", "faw-jiefang"]
+    },
+    {
+      "slug": "new-models",
+      "name": "新车与平台",
+      "group": "genre",
+      "tags": ["新车与平台"],
+      "definition": "新平台、新架构和改变购买决策的产品。小改款和配置微调不在这里。",
+      "related": ["faw-jiefang", "new-energy", "powertrain"]
+    },
+    {
+      "slug": "fleet",
+      "name": "车队与订单",
+      "group": "genre",
+      "tags": ["车队物流"],
+      "definition": "大额车队采购、租赁、运价和货运需求。个位数交车和店庆不算。",
+      "related": ["aftermarket", "export", "swap"]
+    },
+    {
+      "slug": "views",
+      "name": "观点解读",
+      "group": "genre",
+      "tags": ["观点解读"],
+      "definition": "有新事实或新框架的行业判断。没有数字的展望不收。",
+      "related": ["sales-data", "policy", "export"]
+    },
+    {
+      "slug": "tech-notes",
+      "name": "技术路线",
+      "group": "genre",
+      "tags": ["技术路线"],
+      "definition": "会改变选型的动力、底盘和自动驾驶技术说明。",
+      "related": ["autonomous", "powertrain", "hydrogen"]
+    },
+    {
+      "slug": "new-ecosystem",
+      "name": "新业态",
+      "group": "field",
+      "tags": ["新业态"],
+      "definition": "换电与能源运营、氢能重卡、自动驾驶干线、车联网与数字货运、汽配连锁平台、商车金融租赁和轮胎即服务。短新闻仍在上中下游，长文进深度研究。",
+      "related": ["fleet", "aftermarket", "swap", "autonomous"]
+    },
+    {
+      "slug": "autozone",
+      "name": "奥驰",
+      "group": "company",
+      "entityId": "autozone",
+      "tags": ["奥驰", "entity:autozone"],
+      "definition": "AutoZone 的门店网络、商用客户项目和配件分销做法。",
+      "related": ["overseas-practice", "aftermarket", "new-ecosystem"]
+    },
+    {
+      "slug": "oreilly",
+      "name": "奥莱利",
+      "group": "company",
+      "entityId": "oreilly",
+      "tags": ["奥莱利", "entity:oreilly"],
+      "definition": "O'Reilly 的汽配连锁、枢纽配送和专业客户项目。",
+      "related": ["overseas-practice", "aftermarket", "autozone"]
+    },
+    {
+      "slug": "advance-auto",
+      "name": "前进汽配",
+      "group": "company",
+      "entityId": "advance-auto",
+      "tags": ["前进汽配", "entity:advance-auto"],
+      "definition": "Advance Auto Parts 的门店、专业配送和独立维修渠道。",
+      "related": ["overseas-practice", "aftermarket", "oreilly"]
+    },
+    {
+      "slug": "genuine-parts",
+      "name": "真配件",
+      "group": "company",
+      "entityId": "genuine-parts",
+      "tags": ["真配件", "entity:genuine-parts"],
+      "definition": "Genuine Parts 与 NAPA 的车队配件网络和分销。",
+      "related": ["overseas-practice", "aftermarket", "autozone"]
+    },
+    {
+      "slug": "lkq",
+      "name": "LKQ",
+      "group": "company",
+      "entityId": "lkq",
+      "tags": ["LKQ", "entity:lkq"],
+      "definition": "LKQ 的拆车件、再制造和替代件分销。",
+      "related": ["overseas-practice", "aftermarket", "genuine-parts"]
+    },
+    {
+      "slug": "fleetpride",
+      "name": "FleetPride",
+      "group": "company",
+      "entityId": "fleetpride",
+      "tags": ["FleetPride", "entity:fleetpride"],
+      "definition": "FleetPride 的重载配件门店和车队配送。",
+      "related": ["overseas-practice", "aftermarket", "truckpro"]
+    },
+    {
+      "slug": "truckpro",
+      "name": "TruckPro",
+      "group": "company",
+      "entityId": "truckpro",
+      "tags": ["TruckPro", "entity:truckpro"],
+      "definition": "TruckPro 的重卡配件分销和车队服务。",
+      "related": ["overseas-practice", "aftermarket", "fleetpride"]
+    },
+    {
+      "slug": "ryder",
+      "name": "莱德",
+      "group": "company",
+      "entityId": "ryder",
+      "tags": ["莱德", "entity:ryder"],
+      "definition": "Ryder 的租赁、维保和专用车队服务。",
+      "related": ["overseas-practice", "fleet", "penske"]
+    },
+    {
+      "slug": "penske",
+      "name": "潘世奇",
+      "group": "company",
+      "entityId": "penske",
+      "tags": ["潘世奇", "entity:penske"],
+      "definition": "Penske 的卡车租赁、物流和维保合同。",
+      "related": ["overseas-practice", "fleet", "ryder"]
+    },
+    {
+      "slug": "knight-swift",
+      "name": "Knight-Swift",
+      "group": "company",
+      "entityId": "knight-swift",
+      "tags": ["Knight-Swift", "entity:knight-swift"],
+      "definition": "Knight-Swift 的干线车队、运价和运力做法。",
+      "related": ["overseas-practice", "fleet", "jb-hunt"]
+    },
+    {
+      "slug": "jb-hunt",
+      "name": "亨特运输",
+      "group": "company",
+      "entityId": "jb-hunt",
+      "tags": ["亨特运输", "entity:jb-hunt"],
+      "definition": "J.B. Hunt 的多式联运、专用车队和经纪业务。",
+      "related": ["overseas-practice", "fleet", "knight-swift"]
+    },
+    {
+      "slug": "girteka",
+      "name": "吉尔泰卡",
+      "group": "company",
+      "entityId": "girteka",
+      "tags": ["吉尔泰卡", "entity:girteka"],
+      "definition": "Girteka 的欧洲干线车队、运力和新能源卡车采购。",
+      "related": ["overseas-practice", "fleet", "jb-hunt"]
+    },
+    {
+      "slug": "old-dominion",
+      "name": "老道明",
+      "group": "company",
+      "entityId": "old-dominion",
+      "tags": ["老道明", "entity:old-dominion"],
+      "definition": "Old Dominion 的零担网络、运价和服务密度。",
+      "related": ["overseas-practice", "fleet", "knight-swift"]
+    },
+    {
+      "slug": "sf-express",
+      "name": "顺丰",
+      "group": "company",
+      "entityId": "sf-express",
+      "tags": ["顺丰", "entity:sf-express"],
+      "definition": "顺丰的快运网络、运力和商用车相关投入。",
+      "related": ["fleet", "new-ecosystem", "jdl"]
+    },
+    {
+      "slug": "jdl",
+      "name": "京东物流",
+      "group": "company",
+      "entityId": "jdl",
+      "tags": ["京东物流", "entity:jdl"],
+      "definition": "京东物流的仓配网络、运力和新能源车辆。",
+      "related": ["fleet", "new-ecosystem", "sf-express"]
+    },
+    {
+      "slug": "zto-express",
+      "name": "中通快递",
+      "group": "company",
+      "entityId": "zto-express",
+      "tags": ["中通快递", "entity:zto-express"],
+      "definition": "中通快递的转运网络和干线运力。",
+      "related": ["fleet", "yto-express", "sf-express"]
+    },
+    {
+      "slug": "yto-express",
+      "name": "圆通",
+      "group": "company",
+      "entityId": "yto-express",
+      "tags": ["圆通", "entity:yto-express"],
+      "definition": "圆通速递的网络、运价和运力投入。",
+      "related": ["fleet", "zto-express", "sto-express"]
+    },
+    {
+      "slug": "sto-express",
+      "name": "申通",
+      "group": "company",
+      "entityId": "sto-express",
+      "tags": ["申通", "entity:sto-express"],
+      "definition": "申通快递的转运和干线车队。",
+      "related": ["fleet", "yto-express", "yunda"]
+    },
+    {
+      "slug": "yunda",
+      "name": "韵达",
+      "group": "company",
+      "entityId": "yunda",
+      "tags": ["韵达", "entity:yunda"],
+      "definition": "韵达的网络运营和运力。",
+      "related": ["fleet", "sto-express", "zto-express"]
+    },
+    {
+      "slug": "jtexpress",
+      "name": "极兔",
+      "group": "company",
+      "entityId": "jtexpress",
+      "tags": ["极兔", "entity:jtexpress"],
+      "definition": "极兔的快递网络和运力。",
+      "related": ["fleet", "zto-express", "sf-express"]
+    },
+    {
+      "slug": "debang",
+      "name": "德邦",
+      "group": "company",
+      "entityId": "debang",
+      "tags": ["德邦", "entity:debang"],
+      "definition": "德邦的大件与零担网络。公告源已退市，主题仍用于媒体稿归类。",
+      "related": ["fleet", "ane", "sf-express"]
+    },
+    {
+      "slug": "ane",
+      "name": "安能",
+      "group": "company",
+      "entityId": "ane",
+      "tags": ["安能", "entity:ane"],
+      "definition": "安能快运的网络和运力。",
+      "related": ["fleet", "yimidida", "debang"]
+    },
+    {
+      "slug": "yimidida",
+      "name": "壹米滴答",
+      "group": "company",
+      "entityId": "yimidida",
+      "tags": ["壹米滴答", "entity:yimidida"],
+      "definition": "壹米滴答的快运网络和加盟运力。",
+      "related": ["fleet", "ane", "fuyou"]
+    },
+    {
+      "slug": "fuyou",
+      "name": "福佑",
+      "group": "company",
+      "entityId": "fuyou",
+      "tags": ["福佑", "entity:fuyou"],
+      "definition": "福佑卡车的整车经纪和运力组织。",
+      "related": ["fleet", "full-truck-alliance", "new-ecosystem"]
+    },
+    {
+      "slug": "sinotrans",
+      "name": "中外运",
+      "group": "company",
+      "entityId": "sinotrans",
+      "tags": ["中外运", "entity:sinotrans"],
+      "definition": "中国外运的合同物流和公路运力。",
+      "related": ["fleet", "cjl-logistics", "cmst"]
+    },
+    {
+      "slug": "cjl-logistics",
+      "name": "长久物流",
+      "group": "company",
+      "entityId": "cjl-logistics",
+      "tags": ["长久物流", "entity:cjl-logistics"],
+      "definition": "长久物流的商品车运输和整车物流。",
+      "related": ["fleet", "sinotrans", "cmst"]
+    },
+    {
+      "slug": "full-truck-alliance",
+      "name": "满帮",
+      "group": "company",
+      "entityId": "full-truck-alliance",
+      "tags": ["满帮", "entity:full-truck-alliance"],
+      "definition": "满帮、运满满和货车帮的数字货运与绿色运力。",
+      "related": ["fleet", "new-ecosystem", "lalamove"]
+    },
+    {
+      "slug": "lalamove",
+      "name": "货拉拉",
+      "group": "company",
+      "entityId": "lalamove",
+      "tags": ["货拉拉", "entity:lalamove"],
+      "definition": "货拉拉的同城货运和运力平台。",
+      "related": ["fleet", "new-ecosystem", "full-truck-alliance"]
+    },
+    {
+      "slug": "cmst",
+      "name": "中储",
+      "group": "company",
+      "entityId": "cmst",
+      "tags": ["中储", "entity:cmst"],
+      "definition": "中储股份与中储智运的大宗物流和网络货运。",
+      "related": ["fleet", "sinotrans", "new-ecosystem"]
+    },
+    {
+      "slug": "cass-time",
+      "name": "开思",
+      "group": "company",
+      "entityId": "cass-time",
+      "tags": ["开思", "entity:cass-time"],
+      "definition": "开思的汽配交易平台和商用车配件供应链。",
+      "related": ["new-ecosystem", "aftermarket", "tuhu"]
+    },
+    {
+      "slug": "tuhu",
+      "name": "途虎",
+      "group": "company",
+      "entityId": "tuhu",
+      "tags": ["途虎", "entity:tuhu"],
+      "definition": "途虎养车里和商用车、轮胎与养护相关的做法。",
+      "related": ["new-ecosystem", "aftermarket", "cass-time"]
+    },
+    {
+      "slug": "g7",
+      "name": "G7易流",
+      "group": "company",
+      "entityId": "g7",
+      "tags": ["G7易流", "entity:g7"],
+      "definition": "G7易流的车联网、数字货运和车队管理。",
+      "related": ["new-ecosystem", "fleet", "sinoiov"]
+    },
+    {
+      "slug": "sinoiov",
+      "name": "中交兴路",
+      "group": "company",
+      "entityId": "sinoiov",
+      "tags": ["中交兴路", "entity:sinoiov"],
+      "definition": "中交兴路的货运车辆数据和车队服务。",
+      "related": ["new-ecosystem", "fleet", "g7"]
+    },
+    {
+      "slug": "plus-ai",
+      "name": "智加",
+      "group": "company",
+      "entityId": "plus-ai",
+      "tags": ["智加", "entity:plus-ai"],
+      "definition": "智加的自动驾驶干线物流。",
+      "related": ["autonomous", "new-ecosystem", "tusimple"]
+    },
+    {
+      "slug": "tusimple",
+      "name": "图森",
+      "group": "company",
+      "entityId": "tusimple",
+      "tags": ["图森", "entity:tusimple"],
+      "definition": "图森的自动驾驶卡车。",
+      "related": ["autonomous", "new-ecosystem", "plus-ai"]
+    },
+    {
+      "slug": "pony",
+      "name": "小马智卡",
+      "group": "company",
+      "entityId": "pony",
+      "tags": ["小马智卡", "entity:pony"],
+      "definition": "小马智行的卡车自动驾驶。",
+      "related": ["autonomous", "new-ecosystem", "plus-ai"]
+    },
+    {
+      "slug": "qiyuan-power",
+      "name": "启源芯动力",
+      "group": "company",
+      "entityId": "qiyuan-power",
+      "tags": ["启源芯动力", "entity:qiyuan-power"],
+      "definition": "启源芯动力的换电重卡和能源运营。",
+      "related": ["swap", "new-ecosystem", "catl"]
+    },
+    {
+      "slug": "hongjing",
+      "name": "宏景智驾",
+      "group": "company",
+      "entityId": "hongjing",
+      "tags": ["宏景智驾", "entity:hongjing"],
+      "definition": "宏景智驾的干线自动驾驶。",
+      "related": ["autonomous", "new-ecosystem", "plus-ai"]
+    },
+    {
+      "slug": "qiangua",
+      "name": "千挂",
+      "group": "company",
+      "entityId": "qiangua",
+      "tags": ["千挂", "entity:qiangua"],
+      "definition": "千挂的自动驾驶干线物流。",
+      "related": ["autonomous", "new-ecosystem", "hongjing"]
     }
   ]
 }

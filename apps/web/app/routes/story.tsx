@@ -1,4 +1,5 @@
-import { SITE, withSubject } from "@aihot/industry/site";
+import { NAV, SITE } from "@aihot/industry/site";
+import { CHANNEL_LABELS } from "@aihot/contracts/taxonomy";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Link, redirect, useLoaderData } from "react-router";
 import type { Route } from "./+types/story";
@@ -32,7 +33,7 @@ export function meta({ loaderData }: Route.MetaArgs) {
     path: `/story/${s.publicId}`,
     image: `/og/stories/${s.publicId}.png`,
     type: "article",
-    jsonLd: breadcrumbLd([{ name: SITE.name, path: "/" }, { name: "热点榜", path: "/hot" }, { name: s.title, path: `/story/${s.publicId}` }]),
+    jsonLd: breadcrumbLd([{ name: SITE.name, path: "/" }, { name: NAV.hot, path: "/hot" }, { name: s.title, path: `/story/${s.publicId}` }]),
   });
 }
 
@@ -195,7 +196,7 @@ export default function StoryPage() {
     <div className="mx-auto max-w-[var(--page-max-reading)] pb-10">
       <nav aria-label="位置" className="flex items-center gap-2.5 pb-4 pt-5 text-[12px] text-ink-4 lg:pb-5 lg:pt-4">
         <Link to="/hot" className="inline-flex items-center gap-1.5 transition-colors hover:text-ink">
-          <IconArrowLeft size={15} /> 热点榜
+          <IconArrowLeft size={15} /> {NAV.hot}
         </Link>
         <span className="h-3 w-px bg-line-strong" aria-hidden="true" />
         <span>事件详情</span>
@@ -315,7 +316,7 @@ export default function StoryPage() {
               onSelect={(k) => setFilter(k as Filter)}
               items={[
                 { key: "all", label: "全部报道", count: counts.all },
-                { key: "official", label: "官方一手", count: counts.official },
+                { key: "official", label: CHANNEL_LABELS.firstParty, count: counts.official },
                 { key: "selected", label: "精选报道", count: counts.selected },
               ]}
             />
@@ -377,7 +378,7 @@ export default function StoryPage() {
                   <>
                     <span className="mx-1">·</span>
                     <Link to="/hot" className="text-accent hover:underline">
-                      热点榜第 {story.whyHot.rank} 名
+                      {NAV.hot}第 {story.whyHot.rank} 名
                     </Link>
                   </>
                 )}
@@ -385,7 +386,7 @@ export default function StoryPage() {
             </RailCard>
           )}
           {story.officialReports.length > 0 && (
-            <RailCard title="官方一手" right={`${counts.official || story.officialReports.length} 篇`}>
+            <RailCard title={CHANNEL_LABELS.firstParty} right={`${counts.official || story.officialReports.length} 篇`}>
               <p className="text-[12px] text-ink-4">直接了解当事方的说法</p>
               <ul className="mt-1 divide-y divide-line-soft">
                 {story.officialReports.slice(0, 5).map((r) => (

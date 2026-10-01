@@ -1,4 +1,4 @@
-import { SITE, withSubject } from "@aihot/industry/site";
+import { NAV, SITE, withSubject } from "@aihot/industry/site";
 import { data, useLoaderData } from "react-router";
 import type { Route } from "./+types/report-detail";
 import type { ReportDetail, ReportNavigationEntry, ReportKind } from "@aihot/contracts/site";
@@ -30,8 +30,8 @@ export function meta({ loaderData }: Route.MetaArgs) {
   if (!loaderData) return [{ title: titled("报告不存在") }, { name: "robots", content: "noindex" }];
   const r = loaderData.report;
   return pageMeta({
-    title: r.kind === "daily" ? `${withSubject("日报")} ${r.key}` : r.title.replace(`${SITE.name} `, `${SITE.subject} `),
-    description: r.lead?.leadParagraph ?? r.overview?.slice(0, 150) ?? `${SITE.name} ${r.key} 的${withSubject(KIND_LABEL[r.kind])}。`,
+    title: r.kind === "daily" ? `${NAV.daily} ${r.key}` : r.title.replace(`${SITE.name} `, `${SITE.subject} `),
+    description: r.lead?.leadParagraph ?? r.overview?.slice(0, 150) ?? `${SITE.name} ${r.key} 的${r.kind === "daily" ? NAV.daily : withSubject(KIND_LABEL[r.kind])}。`,
     path: `/${r.kind}/${r.key}`,
     image: `/og/reports/${r.kind}/${r.key}.png`,
     type: "article",
