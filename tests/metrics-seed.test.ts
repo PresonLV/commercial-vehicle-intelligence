@@ -7,26 +7,36 @@ import { parseCaamStatistics, reviewBulletin } from "@aihot/industry/metrics-bul
 import { scaleWan } from "@aihot/industry/metric-units";
 import { annualSeries, brandRank, brandRankNormalized, readYtd, readYtdAt, visiblePoints, ytdChange, type MetricViewPoint } from "@aihot/industry/metrics-view";
 
-function excerptHas(excerpt: string, value: number, unit: string): boolean {
-  const compact = excerpt.replace(/,/g, "");
-  const adjacent = new RegExp(`(?<![\\d.])(\\d+(?:\\.\\d+)?)\\s*${unit}`, "g");
-  for (const match of compact.matchAll(adjacent)) {
-    if (Number(match[1]) === value) return true;
-  }
-  for (const line of compact.split("\n")) {
-    if (!line.includes(unit)) continue;
-    for (const match of line.matchAll(/(?<![\d.])(\d+(?:\.\d+)?)(?![\d.])(?:\s*%)?/g)) {
-      if (match[0].includes("%")) continue;
-      if (Number(match[1]) === value) return true;
-    }
-  }
-  const header = (unit === "万辆" && /Unit:\s*10000/.test(excerpt)) || new RegExp(`单位[：:]\\s*${unit}`).test(excerpt);
-  if (!header) return false;
+function numbersMatch(compact: string, value: number): boolean {
   for (const match of compact.matchAll(/(?<![\d.])(\d+(?:\.\d+)?)(?![\d.])(?:\s*%)?/g)) {
     if (match[0].includes("%")) continue;
     if (Number(match[1]) === value) return true;
   }
   return false;
+}
+
+function excerptHas(excerpt: string, value: number, unit: string): boolean {
+  const compact = excerpt.replace(/,/g, "").replace(/輛/g, "辆").replace(/臺/g, "台");
+  const adjacent = new RegExp(`(?<![\\d.])(\\d+(?:\\.\\d+)?)\\s*${unit}`, "g");
+  for (const match of compact.matchAll(adjacent)) {
+    if (Number(match[1]) === value) return true;
+  }
+  if (unit === "台") {
+    for (const match of compact.matchAll(/(?<![\d.])(\d+(?:\.\d+)?)\s*units\b/gi)) {
+      if (Number(match[1]) === value) return true;
+    }
+  }
+  for (const line of compact.split("\n")) {
+    if (!line.includes(unit)) continue;
+    if (numbersMatch(line, value)) return true;
+  }
+  // A bare 辆 or 台 (not 万辆 / 万台) on a filing table covers the other numbers in that excerpt.
+  if ((unit === "辆" || unit === "台") && new RegExp(`(?<![万\\d.])${unit}(?![\\u4e00-\\u9fff])`).test(compact)) {
+    if (numbersMatch(compact, value)) return true;
+  }
+  const header = (unit === "万辆" && /Unit:\s*10000/.test(excerpt)) || new RegExp(`单位[：:]\\s*${unit}`).test(excerpt);
+  if (!header) return false;
+  return numbersMatch(compact, value);
 }
 
 test("every seeded figure is written in its excerpt, once per series", () => {
@@ -188,6 +198,23 @@ test("collection off does not fetch monthly bulletins", async () => {
     if (previous === undefined) delete process.env.COLLECT_ENABLED;
     else process.env.COLLECT_ENABLED = previous;
   }
+});
+
+test("seeded 2026 commercial-vehicle cumulative lines up with 2025 through August", () => {
+  const points: MetricViewPoint[] = METRIC_SEED.filter((row) => row.metric === "sales" && row.segment === "商用车" && row.brand === "" && row.unit === "万辆").map((row) => ({
+    ...row, sample: false,
+  }));
+  const current = readYtd(points, { metric: "sales", segment: "商用车", brand: "", year: "2026", unit: "万辆" });
+  const prior = readYtdAt(points, { metric: "sales", segment: "商用车", brand: "", year: "2025", unit: "万辆" }, current.endMonth ?? 0);
+  assert.equal(current.basis, "cited");
+  assert.equal(current.endMonth, 8);
+  assert.equal(current.value, 294.2);
+  assert.equal(prior.value, 274.4);
+  const ratio = ytdChange(current, prior);
+  assert.ok(ratio !== null && Math.abs(ratio - (294.2 - 274.4) / 274.4) < 1e-9);
+  const years = annualSeries(points, { metric: "sales", segment: "商用车", brand: "", unit: "万辆" }).map((point) => point.period);
+  for (const year of ["2016", "2017", "2018", "2019", "2024", "2025"]) assert.ok(years.includes(year), year);
+  assert.equal(years.includes("2015"), false);
 });
 
 test("a year row can be imported when the CSV names the grain", () => {

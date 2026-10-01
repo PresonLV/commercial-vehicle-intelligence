@@ -2,6 +2,7 @@
 // Tests require the value and unit to occur in the excerpt. Nothing here is estimated.
 import type { Grain } from "./metrics-view.ts";
 import { FILING_SEED } from "./metric-filings.ts";
+import { ROUND_SEED } from "./metric-round.ts";
 
 export interface SeedMetric {
   metric: "production" | "sales" | "registrations";
@@ -306,7 +307,10 @@ function seedKey(row: SeedMetric): string {
 }
 
 const coreKeys = new Set(CORE_SEED.map(seedKey));
+const filingKept = FILING_SEED.filter((row) => !coreKeys.has(seedKey(row)));
+const used = new Set([...coreKeys, ...filingKept.map(seedKey)]);
 export const METRIC_SEED: SeedMetric[] = [
   ...CORE_SEED,
-  ...FILING_SEED.filter((row) => !coreKeys.has(seedKey(row))),
+  ...filingKept,
+  ...ROUND_SEED.filter((row) => !used.has(seedKey(row))),
 ];

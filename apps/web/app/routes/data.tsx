@@ -203,7 +203,7 @@ export default function DataPage() {
                 </table>
               </div>
             )}
-            {!brand && <p className="mt-2 text-[12px] text-ink-4">2011–2019 年的行业年度序列还没有可复制的原文表，原因见文末。</p>}
+            {!brand && <p className="mt-2 text-[12px] text-ink-4">2016–2019 年商用车、货车、客车和重型货车的行业年度来自中汽协正文。2011–2015 年仍没有可复制的数字，原因见文末。</p>}
           </section>
 
           <section id="ytd" className="mt-8">
@@ -235,7 +235,7 @@ export default function DataPage() {
           <section id="months" className="mt-8">
             <h2 className="text-[18px] font-semibold text-ink">2026 年单月</h2>
             {otherBrandUnit && <p className="mt-1 text-[12px] text-ink-4">企业排行还有以{otherBrandUnit}计的数字，可在下方切换单位。</p>}
-            {months2026.length === 0 ? <p className="mt-2 text-[13px] text-ink-4">2026 年这一组还没有单月数字。1–5 月和 9 月见文末缺口。</p> : (
+            {months2026.length === 0 ? <p className="mt-2 text-[13px] text-ink-4">2026 年这一组还没有单月数字。9 月见文末缺口。</p> : (
               <div className="mt-3 overflow-x-auto">
                 <table className="w-full min-w-[560px] border-collapse text-left text-[13px]">
                   <thead>
