@@ -1,4 +1,5 @@
 // Manual figures. Readers never type these; an admin does, and the audit log keeps the reason.
+import { canonicalBrand } from "@aihot/industry/metric-alias";
 import { METRIC_LABELS, parseMetricCsv, type ManualMetricRow } from "@aihot/industry/metrics";
 import { sql } from "../db.ts";
 import { audit } from "./auth.ts";
@@ -24,8 +25,8 @@ export async function listAdminMetrics() {
 
 async function insertManual(row: ManualMetricRow, actor: string, reason: string) {
   const [saved] = await sql<{ id: string }[]>`
-    INSERT INTO metric_points (metric, segment, brand, period, grain, value, unit, source_name, url, article_id, sample, method, confidence)
-    VALUES (${row.metric}, ${row.segment}, ${row.brand}, ${row.period}, ${row.grain}, ${row.value}, ${row.unit}, ${row.sourceName}, ${row.url}, NULL, false, 'manual', 'high')
+    INSERT INTO metric_points (metric, segment, brand, brand_text, period, grain, value, unit, source_name, url, page, article_id, sample, method, confidence)
+    VALUES (${row.metric}, ${row.segment}, ${canonicalBrand(row.brand)}, ${row.brand}, ${row.period}, ${row.grain}, ${row.value}, ${row.unit}, ${row.sourceName}, ${row.url}, '', NULL, false, 'manual', 'high')
     ON CONFLICT (metric, segment, brand, period, grain, url) DO UPDATE SET
       value = EXCLUDED.value, unit = EXCLUDED.unit, source_name = EXCLUDED.source_name, method = 'manual', confidence = 'high'
     RETURNING id`;

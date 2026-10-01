@@ -1,17 +1,21 @@
 // How the data page reads stored figures. Cumulative totals are either cited or a sum of
 // January-through-k when those months are all present. A stated growth rate is not a level.
+import { normalizeUnit } from "./metric-units.ts";
+
 export type Grain = "month" | "year" | "ytd";
 
 export interface MetricViewPoint {
   metric: string;
   segment: string;
   brand: string;
+  brandText?: string;
   period: string;
   grain: Grain;
   value: number;
   unit: string;
   sourceName: string;
   url: string;
+  page?: string;
   sample: boolean;
 }
 
@@ -107,6 +111,39 @@ export function readYtd(points: MetricViewPoint[], query: { metric: string; segm
   };
 }
 
+/** A cited total for this exact end month, otherwise the sum of January through that month. */
+export function readYtdAt(points: MetricViewPoint[], query: { metric: string; segment: string; brand: string; year: string; unit: string }, endMonth: number): YtdReading {
+  const rows = points.filter((point) => matches(point, query) && point.period.startsWith(`${query.year}-`));
+  const cited = rows.find((point) => point.grain === "ytd" && monthNumber(point.period) === endMonth);
+  if (cited) {
+    return {
+      year: query.year, endMonth, value: cited.value, unit: cited.unit,
+      sourceName: cited.sourceName, url: cited.url, basis: "cited", missingMonths: [], openMonths: monthsAfter(endMonth),
+    };
+  }
+  const months = new Map<number, MetricViewPoint>();
+  for (const row of rows) {
+    if (row.grain !== "month") continue;
+    const month = monthNumber(row.period);
+    if (month) months.set(month, row);
+  }
+  for (let month = 1; month <= endMonth; month++) {
+    if (!months.has(month)) {
+      return {
+        year: query.year, endMonth: null, value: null, unit: query.unit,
+        sourceName: "", url: "", basis: "none", missingMonths: [], openMonths: monthsAfter(0),
+      };
+    }
+  }
+  let sum = 0;
+  for (let month = 1; month <= endMonth; month++) sum += months.get(month)!.value;
+  const first = months.get(1)!;
+  return {
+    year: query.year, endMonth, value: sum, unit: query.unit,
+    sourceName: first.sourceName, url: first.url, basis: "sum", missingMonths: [], openMonths: monthsAfter(endMonth),
+  };
+}
+
 /** Same end month and the same unit. A percent in a source is not used. */
 export function ytdChange(current: YtdReading, prior: YtdReading): number | null {
   if (current.basis === "none" || prior.basis === "none") return null;
@@ -135,8 +172,12 @@ export function yearChange(points: MetricViewPoint[]): Map<string, number | null
 
 export interface RankRow {
   brand: string;
+  brandText: string;
   value: number;
   unit: string;
+  /** Published figure ×10000 when the unit is 万辆 or 万台. Equal to value when already in 辆 or 台. */
+  normValue: number;
+  normUnit: string;
   sourceName: string;
   url: string;
   /** Share of the brands in this list. Not a share of a differently worded industry total. */
@@ -153,14 +194,46 @@ export function brandRank(points: MetricViewPoint[], query: { metric: string; se
   const total = points.find((point) => !point.brand && point.metric === query.metric && point.segment === query.segment && point.period === query.period && point.grain === query.grain && point.unit === query.unit) ?? null;
   return {
     total,
-    rows: rows.map((row) => ({
-      brand: row.brand,
-      value: row.value,
-      unit: row.unit,
-      sourceName: row.sourceName,
-      url: row.url,
-      listShare: sum > 0 ? row.value / sum : 0,
-      totalShare: total && total.value > 0 ? row.value / total.value : null,
+    rows: rows.map((row) => {
+      const norm = normalizeUnit(row.value, row.unit);
+      return {
+        brand: row.brand,
+        brandText: row.brandText ?? "",
+        value: row.value,
+        unit: row.unit,
+        normValue: norm.value,
+        normUnit: norm.unit,
+        sourceName: row.sourceName,
+        url: row.url,
+        listShare: sum > 0 ? row.value / sum : 0,
+        totalShare: total && total.value > 0 ? row.value / total.value : null,
+      };
+    }),
+  };
+}
+
+/** Rank after 万辆→辆 and 万台→台. Shares use the converted figures. The row still carries the published value. */
+export function brandRankNormalized(points: MetricViewPoint[], query: { metric: string; segment: string; period: string; grain: Grain }): { rows: RankRow[]; total: MetricViewPoint | null } {
+  const pool = points.filter((point) => point.metric === query.metric && point.segment === query.segment && point.period === query.period && point.grain === query.grain);
+  const branded = pool.filter((point) => point.brand).map((point) => ({ point, norm: normalizeUnit(point.value, point.unit) }));
+  const normUnit = branded[0]?.norm.unit ?? "";
+  const same = branded.filter((row) => row.norm.unit === normUnit).sort((a, b) => b.norm.value - a.norm.value || a.point.brand.localeCompare(b.point.brand, "zh"));
+  const sum = same.reduce((total, row) => total + row.norm.value, 0);
+  const totalPoint = pool.find((point) => !point.brand) ?? null;
+  const totalNorm = totalPoint ? normalizeUnit(totalPoint.value, totalPoint.unit) : null;
+  return {
+    total: totalPoint,
+    rows: same.map((row) => ({
+      brand: row.point.brand,
+      brandText: row.point.brandText ?? "",
+      value: row.point.value,
+      unit: row.point.unit,
+      normValue: row.norm.value,
+      normUnit: row.norm.unit,
+      sourceName: row.point.sourceName,
+      url: row.point.url,
+      listShare: sum > 0 ? row.norm.value / sum : 0,
+      totalShare: totalNorm && totalNorm.unit === row.norm.unit && totalNorm.value > 0 ? row.norm.value / totalNorm.value : null,
     })),
   };
 }

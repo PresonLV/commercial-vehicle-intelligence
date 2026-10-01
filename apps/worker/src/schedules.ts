@@ -25,6 +25,7 @@ import { backupConfigured, runBackup } from "@aihot/backend/operations/backup";
 import { sourceHealthWeekly } from "@aihot/backend/operations/reports";
 import { markStalePendingReceipts } from "@aihot/backend/providers/receipts";
 import { markStaleDeliveries } from "@aihot/backend/notify/deliver";
+import { appendMonthlyBulletins } from "@aihot/backend/metrics/bulletin";
 
 interface Scheduled {
   name: string;
@@ -73,6 +74,8 @@ export const SCHEDULES: Scheduled[] = [
   { name: "feedback.forward", cron: "*/10 * * * *", run: () => forwardPendingFeedback() },
   ...(backupConfigured() ? [{ name: "ops.backup", cron: "10 4 * * *", missed: "once" as const, run: () => runBackup() }] : []),
   { name: "reports.source-health", cron: "0 9 * * 1", missed: "once", run: () => sourceHealthWeekly() },
+  // Association and company output bulletins land between the 10th and the 20th. Collection off: no fetch.
+  { name: "metrics.bulletin", cron: "0 9 12 * *", missed: "once", run: () => appendMonthlyBulletins() },
   // Four upstream checks a day; a new run is published only when the evidence changed. With collection
   // off only the computation runs, over the snapshots already stored.
   ...(FEATURES.leaderboard

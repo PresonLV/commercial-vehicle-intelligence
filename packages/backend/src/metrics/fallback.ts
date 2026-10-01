@@ -2,6 +2,7 @@
 // A suggestion is stored only when the number, unit and segment appear in the article, and it stays
 // out of the public table until an admin marks it reviewed.
 import { z } from "zod";
+import { canonicalBrand } from "@aihot/industry/metric-alias";
 import { acceptLiteralMetrics } from "@aihot/industry/metrics";
 import { sql } from "../db.ts";
 import { config } from "../config.ts";
@@ -48,8 +49,8 @@ export async function fillMetricFallback(articleId: string): Promise<{ added: nu
   await sql.begin(async (tx) => {
     for (const point of accepted) {
       await tx`
-        INSERT INTO metric_points (metric, segment, brand, period, grain, value, unit, source_name, url, article_id, sample, method, confidence)
-        VALUES (${point.metric}, ${point.segment}, ${point.brand}, ${point.period}, 'month', ${point.value}, ${point.unit}, ${row.source_name}, ${row.url}, ${articleId}, false, 'llm', 'review')
+        INSERT INTO metric_points (metric, segment, brand, brand_text, period, grain, value, unit, source_name, url, page, article_id, sample, method, confidence)
+        VALUES (${point.metric}, ${point.segment}, ${canonicalBrand(point.brand)}, ${point.brand}, ${point.period}, 'month', ${point.value}, ${point.unit}, ${row.source_name}, ${row.url}, '', ${articleId}, false, 'llm', 'review')
         ON CONFLICT (metric, segment, brand, period, grain, url) DO NOTHING`;
     }
     await completeReceipt(tx, res.receiptId);

@@ -1,4 +1,5 @@
 // Figures copied out of a data article. Readers never trigger this; publish does, after the text is stored.
+import { canonicalBrand } from "@aihot/industry/metric-alias";
 import { extractFigures } from "@aihot/industry/metrics";
 import type { Tx } from "../db.ts";
 
@@ -17,10 +18,10 @@ export async function syncMetricPoints(tx: Tx, input: {
   for (const point of extractFigures(input.text, input.html ?? "")) {
     if (point.method === "llm") continue;
     await tx`
-      INSERT INTO metric_points (metric, segment, brand, period, grain, value, unit, source_name, url, article_id, sample, method, confidence)
-      VALUES (${point.metric}, ${point.segment}, ${point.brand}, ${point.period}, 'month', ${point.value}, ${point.unit}, ${input.sourceName}, ${input.url}, ${input.articleId}, false, ${point.method}, 'high')
+      INSERT INTO metric_points (metric, segment, brand, brand_text, period, grain, value, unit, source_name, url, page, article_id, sample, method, confidence)
+      VALUES (${point.metric}, ${point.segment}, ${canonicalBrand(point.brand)}, ${point.brand}, ${point.period}, 'month', ${point.value}, ${point.unit}, ${input.sourceName}, ${input.url}, '', ${input.articleId}, false, ${point.method}, 'high')
       ON CONFLICT (metric, segment, brand, period, grain, url) DO UPDATE SET
         value = EXCLUDED.value, unit = EXCLUDED.unit, source_name = EXCLUDED.source_name, article_id = EXCLUDED.article_id,
-        method = EXCLUDED.method, confidence = 'high'`;
+        brand_text = EXCLUDED.brand_text, method = EXCLUDED.method, confidence = 'high'`;
   }
 }

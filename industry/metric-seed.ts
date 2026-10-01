@@ -1,6 +1,7 @@
 // Public figures copied from pages fetched on 2026-10-01. Each excerpt is a span of that page.
 // Tests require the value and unit to occur in the excerpt. Nothing here is estimated.
 import type { Grain } from "./metrics-view.ts";
+import { FILING_SEED } from "./metric-filings.ts";
 
 export interface SeedMetric {
   metric: "production" | "sales" | "registrations";
@@ -13,6 +14,10 @@ export interface SeedMetric {
   sourceName: string;
   url: string;
   excerpt: string;
+  /** Wording in the source. Empty means the same as brand. */
+  brandText?: string;
+  /** PDF page when the figure comes from a filing. */
+  page?: string;
 }
 
 interface Source { sourceName: string; url: string }
@@ -70,7 +75,7 @@ const PLATE_LOW = "红岩和大运列累计销量榜第9、10位，分别累计�
 const PLATE_TAIL = "远程商用车和北汽重卡列累计销量榜第11、12位，累计销量分别为6786辆和6580辆";
 const INVOICE = "其中中国重汽以24.5031万辆的销量强势夺冠；一汽解放、陕汽集团和东风汽车分别销售18.2808万辆、15.0285万辆和14.4807万辆依次夺得第二、第三、第四名。此外，福田汽车以6.9819万辆排名第五。";
 
-export const METRIC_SEED: SeedMetric[] = [
+const CORE_SEED: SeedMetric[] = [
   sales("商用车", "", "2025", "year", 429.6, "万辆", CE, CE_CV),
   made("商用车", "2025", "year", 426.1, CE, CE_CV),
   sales("货车", "", "2025", "year", 372.3, "万辆", CE, CE_TRUCK),
@@ -183,12 +188,12 @@ export const METRIC_SEED: SeedMetric[] = [
   sales("重型货车", "华菱汽车", "2026-08", "month", 992, "辆", CE8, "华菱汽车8月销售重型货车992辆"),
   sales("重型货车", "北汽重卡", "2026-08", "month", 800, "辆", CE8, "北汽重卡8月销售重型货车800辆"),
 
-  sales("重卡", "", "2024", "year", 90.1697, "万辆", CT, "2024年我国重卡累计销售90.1697万辆（开票数据，非终端数据，含出口）"),
-  sales("重卡", "中国重汽", "2024", "year", 24.5031, "万辆", CT, INVOICE),
-  sales("重卡", "一汽解放", "2024", "year", 18.2808, "万辆", CT, INVOICE),
-  sales("重卡", "陕汽集团", "2024", "year", 15.0285, "万辆", CT, INVOICE),
-  sales("重卡", "东风汽车", "2024", "year", 14.4807, "万辆", CT, INVOICE),
-  sales("重卡", "福田汽车", "2024", "year", 6.9819, "万辆", CT, INVOICE),
+  sales("重卡开票", "", "2024", "year", 90.1697, "万辆", CT, "2024年我国重卡累计销售90.1697万辆（开票数据，非终端数据，含出口）"),
+  sales("重卡开票", "中国重汽", "2024", "year", 24.5031, "万辆", CT, INVOICE),
+  sales("重卡开票", "一汽解放", "2024", "year", 18.2808, "万辆", CT, INVOICE),
+  sales("重卡开票", "陕汽集团", "2024", "year", 15.0285, "万辆", CT, INVOICE),
+  sales("重卡开票", "东风汽车", "2024", "year", 14.4807, "万辆", CT, INVOICE),
+  sales("重卡开票", "福田汽车", "2024", "year", 6.9819, "万辆", CT, INVOICE),
   plate("重卡", "", "2024", 60.24, "万辆", "在2024年国内重卡累计销售60.24万辆"),
   plate("重卡", "一汽解放", "2024", 14.27, "万辆", PLATE_TOP),
   plate("重卡", "东风汽车", "2024", 12.47, "万辆", PLATE_TOP),
@@ -294,4 +299,14 @@ export const METRIC_SEED: SeedMetric[] = [
   sales("工程机械用多缸柴油机", "", "2026-07", "ytd", 54.44, "万台", JUL, "1-7月累计销量54.44万台"),
   sales("单缸柴油机", "", "2026-07", "month", 7.99, "万台", JUL, "7月，单缸柴油机销量7.99万台"),
   sales("单缸柴油机", "", "2026-07", "ytd", 65.21, "万台", JUL, "1-7月累计销量65.21万台"),
+];
+
+function seedKey(row: SeedMetric): string {
+  return [row.metric, row.segment, row.brand, row.period, row.grain, row.unit].join("|");
+}
+
+const coreKeys = new Set(CORE_SEED.map(seedKey));
+export const METRIC_SEED: SeedMetric[] = [
+  ...CORE_SEED,
+  ...FILING_SEED.filter((row) => !coreKeys.has(seedKey(row))),
 ];

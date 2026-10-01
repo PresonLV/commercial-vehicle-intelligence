@@ -1,8 +1,9 @@
 import { useMemo, useState, type ReactNode } from "react";
 import { METRIC_LABELS } from "@aihot/industry/metrics";
 import { METRIC_GAPS } from "@aihot/industry/metric-gaps";
+import { normalizeUnit } from "@aihot/industry/metric-units";
 import {
-  annualSeries, brandRank, coverageLines, formatChange, periodLabel, readYtd, visiblePoints, yearChange, ytdChange,
+  annualSeries, brandRank, brandRankNormalized, coverageLines, formatChange, periodLabel, readYtd, readYtdAt, visiblePoints, yearChange, ytdChange,
   type Grain, type MetricViewPoint,
 } from "@aihot/industry/metrics-view";
 import { data as withHeaders, useLoaderData } from "react-router";
@@ -29,6 +30,12 @@ export function meta() {
 
 export function headers({ loaderHeaders }: Route.HeadersArgs) {
   return loaderHeaders;
+}
+
+function published(value: number, unit: string): string {
+  const norm = normalizeUnit(value, unit);
+  if (!norm.converted) return `${value} ${unit}`;
+  return `${value} ${unit}（折合 ${norm.value.toLocaleString("zh-CN")} ${norm.unit}）`;
 }
 
 function preferredUnit(points: Point[]): string {
@@ -89,20 +96,26 @@ export default function DataPage() {
   const annual = annualSeries(series, { metric, segment, brand, unit: seriesUnit });
   const yoy = yearChange(annual);
   const ytd2026 = readYtd(points, { metric, segment, brand, year: "2026", unit: seriesUnit });
-  const ytd2025 = readYtd(points, { metric, segment, brand, year: "2025", unit: seriesUnit });
+  const ytd2025 = ytd2026.endMonth
+    ? readYtdAt(points, { metric, segment, brand, year: "2025", unit: seriesUnit }, ytd2026.endMonth)
+    : readYtd(points, { metric, segment, brand, year: "2025", unit: seriesUnit });
   const ytdRatio = ytdChange(ytd2026, ytd2025);
   const months2026 = series.filter((point) => point.grain === "month" && point.period.startsWith("2026-")).sort((a, b) => a.period.localeCompare(b.period));
   const rankPool = segmentPoints.filter((point) => point.brand);
   const rankUnits = [...new Set(rankPool.map((point) => point.unit))];
   const [rankUnit, setRankUnit] = useState("");
   const rankUnitValue = rankUnits.includes(rankUnit) ? rankUnit : preferredUnit(rankPool);
-  const rankGrains = [...new Set(rankPool.filter((point) => point.unit === rankUnitValue).map((point) => point.grain))];
+  const mixedRank = (rankUnits.includes("万辆") && rankUnits.includes("辆")) || (rankUnits.includes("万台") && rankUnits.includes("台"));
+  const rankSource = mixedRank ? rankPool : rankPool.filter((point) => point.unit === rankUnitValue);
+  const rankGrains = [...new Set(rankSource.map((point) => point.grain))];
   const [rankGrain, setRankGrain] = useState<Grain>("year");
   const grain = rankGrains.includes(rankGrain) ? rankGrain : rankGrains[0] ?? "year";
-  const rankPeriods = [...new Set(rankPool.filter((point) => point.unit === rankUnitValue && point.grain === grain).map((point) => point.period))].sort();
+  const rankPeriods = [...new Set(rankSource.filter((point) => point.grain === grain).map((point) => point.period))].sort();
   const [rankPeriod, setRankPeriod] = useState("");
   const period = rankPeriods.includes(rankPeriod) ? rankPeriod : rankPeriods.at(-1) ?? "";
-  const ranking = brandRank(points, { metric, segment, period, grain, unit: rankUnitValue });
+  const ranking = mixedRank
+    ? brandRankNormalized(points, { metric, segment, period, grain })
+    : brandRank(points, { metric, segment, period, grain, unit: rankUnitValue });
   const coverage = coverageLines(points);
   const otherBrandUnit = rankUnits.find((item) => item !== seriesUnit);
 
@@ -126,7 +139,7 @@ export default function DataPage() {
     <div className="pb-8">
       <h1 className="pt-4 text-[24px] font-semibold leading-[1.3] text-ink lg:pt-0">数据统计</h1>
       <p className="mt-2 max-w-[42rem] text-[14px] leading-relaxed text-ink-3">
-        产量、销量和上牌量按年度、单月和累计排列，并可按品牌筛选。同比只在两侧都有同一单位的水平值时计算。每个数字链到写出它的原文。
+        产量、销量和上牌量按年度、单月和累计排列，并可按品牌筛选。同比用同一截止月的水平值。万辆、万台按公布数字乘以 10000 折成辆、台，原文数字仍写在前面。每个数字链到写出它的原文。
       </p>
       {sampleLeft && (
         <p className="mt-4 rounded-panel bg-bg-sunk px-4 py-3 text-[13px] leading-relaxed text-ink-2">
@@ -155,7 +168,7 @@ export default function DataPage() {
             )}
           </div>
           <p className="mt-3 text-[12px] leading-relaxed text-ink-4">
-            原文里的解放和一汽解放、重汽和中国重汽、云内和云内动力按各篇用字分列。万辆和辆不换算。
+            解放和一汽解放、重汽和中国重汽这类别名合成一个品牌，原文用字留在格子里。东风汽车股份不并进东风商用车。折合数不是原文印出的整数。
           </p>
 
           <section id="annual" className="mt-8">
@@ -181,7 +194,7 @@ export default function DataPage() {
                     {annual.map((point) => (
                       <tr key={point.period} className="border-b border-line-soft">
                         <td className="py-2 pr-3 num">{point.period}</td>
-                        <td className="py-2 pr-3 num">{point.value} {point.unit}</td>
+                        <td className="py-2 pr-3 num">{published(point.value, point.unit)}{point.page ? ` · 第${point.page}页` : ""}</td>
                         <td className="py-2 pr-3 num">{formatChange(yoy.get(point.period) ?? null)}</td>
                         <td className="py-2"><a className="text-accent hover:underline" href={point.url} target="_blank" rel="noreferrer">{point.sourceName}</a></td>
                       </tr>
@@ -190,7 +203,7 @@ export default function DataPage() {
                 </table>
               </div>
             )}
-            {!brand && <p className="mt-2 text-[12px] text-ink-4">2011–2023 年的行业年度序列尚未收录，原因见文末。</p>}
+            {!brand && <p className="mt-2 text-[12px] text-ink-4">2011–2019 年的行业年度序列还没有可复制的原文表，原因见文末。</p>}
           </section>
 
           <section id="ytd" className="mt-8">
@@ -201,7 +214,7 @@ export default function DataPage() {
               <div className="mt-3 rounded-panel bg-bg-sunk px-4 py-3 text-[14px] leading-relaxed text-ink-2">
                 <p>
                   {periodLabel(`2026-${String(ytd2026.endMonth).padStart(2, "0")}`, "ytd")} {METRIC_LABELS[metric] ?? metric}
-                  {brand ? ` · ${brand}` : ""}：<span className="num font-semibold text-ink">{ytd2026.value}</span> {ytd2026.unit}
+                  {brand ? ` · ${brand}` : ""}：<span className="num font-semibold text-ink">{published(ytd2026.value ?? 0, ytd2026.unit)}</span>
                   。同比 {formatChange(ytdRatio)}。
                 </p>
                 <p className="mt-1 text-[13px]">
@@ -222,7 +235,7 @@ export default function DataPage() {
           <section id="months" className="mt-8">
             <h2 className="text-[18px] font-semibold text-ink">2026 年单月</h2>
             {otherBrandUnit && <p className="mt-1 text-[12px] text-ink-4">企业排行还有以{otherBrandUnit}计的数字，可在下方切换单位。</p>}
-            {months2026.length === 0 ? <p className="mt-2 text-[13px] text-ink-4">2026 年这一组还没有单月数字。1–7 月和 9 月见文末缺口。</p> : (
+            {months2026.length === 0 ? <p className="mt-2 text-[13px] text-ink-4">2026 年这一组还没有单月数字。1–5 月和 9 月见文末缺口。</p> : (
               <div className="mt-3 overflow-x-auto">
                 <table className="w-full min-w-[560px] border-collapse text-left text-[13px]">
                   <thead>
@@ -237,8 +250,8 @@ export default function DataPage() {
                     {months2026.map((point) => (
                       <tr key={`${point.brand}-${point.period}-${point.url}`} className="border-b border-line-soft">
                         <td className="py-2 pr-3 num">{point.period}</td>
-                        <td className="py-2 pr-3">{point.brand || "行业合计"}</td>
-                        <td className="py-2 pr-3 num">{point.value} {point.unit}</td>
+                        <td className="py-2 pr-3">{point.brand || "行业合计"}{point.brandText && point.brandText !== point.brand ? <span className="block text-[11px] text-ink-4">原文：{point.brandText.slice(0, 42)}</span> : null}</td>
+                        <td className="py-2 pr-3 num">{published(point.value, point.unit)}</td>
                         <td className="py-2"><a className="text-accent hover:underline" href={point.url} target="_blank" rel="noreferrer">{point.sample ? "【样例】" : ""}{point.sourceName}</a></td>
                       </tr>
                     ))}
@@ -259,7 +272,7 @@ export default function DataPage() {
                   <Select label="期间" value={period} onChange={setRankPeriod}>
                     {rankPeriods.map((item) => <option key={item} value={item}>{periodLabel(item, grain)}</option>)}
                   </Select>
-                  {rankUnits.length > 1 && (
+                  {!mixedRank && rankUnits.length > 1 && (
                     <Select label="单位" value={rankUnitValue} onChange={(value) => { setRankUnit(value); setRankPeriod(""); }}>
                       {rankUnits.map((item) => <option key={item}>{item}</option>)}
                     </Select>
@@ -278,7 +291,7 @@ export default function DataPage() {
                     ))}
                   </div>
                 )}
-                <p className="mt-2 text-[12px] text-ink-4">条形是这一榜内部的份额。{ranking.total ? "与行业合计同单位时，表中另给出占公布总量的比例。" : "没有同单位的行业合计，所以不另算市场占比。"}</p>
+                <p className="mt-2 text-[12px] text-ink-4">条形是这一榜内部的份额。{mixedRank ? "万辆和辆、万台和台按公布值乘以 10000 后排在一起，折合整数不是原文印出的数字。" : ""}{ranking.total ? "与行业合计折成同一单位时，表中另给出占公布总量的比例。" : "没有同单位的行业合计，所以不另算市场占比。"}</p>
                 <div className="mt-3 overflow-x-auto">
                   <table className="w-full min-w-[640px] border-collapse text-left text-[13px]">
                     <thead>
@@ -293,13 +306,16 @@ export default function DataPage() {
                     </thead>
                     <tbody>
                       {ranking.rows.map((row) => {
-                        const priorPeriod = grain === "year" ? String(Number(period) - 1) : grain === "month" ? `${Number(period.slice(0, 4)) - 1}-${period.slice(5)}` : `${Number(period.slice(0, 4)) - 1}-${period.slice(5)}`;
-                        const prior = rankPool.find((point) => point.brand === row.brand && point.period === priorPeriod && point.grain === grain && point.unit === row.unit);
-                        const ratio = prior && prior.value !== 0 ? (row.value - prior.value) / prior.value : null;
+                        const priorPeriod = grain === "year" ? String(Number(period) - 1) : `${Number(period.slice(0, 4)) - 1}-${period.slice(5)}`;
+                        const priors = rankPool.filter((point) => point.brand === row.brand && point.period === priorPeriod && point.grain === grain);
+                        const currentNorm = normalizeUnit(row.value, row.unit);
+                        const prior = priors.find((point) => point.unit === row.unit) ?? priors.find((point) => normalizeUnit(point.value, point.unit).unit === currentNorm.unit);
+                        const priorNorm = prior ? normalizeUnit(prior.value, prior.unit) : null;
+                        const ratio = priorNorm && priorNorm.unit === currentNorm.unit && priorNorm.value !== 0 ? (currentNorm.value - priorNorm.value) / priorNorm.value : null;
                         return (
                           <tr key={row.brand} className="border-b border-line-soft">
-                            <td className="py-2 pr-3">{row.brand}</td>
-                            <td className="py-2 pr-3 num">{row.value} {row.unit}</td>
+                            <td className="py-2 pr-3">{row.brand}{row.brandText && row.brandText !== row.brand ? <span className="block text-[11px] text-ink-4">原文：{row.brandText.slice(0, 42)}</span> : null}</td>
+                            <td className="py-2 pr-3 num">{published(row.value, row.unit)}</td>
                             <td className="py-2 pr-3 num">{(row.listShare * 100).toFixed(1)}%</td>
                             <td className="py-2 pr-3 num">{row.totalShare === null ? "—" : `${(row.totalShare * 100).toFixed(1)}%`}</td>
                             <td className="py-2 pr-3 num">{formatChange(ratio)}</td>
