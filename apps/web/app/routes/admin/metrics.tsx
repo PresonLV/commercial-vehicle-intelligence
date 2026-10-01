@@ -15,6 +15,7 @@ interface MetricRow {
   source_name: string;
   url: string;
   sample: boolean;
+  grain: "month" | "year" | "ytd";
   method: string;
   confidence: string;
 }
@@ -23,7 +24,8 @@ export async function loader({ request }: Route.LoaderArgs) {
   return adminGet<{ metrics: Record<string, string>; rows: MetricRow[] }>(request, "/api/admin/metrics");
 }
 
-const EMPTY = { metric: "sales", segment: "", brand: "", period: "", value: "", unit: "辆", sourceName: "", url: "", reason: "" };
+const EMPTY = { metric: "sales", segment: "", brand: "", period: "", grain: "month", value: "", unit: "辆", sourceName: "", url: "", reason: "" };
+const GRAIN_LABEL: Record<string, string> = { month: "单月", year: "年度", ytd: "累计" };
 
 export default function AdminMetrics({ loaderData }: Route.ComponentProps) {
   const { run, busy } = useAdminAction();
@@ -47,7 +49,14 @@ export default function AdminMetrics({ loaderData }: Route.ComponentProps) {
             <div className="grid grid-cols-2 gap-3">
               <Field label="细分"><input className="h-9 w-full rounded-control bg-bg px-2 text-[13px] ring-1 ring-line" value={form.segment} onChange={set("segment")} placeholder="重卡" /></Field>
               <Field label="品牌"><input className="h-9 w-full rounded-control bg-bg px-2 text-[13px] ring-1 ring-line" value={form.brand} onChange={set("brand")} placeholder="可空" /></Field>
-              <Field label="期间"><input className="h-9 w-full rounded-control bg-bg px-2 text-[13px] ring-1 ring-line" value={form.period} onChange={set("period")} placeholder="2026-08" /></Field>
+              <Field label="粒度">
+                <select className="h-9 w-full rounded-control bg-bg px-2 text-[13px] ring-1 ring-line" value={form.grain} onChange={set("grain")}>
+                  <option value="month">单月</option>
+                  <option value="year">年度</option>
+                  <option value="ytd">累计到该月</option>
+                </select>
+              </Field>
+              <Field label="期间"><input className="h-9 w-full rounded-control bg-bg px-2 text-[13px] ring-1 ring-line" value={form.period} onChange={set("period")} placeholder={form.grain === "year" ? "2025" : "2026-08"} /></Field>
               <Field label="数值"><input className="h-9 w-full rounded-control bg-bg px-2 text-[13px] ring-1 ring-line" value={form.value} onChange={set("value")} /></Field>
               <Field label="单位">
                 <select className="h-9 w-full rounded-control bg-bg px-2 text-[13px] ring-1 ring-line" value={form.unit} onChange={set("unit")}>
@@ -66,7 +75,7 @@ export default function AdminMetrics({ loaderData }: Route.ComponentProps) {
             event.preventDefault();
             void run("POST", "/api/admin/metrics/import", { csv, reason: csvReason }, { success: "已导入", label: "import-metrics" });
           }}>
-            <Field label="表头固定" hint="metric,segment,brand,period,value,unit,source_name,url">
+            <Field label="表头固定" hint="可加 grain：month、year 或 ytd。不加时按单月。">
               <textarea className="min-h-40 w-full rounded-control bg-bg p-2 font-mono text-[12px] ring-1 ring-line" value={csv} onChange={(event) => setCsv(event.target.value)} />
             </Field>
             <Field label="原因"><input className="h-9 w-full rounded-control bg-bg px-2 text-[13px] ring-1 ring-line" value={csvReason} onChange={(event) => setCsvReason(event.target.value)} /></Field>
@@ -83,7 +92,7 @@ export default function AdminMetrics({ loaderData }: Route.ComponentProps) {
             <tbody>
               {loaderData.rows.map((row) => (
                 <tr key={row.id} className="border-t border-line-soft">
-                  <td className="px-3 py-2 num">{row.period}</td>
+                  <td className="px-3 py-2 num">{row.period} {GRAIN_LABEL[row.grain] ?? ""}</td>
                   <td className="px-3 py-2">{loaderData.metrics[row.metric] ?? row.metric}</td>
                   <td className="px-3 py-2">{row.segment}</td>
                   <td className="px-3 py-2">{row.brand}</td>

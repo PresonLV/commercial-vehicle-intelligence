@@ -48,9 +48,9 @@ export async function fillMetricFallback(articleId: string): Promise<{ added: nu
   await sql.begin(async (tx) => {
     for (const point of accepted) {
       await tx`
-        INSERT INTO metric_points (metric, segment, brand, period, value, unit, source_name, url, article_id, sample, method, confidence)
-        VALUES (${point.metric}, ${point.segment}, ${point.brand}, ${point.period}, ${point.value}, ${point.unit}, ${row.source_name}, ${row.url}, ${articleId}, false, 'llm', 'review')
-        ON CONFLICT (metric, segment, brand, period, url) DO NOTHING`;
+        INSERT INTO metric_points (metric, segment, brand, period, grain, value, unit, source_name, url, article_id, sample, method, confidence)
+        VALUES (${point.metric}, ${point.segment}, ${point.brand}, ${point.period}, 'month', ${point.value}, ${point.unit}, ${row.source_name}, ${row.url}, ${articleId}, false, 'llm', 'review')
+        ON CONFLICT (metric, segment, brand, period, grain, url) DO NOTHING`;
     }
     await completeReceipt(tx, res.receiptId);
   });

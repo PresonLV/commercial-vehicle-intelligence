@@ -26,7 +26,7 @@ export const SIDEBAR: Array<{ title: string; items: NavItem[] }> = [
       { to: "/daily", label: NAV.daily, icon: IconDoc },
       { to: "/topics", label: NAV.topics, icon: IconGrid },
       ...(FEATURES.readerBookmarks ? [{ to: "/starred", label: "收藏", icon: IconBookmark }] : []),
-      { to: "/data", label: "数据", icon: IconChart },
+      { to: "/data", label: "数据统计", icon: IconChart },
       { to: "/research", label: "深度研究", icon: IconChart },
     ],
   },

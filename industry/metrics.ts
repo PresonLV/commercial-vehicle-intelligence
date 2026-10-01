@@ -269,44 +269,63 @@ export function acceptLiteralMetrics(source: string, rows: ProposedMetric[]): Me
 }
 
 const CSV_HEADER = ["metric", "segment", "brand", "period", "value", "unit", "source_name", "url"];
+const CSV_HEADER_GRAIN = ["metric", "segment", "brand", "period", "grain", "value", "unit", "source_name", "url"];
+const GRAINS = new Set(["month", "year", "ytd"]);
 
 export interface ManualMetricRow {
   metric: string;
   segment: string;
   brand: string;
   period: string;
+  grain: "month" | "year" | "ytd";
   value: number;
   unit: string;
   sourceName: string;
   url: string;
 }
 
-/** Admin CSV. The header is required. A row with a missing field or an unknown metric is rejected. */
+function periodOk(grain: string, period: string): boolean {
+  if (grain === "year") return /^\d{4}$/.test(period);
+  return /^\d{4}-\d{2}$/.test(period) && Number(period.slice(5)) >= 1 && Number(period.slice(5)) <= 12;
+}
+
+/** Admin CSV. The header is required. Grain defaults to a single month when that column is omitted. */
 export function parseMetricCsv(csv: string): { rows: ManualMetricRow[]; errors: string[] } {
   const lines = csv.replace(/^\uFEFF/, "").split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
   const errors: string[] = [];
   if (!lines.length) return { rows: [], errors: ["CSV 是空的"] };
   const header = lines[0]!.split(",").map((cell) => cell.trim());
-  if (header.join(",") !== CSV_HEADER.join(",")) {
-    return { rows: [], errors: [`表头必须是 ${CSV_HEADER.join(",")}`] };
+  const withGrain = header.join(",") === CSV_HEADER_GRAIN.join(",");
+  if (!withGrain && header.join(",") !== CSV_HEADER.join(",")) {
+    return { rows: [], errors: [`表头必须是 ${CSV_HEADER.join(",")} 或 ${CSV_HEADER_GRAIN.join(",")}`] };
   }
   const rows: ManualMetricRow[] = [];
   for (let i = 1; i < lines.length; i++) {
     const cells = splitCsv(lines[i]!);
-    if (cells.length !== CSV_HEADER.length) {
+    if (cells.length !== header.length) {
       errors.push(`第 ${i + 1} 行列数不对`);
       continue;
     }
-    const [metric, segment, brand, period, rawValue, unit, sourceName, url] = cells.map((cell) => cell.trim());
+    const trimmed = cells.map((cell) => cell.trim());
+    const metric = trimmed[0];
+    const segment = trimmed[1];
+    const brand = trimmed[2] ?? "";
+    const period = trimmed[3] ?? "";
+    const grain = withGrain ? trimmed[4] ?? "" : "month";
+    const rawValue = withGrain ? trimmed[5] : trimmed[4];
+    const unit = withGrain ? trimmed[6] : trimmed[5];
+    const sourceName = withGrain ? trimmed[7] : trimmed[6];
+    const url = withGrain ? trimmed[8] : trimmed[7];
     const value = Number(rawValue);
     if (!metric || !METRIC_LABELS[metric]) errors.push(`第 ${i + 1} 行指标必须是 ${Object.keys(METRIC_LABELS).join("、")}`);
     else if (!segment) errors.push(`第 ${i + 1} 行缺少细分`);
-    else if (!/^\d{4}-\d{2}$/.test(period ?? "") || Number(period!.slice(5)) < 1 || Number(period!.slice(5)) > 12) errors.push(`第 ${i + 1} 行期间要写成 YYYY-MM`);
+    else if (!GRAINS.has(grain)) errors.push(`第 ${i + 1} 行粒度必须是 month、year 或 ytd`);
+    else if (!periodOk(grain, period)) errors.push(`第 ${i + 1} 行期间与粒度不符`);
     else if (!Number.isFinite(value) || value < 0) errors.push(`第 ${i + 1} 行数值无效`);
     else if (!UNITS.has(unit ?? "")) errors.push(`第 ${i + 1} 行单位必须是万辆、万台、辆或台`);
     else if (!sourceName) errors.push(`第 ${i + 1} 行缺少来源名称`);
     else if (!/^https?:\/\//.test(url ?? "")) errors.push(`第 ${i + 1} 行需要原文链接`);
-    else rows.push({ metric: metric!, segment: segment!, brand: brand ?? "", period: period!, value, unit: unit!, sourceName: sourceName!, url: url! });
+    else rows.push({ metric, segment, brand, period, grain: grain as ManualMetricRow["grain"], value, unit: unit!, sourceName, url: url! });
   }
   return { rows, errors };
 }

@@ -17,9 +17,9 @@ export async function syncMetricPoints(tx: Tx, input: {
   for (const point of extractFigures(input.text, input.html ?? "")) {
     if (point.method === "llm") continue;
     await tx`
-      INSERT INTO metric_points (metric, segment, brand, period, value, unit, source_name, url, article_id, sample, method, confidence)
-      VALUES (${point.metric}, ${point.segment}, ${point.brand}, ${point.period}, ${point.value}, ${point.unit}, ${input.sourceName}, ${input.url}, ${input.articleId}, false, ${point.method}, 'high')
-      ON CONFLICT (metric, segment, brand, period, url) DO UPDATE SET
+      INSERT INTO metric_points (metric, segment, brand, period, grain, value, unit, source_name, url, article_id, sample, method, confidence)
+      VALUES (${point.metric}, ${point.segment}, ${point.brand}, ${point.period}, 'month', ${point.value}, ${point.unit}, ${input.sourceName}, ${input.url}, ${input.articleId}, false, ${point.method}, 'high')
+      ON CONFLICT (metric, segment, brand, period, grain, url) DO UPDATE SET
         value = EXCLUDED.value, unit = EXCLUDED.unit, source_name = EXCLUDED.source_name, article_id = EXCLUDED.article_id,
         method = EXCLUDED.method, confidence = 'high'`;
   }
