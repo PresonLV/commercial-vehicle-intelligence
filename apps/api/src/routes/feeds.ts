@@ -1,7 +1,7 @@
 // RSS routes. Unknown query parameters are accepted and never change content.
 import type { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { RSS_CACHE_CONTROL } from "@aihot/contracts/http-policy";
-import { dailyFeed, isFeedCategory, itemFeed, type ItemFeedKind } from "@aihot/backend/publication/feeds";
+import { dailyFeed, feedCategory, itemFeed, type ItemFeedKind } from "@aihot/backend/publication/feeds";
 import { applyPublicHeaders, sendTextWithEtag } from "../http/respond.ts";
 
 async function sendFeed(req: FastifyRequest, reply: FastifyReply, xml: string) {
@@ -40,10 +40,10 @@ export function registerFeeds(app: FastifyInstance) {
   for (const full of [false, true]) {
     app.get(full ? "/feed/full/category/:file" : "/feed/category/:file", async (req, reply) => {
       const file = (req.params as { file: string }).file;
-      const slug = file.replace(/\.xml$/, "");
-      if (!file.endsWith(".xml") || !isFeedCategory(slug)) return reply.code(404).type("text/plain; charset=utf-8").send("Not found");
+      const category = file.endsWith(".xml") ? feedCategory(file.replace(/\.xml$/, "")) : null;
+      if (!category) return reply.code(404).type("text/plain; charset=utf-8").send("Not found");
       try {
-        return await sendFeed(req, reply, await itemFeed(full ? "selected-full" : "selected", slug));
+        return await sendFeed(req, reply, await itemFeed(full ? "selected-full" : "selected", category));
       } catch (error) {
         req.log.error({ err: error }, "feed error");
         return feedError(reply);

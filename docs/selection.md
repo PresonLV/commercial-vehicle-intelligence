@@ -21,7 +21,7 @@ export const SELECTION = {
 };
 ```
 
-官方一手信源（T1）门槛低一些，媒体和个人（T2）门槛高一些：同样一件事，官方原文更值得先看。没有门槛的分级（`EXCLUDE_MP`）不参与精选。
+官方信源（T1）门槛低一些，媒体和个人（T2）门槛高一些：同样一件事，官方原文更值得先看。没有门槛的分级（`EXCLUDE_MP`）不参与精选。
 
 这组数是 AIHOT 在 AI 领域一直在用的门槛，偏严：宁可少选几条，也不让噪声进精选。换了行业、改了评分标准，一定要按下面的办法重新校准。
 
@@ -39,7 +39,7 @@ export const SELECTION = {
 |---|---|
 | `caseId` | 唯一编号 |
 | `material` | 标题、原标题、发布时间、信源名、正文（中文正文放 `bodyZh`，原文放 `bodyOriginal`，有一个就行） |
-| `sourceFacts` | 信源类型、分级、是否一手、语言。分级决定用哪个门槛 |
+| `sourceFacts` | 信源类型、分级、是否官方、语言。分级决定用哪个门槛 |
 | `samplingContext` | 可选。`benchmarkSplit` 分开发集和留出集，`samplingStratum` 是你自己的分组（比如“新规”“判决”“营销”），看错在哪一类 |
 | `gold.decision` | `select` 该选，`reject` 不该选，`either` 两可（不计入准确率） |
 

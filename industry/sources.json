@@ -1,388 +1,2251 @@
 {
-  "$comment": "示范信源：首次启动时导入（scripts/seed.ts），已存在的不会被覆盖。之后在后台“信源”里增删改。字段说明见 docs/customize.md。",
+  "$comment": "商用车示范信源：首次启动时导入（scripts/seed.ts），已存在的不会被覆盖。只收录在 2026-09-30 从公网确认能返回列表或 RSS 的地址。打不开、反爬、或主要靠公众号的源见 docs/cv-sources.md。字段说明见 docs/customize.md。",
   "sources": [
     {
-      "id": "rss-openai-news",
-      "name": "OpenAI News",
-      "kind": "rss",
+      "id": "web-caam-sales",
+      "name": "中汽协 · 产销数据",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://openai.com/news/rss.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": "openai",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-google-deepmind",
-      "name": "Google DeepMind",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://deepmind.google/blog/rss.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": "google",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-google-research",
-      "name": "Google Research",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://research.google/blog/rss/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": "google",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方",
-        "研究"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-hugging-face",
-      "name": "Hugging Face Blog",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://huggingface.co/blog/feed.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": "hugging-face",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方",
-        "开源"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-microsoft-research",
-      "name": "Microsoft Research",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://www.microsoft.com/en-us/research/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": "microsoft",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方",
-        "研究"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-nvidia-blog",
-      "name": "NVIDIA Blog",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://blogs.nvidia.com/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": "nvidia",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-aws-ml",
-      "name": "AWS Machine Learning Blog",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://aws.amazon.com/blogs/machine-learning/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方",
-        "教程"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-github-ai",
-      "name": "GitHub Blog · AI & ML",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://github.blog/ai-and-ml/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-mistral",
-      "name": "Mistral AI",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://mistral.ai/rss.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-bair",
-      "name": "Berkeley AI Research",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://bair.berkeley.edu/blog/feed.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "url": "http://www.caam.org.cn/",
+        "itemSelector": ".DataStatisticsList li",
+        "linkSelector": "a",
+        "titleSelector": "span.cont",
+        "allowUrlPrefixes": [
+          "http://www.caam.org.cn/chn/5/cate_39/",
+          "https://www.caam.org.cn/chn/5/cate_39/"
+        ],
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": ["乘用车"]
+        },
+        "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T1",
       "first_party": true,
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 180,
-      "tags": [
-        "研究"
-      ],
+      "tags": ["机构", "数据"],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-the-verge-ai",
-      "name": "The Verge · AI",
-      "kind": "rss",
+      "id": "web-mot-news",
+      "name": "交通运输部 · 交通要闻",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "url": "https://www.mot.gov.cn/xinwen/jiaotongyaowen/index.html",
+        "itemSelector": "li.news-item",
+        "linkSelector": "a.news-link",
+        "titleSelector": ".news-title",
+        "publishedAtSelector": ".news-date",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.mot.gov.cn/xinwen/jiaotongyaowen/"],
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": ["官方", "政策"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-weichai-news",
+      "name": "潍柴 · 新闻与事件",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.weichai.com/group/weichai/cn/media-hub/news2/index.html",
+        "itemSelector": "a.simple-box",
+        "titleSelector": ".simple-title",
+        "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.weichai.com/group/weichai/cn/media-hub/news2/"],
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "weichai",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "上游"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-catl-news",
+      "name": "宁德时代 · 新闻",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.catl.com/news/",
+        "itemSelector": "li.mc_e1_li",
+        "linkSelector": "a",
+        "titleSelector": ".mc_e1_txt",
+        "publishedAtSelector": ".mc_e1_date",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.catl.com/news/"],
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "catl",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "上游"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-360che-news",
+      "name": "卡车之家 · 行业新闻",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.360che.com/news/",
+        "itemSelector": ".news_dk",
+        "linkSelector": ".news_dk1 a",
+        "titleSelector": ".news_dk1 a",
+        "publishedAtSelector": ".news_dk3a",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.360che.com/news/"],
+        "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
       "first_party": false,
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
+      "tags": ["媒体"],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-techcrunch-ai",
-      "name": "TechCrunch · AI",
-      "kind": "rss",
+      "id": "web-chinatruck-news",
+      "name": "中国卡车网 · 资讯",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://techcrunch.com/category/artificial-intelligence/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "url": "https://www.chinatruck.org/news/",
+        "itemSelector": ".article-lists",
+        "linkSelector": "a",
+        "titleSelector": "h2",
+        "publishedAtSelector": ".atr-column span",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.chinatruck.org/news/"],
+        "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
       "first_party": false,
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
+      "tags": ["媒体"],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-ars-technica-ai",
-      "name": "Ars Technica · AI",
-      "kind": "rss",
+      "id": "web-find800-truck",
+      "name": "方得网 · 卡车新闻",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://arstechnica.com/ai/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "url": "https://www.find800.cn/list?cid=33&page=1",
+        "itemSelector": "ul.card > li",
+        "linkSelector": "span.card_info > a",
+        "titleSelector": "span.card_info > a",
+        "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.find800.cn/news/", "http://www.find800.cn/news/"],
+        "ingestNoiseFilter": { "dropMarkersTitleOnly": ["页面未找到"] },
+        "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
       "first_party": false,
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
+      "tags": ["媒体", "中游"],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-mit-tech-review-ai",
-      "name": "MIT Technology Review · AI",
-      "kind": "rss",
+      "id": "web-find800-bus",
+      "name": "方得网 · 客车新闻",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://www.technologyreview.com/topic/artificial-intelligence/feed",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "url": "https://www.find800.cn/list?cid=35&page=1",
+        "itemSelector": "ul.card > li",
+        "linkSelector": "span.card_info > a",
+        "titleSelector": "span.card_info > a",
+        "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.find800.cn/news/", "http://www.find800.cn/news/"],
+        "ingestNoiseFilter": { "dropMarkersTitleOnly": ["页面未找到"] },
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 90,
+      "tags": ["媒体", "中游"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-find800-parts",
+      "name": "方得网 · 零部件新闻",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.find800.cn/list?cid=213&page=1",
+        "itemSelector": "ul.card > li",
+        "linkSelector": "span.card_info > a",
+        "titleSelector": "span.card_info > a",
+        "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.find800.cn/news/", "http://www.find800.cn/news/"],
+        "ingestNoiseFilter": { "dropMarkersTitleOnly": ["页面未找到"] },
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 90,
+      "tags": ["媒体", "上游"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-find800-data",
+      "name": "方得网 · 数据分析",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.find800.cn/list?cid=248&page=1",
+        "itemSelector": "ul.card > li",
+        "linkSelector": "span.card_info > a",
+        "titleSelector": "span.card_info > a",
+        "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.find800.cn/news/", "http://www.find800.cn/news/"],
+        "ingestNoiseFilter": { "dropMarkersTitleOnly": ["页面未找到"] },
+        "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
       "first_party": false,
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 120,
-      "tags": [
-        "媒体"
-      ],
+      "tags": ["媒体", "数据"],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-the-decoder",
-      "name": "The Decoder",
-      "kind": "rss",
+      "id": "web-find800-policy",
+      "name": "方得网 · 政策新闻",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://the-decoder.com/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "first_party": false,
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-simon-willison",
-      "name": "Simon Willison",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://simonwillison.net/atom/everything/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "url": "https://www.find800.cn/list?cid=205&page=1",
+        "itemSelector": "ul.card > li",
+        "linkSelector": "span.card_info > a",
+        "titleSelector": "span.card_info > a",
+        "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.find800.cn/news/", "http://www.find800.cn/news/"],
+        "ingestNoiseFilter": { "dropMarkersTitleOnly": ["页面未找到"] },
+        "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
       "first_party": false,
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 120,
-      "tags": [
-        "个人"
-      ],
+      "tags": ["媒体", "政策"],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-import-ai",
-      "name": "Import AI",
+      "id": "rss-transport-topics",
+      "name": "Transport Topics",
       "kind": "rss",
       "config": {
-        "feedUrl": "https://importai.substack.com/feed",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "feedUrl": "https://www.ttnews.com/rss.xml",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": ["媒体", "海外市场"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-truckinginfo",
+      "name": "TruckingInfo",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.truckinginfo.com/rss",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": ["媒体", "海外市场"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-sustainable-bus",
+      "name": "Sustainable Bus",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.sustainable-bus.com/feed/",
+        "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
       "first_party": false,
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 180,
-      "tags": [
-        "个人",
-        "周刊"
-      ],
+      "tags": ["媒体", "客车"],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
     {
-      "id": "rss-latent-space",
-      "name": "Latent Space",
+      "id": "rss-electrek-trucks",
+      "name": "Electrek · Electric Trucks",
       "kind": "rss",
       "config": {
-        "feedUrl": "https://www.latent.space/feed",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        "feedUrl": "https://electrek.co/guides/electric-trucks/feed/",
+        "_aihot": { "initialBackfillLimit": 8 }
       },
       "tier": "T2",
       "first_party": false,
       "owner_entity_id": null,
       "participation_mode": "editorial",
       "interval_minutes": 180,
-      "tags": [
-        "个人"
-      ],
+      "tags": ["媒体", "新能源"],
       "site_fulltext": false,
       "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-fleet-equipment",
+      "name": "Fleet Equipment",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.fleetequipmentmag.com/feed/",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["媒体", "车队"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-ata",
+      "name": "美国卡车运输协会 ATA",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.trucking.org/rss.xml",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["协会", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-iru",
+      "name": "国际道路运输联盟 IRU",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.iru.org/rss.xml",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["协会", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-fmcsa-fr",
+      "name": "美国联邦公报 · FMCSA",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.federalregister.gov/api/v1/documents.rss?conditions%5Bagencies%5D%5B%5D=federal-motor-carrier-safety-administration&per_page=20",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": ["Exemption", "Hearing", "Information Collection"]
+        },
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": ["官方", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-paccar",
+      "name": "帕卡 · 新闻",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.paccar.com/rss",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "paccar",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-man",
+      "name": "曼恩 · 新闻",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://press.mantruckandbus.com/corporate/feed/en",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "man-truck",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-traton",
+      "name": "传拓 · 新闻",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://traton.com/rss/?generatorName=elastic&locale=en",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "traton",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-international",
+      "name": "国际卡车 International · 新闻",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.international.com/news?pagetemplate=rss",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-daimler-news",
+      "name": "戴姆勒卡车 · 新闻室",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.daimlertruck.com/en/newsroom",
+        "itemSelector": "a.card",
+        "titleSelector": ".card__caption",
+        "publishedAtRegex": "(\\d{2}\\.\\d{2}\\.\\d{4})",
+        "publishedAtUtcOffset": "+02:00",
+        "allowUrlPrefixes": ["https://www.daimlertruck.com/en/newsroom/pressrelease/"],
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "daimler-truck",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-volvo-news",
+      "name": "沃尔沃集团 · 新闻",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.volvogroup.com/en/news-and-media.html",
+        "itemSelector": "li.articlelist__item",
+        "linkSelector": "h3 a",
+        "titleSelector": "h3.articlelist__headerTitle",
+        "publishedAtSelector": ".articlelist__headerTimeDate",
+        "publishedAtUtcOffset": "+02:00",
+        "allowUrlPrefixes": ["https://www.volvogroup.com/en/news-and-media/news/"],
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "volvo-group",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "web-scania-news",
+      "name": "斯堪尼亚 · 新闻室",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.scania.com/group/en/home/newsroom.html",
+        "itemSelector": "article.cmp-list__item-wrapper",
+        "linkSelector": "a.cmp-list__item-link",
+        "titleSelector": "a.cmp-list__item-link",
+        "allowUrlPrefixes": ["https://www.scania.com/group/en/home/newsroom/news/"],
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "scania",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-freightwaves",
+      "name": "FreightWaves",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.freightwaves.com/feed",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": ["媒体", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-truck-bus-news",
+      "name": "Truck & Bus News",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.truckandbusnews.net/feed/",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["媒体", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-cv-india",
+      "name": "Commercial Vehicle India",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.commercialvehicle.in/feed/",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["媒体", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-freightnews-za",
+      "name": "Freight News",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.freightnews.co.za/rss",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["媒体", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-transporte-mx",
+      "name": "Transporte Informativo",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.transporteinformativo.com.mx/feed/",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["媒体", "海外"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "girteka",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-girteka",
+      "name": "吉尔泰卡 · 新闻",
+      "kind": "rss",
+      "tags": [
+        "官方",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://www.girteka.eu/feed/",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "old-dominion",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-odfl",
+      "name": "老道明 · 投资者关系",
+      "kind": "rss",
+      "tags": [
+        "官方",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://ir.odfl.com/rss",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "to Webcast",
+            "Conference Call"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "oreilly",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-oreilly",
+      "name": "奥莱利 · 公司新闻",
+      "kind": "rss",
+      "tags": [
+        "官方",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://corporate.oreillyauto.com/feed/",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "Sharing Important Moments",
+            "Back to School",
+            "Get Road Trip Ready",
+            "Developing the Next Generation"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "ryder",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-ryder",
+      "name": "莱德 · 洞察",
+      "kind": "rss",
+      "tags": [
+        "官方",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://www.ryder.com/en-us/api/rssfeed/showrssfeed",
+        "sortByPublishedAt": true,
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "Ryder Insights |",
+            "Blogs | Ryder Insights"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-hda-truck-pride",
+      "name": "HDA Truck Pride",
+      "kind": "rss",
+      "tags": [
+        "协会",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://www.hdatruckpride.com/feed",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-fleetowner",
+      "name": "Fleet Owner",
+      "kind": "rss",
+      "tags": [
+        "媒体",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://www.fleetowner.com/__rss/website-scheduled-content.xml?input=%7B%22sectionAlias%22%3A%22home%22%7D",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-truckingdive",
+      "name": "Trucking Dive",
+      "kind": "rss",
+      "tags": [
+        "媒体",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://www.truckingdive.com/feeds/news/",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-aftermarketnews",
+      "name": "aftermarketNews",
+      "kind": "rss",
+      "tags": [
+        "媒体",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://www.aftermarketnews.com/feed/",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-aftermarketmatters",
+      "name": "Aftermarket Matters",
+      "kind": "rss",
+      "tags": [
+        "媒体",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://www.aftermarketmatters.com/feed/",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-gn-tires",
+      "name": "Google 新闻 · 轮胎即服务与翻新",
+      "kind": "rss",
+      "tags": [
+        "聚合",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22tires+as+a+service%22+OR+%22retread%22+fleet&hl=en-US&gl=US&ceid=US:en",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-gn-michelin-fleet",
+      "name": "Google 新闻 · 米其林车队",
+      "kind": "rss",
+      "tags": [
+        "聚合",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22Michelin%22+%22fleet%22&hl=en-US&gl=US&ceid=US:en",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-gn-parts",
+      "name": "Google 新闻 · 汽配连锁与重载配件",
+      "kind": "rss",
+      "tags": [
+        "聚合",
+        "海外"
+      ],
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=AutoZone+Commercial+OR+%22NAPA+AutoCare%22+OR+%22FleetPride%22&hl=en-US&gl=US&ceid=US:en",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-gn-swap",
+      "name": "Google 新闻 · 换电重卡",
+      "kind": "rss",
+      "tags": [
+        "聚合",
+        "下游"
+      ],
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E6%8D%A2%E7%94%B5%E9%87%8D%E5%8D%A1%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "rss-gn-cass",
+      "name": "Google 新闻 · 开思汽配",
+      "kind": "rss",
+      "tags": [
+        "聚合",
+        "下游"
+      ],
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E5%BC%80%E6%80%9D%22+%E6%B1%BD%E9%85%8D&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "jb-hunt",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "web-jbhunt",
+      "name": "亨特运输 · 新闻室",
+      "kind": "web_list",
+      "tags": [
+        "官方",
+        "海外"
+      ],
+      "config": {
+        "url": "https://www.jbhunt.com/our-company/newsroom",
+        "itemSelector": ".cmp-article-teaser",
+        "linkSelector": "a[href*='/our-company/newsroom/20']",
+        "titleSelector": "h4.cmp-article-teaser__title",
+        "publishedAtSelector": ".cmp-article-teaser__date",
+        "publishedAtUtcOffset": "-05:00",
+        "allowUrlPrefixes": [
+          "https://www.jbhunt.com/our-company/newsroom/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "g7",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "web-g7",
+      "name": "G7易流 · 新闻",
+      "kind": "web_list",
+      "tags": [
+        "官方",
+        "下游"
+      ],
+      "config": {
+        "url": "https://www.g7.com.cn/News-center.html",
+        "itemSelector": "a[href*='news_detail']",
+        "publishedAtRegex": "(\\d{4}/\\d{2}/\\d{2})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": [
+          "https://www.g7.com.cn/news_detail/"
+        ],
+        "sortByPublishedAt": true,
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "sinoiov",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "web-sinoiov",
+      "name": "中交兴路 · 官方动态",
+      "kind": "web_list",
+      "tags": [
+        "官方",
+        "下游"
+      ],
+      "config": {
+        "url": "https://www.sinoiov.com/news/official/",
+        "itemSelector": "a[href*='/news/official/']",
+        "publishedAtRegex": "(\\d{4}-\\d{2}-\\d{2})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": [
+          "https://www.sinoiov.com/news/official/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "plus-ai",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "web-plusai",
+      "name": "智加 · 新闻",
+      "kind": "web_list",
+      "tags": [
+        "官方",
+        "技术"
+      ],
+      "config": {
+        "url": "https://www.plus.ai/news-and-insights",
+        "itemSelector": "a[href*='/news-and-insights/20']",
+        "allowUrlPrefixes": [
+          "https://www.plus.ai/news-and-insights/20"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "sf-express",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "json-cninfo-sf",
+      "name": "顺丰控股 · 巨潮公告",
+      "kind": "json_list",
+      "tags": [
+        "官方",
+        "下游"
+      ],
+      "config": {
+        "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+        "method": "POST",
+        "headers": {
+          "Referer": "https://www.cninfo.com.cn/",
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        "bodyEncoding": "form",
+        "bodyJson": {
+          "pageNum": "1",
+          "pageSize": "30",
+          "column": "szse",
+          "tabName": "fulltext",
+          "plate": "",
+          "stock": "002352,9900010448",
+          "searchkey": "",
+          "secid": "",
+          "category": "",
+          "trade": "",
+          "seDate": "",
+          "sortName": "",
+          "sortType": "",
+          "isHLtitle": "true"
+        },
+        "itemsPath": "announcements",
+        "titlePaths": [
+          "announcementTitle"
+        ],
+        "publishedAtPath": "announcementTime",
+        "publishedAtUnit": "epoch_ms",
+        "urlTemplate": "http://static.cninfo.com.cn/{raw:adjunctUrl}",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "独立董事",
+            "监事会",
+            "法律意见书",
+            "股票交易异常波动",
+            "提示性公告",
+            "无偿捐赠",
+            "一致行动人"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "yto-express",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "json-cninfo-yto",
+      "name": "圆通速递 · 巨潮公告",
+      "kind": "json_list",
+      "tags": [
+        "官方",
+        "下游"
+      ],
+      "config": {
+        "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+        "method": "POST",
+        "headers": {
+          "Referer": "https://www.cninfo.com.cn/",
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        "bodyEncoding": "form",
+        "bodyJson": {
+          "pageNum": "1",
+          "pageSize": "30",
+          "column": "sse",
+          "tabName": "fulltext",
+          "plate": "",
+          "stock": "600233,gssh0600233",
+          "searchkey": "",
+          "secid": "",
+          "category": "",
+          "trade": "",
+          "seDate": "",
+          "sortName": "",
+          "sortType": "",
+          "isHLtitle": "true"
+        },
+        "itemsPath": "announcements",
+        "titlePaths": [
+          "announcementTitle"
+        ],
+        "publishedAtPath": "announcementTime",
+        "publishedAtUnit": "epoch_ms",
+        "urlTemplate": "http://static.cninfo.com.cn/{raw:adjunctUrl}",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "独立董事",
+            "监事会",
+            "法律意见书",
+            "股票交易异常波动",
+            "提示性公告",
+            "无偿捐赠",
+            "一致行动人"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "yunda",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "json-cninfo-yunda",
+      "name": "韵达股份 · 巨潮公告",
+      "kind": "json_list",
+      "tags": [
+        "官方",
+        "下游"
+      ],
+      "config": {
+        "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+        "method": "POST",
+        "headers": {
+          "Referer": "https://www.cninfo.com.cn/",
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        "bodyEncoding": "form",
+        "bodyJson": {
+          "pageNum": "1",
+          "pageSize": "30",
+          "column": "szse",
+          "tabName": "fulltext",
+          "plate": "",
+          "stock": "002120,9900002261",
+          "searchkey": "",
+          "secid": "",
+          "category": "",
+          "trade": "",
+          "seDate": "",
+          "sortName": "",
+          "sortType": "",
+          "isHLtitle": "true"
+        },
+        "itemsPath": "announcements",
+        "titlePaths": [
+          "announcementTitle"
+        ],
+        "publishedAtPath": "announcementTime",
+        "publishedAtUnit": "epoch_ms",
+        "urlTemplate": "http://static.cninfo.com.cn/{raw:adjunctUrl}",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "独立董事",
+            "监事会",
+            "法律意见书",
+            "股票交易异常波动",
+            "提示性公告",
+            "无偿捐赠",
+            "一致行动人"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "sto-express",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "json-cninfo-sto",
+      "name": "申通快递 · 巨潮公告",
+      "kind": "json_list",
+      "tags": [
+        "官方",
+        "下游"
+      ],
+      "config": {
+        "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+        "method": "POST",
+        "headers": {
+          "Referer": "https://www.cninfo.com.cn/",
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        "bodyEncoding": "form",
+        "bodyJson": {
+          "pageNum": "1",
+          "pageSize": "30",
+          "column": "szse",
+          "tabName": "fulltext",
+          "plate": "",
+          "stock": "002468,9900014251",
+          "searchkey": "",
+          "secid": "",
+          "category": "",
+          "trade": "",
+          "seDate": "",
+          "sortName": "",
+          "sortType": "",
+          "isHLtitle": "true"
+        },
+        "itemsPath": "announcements",
+        "titlePaths": [
+          "announcementTitle"
+        ],
+        "publishedAtPath": "announcementTime",
+        "publishedAtUnit": "epoch_ms",
+        "urlTemplate": "http://static.cninfo.com.cn/{raw:adjunctUrl}",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "独立董事",
+            "监事会",
+            "法律意见书",
+            "股票交易异常波动",
+            "提示性公告",
+            "无偿捐赠",
+            "一致行动人"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "sinotrans",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "json-cninfo-sinotrans",
+      "name": "中国外运 · 巨潮公告",
+      "kind": "json_list",
+      "tags": [
+        "官方",
+        "下游"
+      ],
+      "config": {
+        "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+        "method": "POST",
+        "headers": {
+          "Referer": "https://www.cninfo.com.cn/",
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        "bodyEncoding": "form",
+        "bodyJson": {
+          "pageNum": "1",
+          "pageSize": "30",
+          "column": "sse",
+          "tabName": "fulltext",
+          "plate": "",
+          "stock": "601598,gshk0000598",
+          "searchkey": "",
+          "secid": "",
+          "category": "",
+          "trade": "",
+          "seDate": "",
+          "sortName": "",
+          "sortType": "",
+          "isHLtitle": "true"
+        },
+        "itemsPath": "announcements",
+        "titlePaths": [
+          "announcementTitle"
+        ],
+        "publishedAtPath": "announcementTime",
+        "publishedAtUnit": "epoch_ms",
+        "urlTemplate": "http://static.cninfo.com.cn/{raw:adjunctUrl}",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "独立董事",
+            "监事会",
+            "法律意见书",
+            "股票交易异常波动",
+            "提示性公告",
+            "无偿捐赠",
+            "一致行动人"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "cjl-logistics",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "json-cninfo-cjl",
+      "name": "长久物流 · 巨潮公告",
+      "kind": "json_list",
+      "tags": [
+        "官方",
+        "下游"
+      ],
+      "config": {
+        "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+        "method": "POST",
+        "headers": {
+          "Referer": "https://www.cninfo.com.cn/",
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        "bodyEncoding": "form",
+        "bodyJson": {
+          "pageNum": "1",
+          "pageSize": "30",
+          "column": "sse",
+          "tabName": "fulltext",
+          "plate": "",
+          "stock": "603569,9900026446",
+          "searchkey": "",
+          "secid": "",
+          "category": "",
+          "trade": "",
+          "seDate": "",
+          "sortName": "",
+          "sortType": "",
+          "isHLtitle": "true"
+        },
+        "itemsPath": "announcements",
+        "titlePaths": [
+          "announcementTitle"
+        ],
+        "publishedAtPath": "announcementTime",
+        "publishedAtUnit": "epoch_ms",
+        "urlTemplate": "http://static.cninfo.com.cn/{raw:adjunctUrl}",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "独立董事",
+            "监事会",
+            "法律意见书",
+            "股票交易异常波动",
+            "提示性公告",
+            "无偿捐赠",
+            "一致行动人"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-miit-notices",
+      "name": "工业和信息化部 · 通知公告",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "政策"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.miit.gov.cn/api-gateway/jpaas-publish-server/front/page/build/unit?parseType=buildstatic&webId=8d828e408d90447786ddbe128d495e9e&tplSetId=209741b2109044b5b7695700b2bec37e&pageType=column&tagId=%E5%8F%B3%E4%BE%A7%E5%86%85%E5%AE%B9&editType=null&pageId=3e3ad1a3bec74939890a0d3e54815141",
+        "baseUrl": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/tz/index.html",
+        "htmlJsonPath": "data.html",
+        "itemSelector": "li.cf",
+        "linkSelector": "a.fl",
+        "titleSelector": "a.fl",
+        "publishedAtSelector": "span.fr",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.miit.gov.cn/zwgk/zcwj/"],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": ["商用车", "货车", "卡车", "客车", "挂车", "重卡", "轻卡", "微卡", "新能源", "换电", "氢能", "排放", "以旧换新", "报废", "路权", "治超", "超限", "收费公路", "物流", "出口", "购置税", "国六", "国七", "电池", "车辆", "汽车"]
+        },
+        "_aihot": { "initialBackfillLimit": 8 }
+      }
+    },
+    {
+      "id": "web-ndrc-notices",
+      "name": "国家发展改革委 · 通知",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "政策"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.ndrc.gov.cn/xxgk/zcfb/tz/index.html",
+        "itemSelector": "a[href*='/t20']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{6})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": ["https://www.ndrc.gov.cn/xxgk/zcfb/"],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": ["商用车", "货车", "卡车", "客车", "挂车", "重卡", "轻卡", "新能源", "换电", "氢能", "排放", "以旧换新", "报废", "路权", "治超", "收费公路", "物流", "出口", "购置税", "国六", "电池", "汽车", "车辆"]
+        },
+        "_aihot": { "initialBackfillLimit": 8 }
+      }
+    },
+    {
+      "id": "web-mof-notices",
+      "name": "财政部 · 政策发布",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "政策"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.mof.gov.cn/zhengwuxinxi/zhengcefabu/index.htm",
+        "itemSelector": "a[href*='zhengcefabu']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{6})",
+        "publishedAtUtcOffset": "+08:00",
+        "ingestNoiseFilter": {
+          "requireTitleMatch": ["商用车", "货车", "卡车", "客车", "汽车", "车辆", "新能源", "以旧换新", "报废", "购置税", "物流", "公路", "排放"]
+        },
+        "_aihot": { "initialBackfillLimit": 8 }
+      }
+    },
+    {
+      "id": "web-ciceia-sales",
+      "name": "中国内燃机工业协会 · 销量综述",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["机构", "数据"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.ciceia.org.cn/",
+        "itemSelector": "a[href*='/xinwendongtai/']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "allowUrlPrefixes": ["https://www.ciceia.org.cn/xinwendongtai/"],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": ["销量", "产量", "产销", "进出口"]
+        },
+        "_aihot": { "initialBackfillLimit": 8 }
+      }
+    },
+    {
+      "id": "web-cada",
+      "name": "中国汽车流通协会",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["机构", "政策"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "http://www.cada.cn/",
+        "itemSelector": "a[href*='info_']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "allowUrlPrefixes": ["http://www.cada.cn/", "https://www.cada.cn/"],
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": ["乘用车"],
+          "requireTitleMatch": ["商用车", "货车", "客车", "二手车", "经销商", "库存", "挂车"]
+        },
+        "_aihot": { "initialBackfillLimit": 8 }
+      }
+    },
+    {
+      "id": "json-cninfo-weichai",
+      "name": "潍柴动力 · 巨潮公告",
+      "kind": "json_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "weichai",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "数据"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+        "method": "POST",
+        "headers": {
+          "Referer": "https://www.cninfo.com.cn/",
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        "bodyEncoding": "form",
+        "bodyJson": {
+          "pageNum": "1",
+          "pageSize": "30",
+          "column": "szse",
+          "tabName": "fulltext",
+          "plate": "",
+          "stock": "000338,9900002961",
+          "searchkey": "",
+          "secid": "",
+          "category": "",
+          "trade": "",
+          "seDate": "",
+          "sortName": "",
+          "sortType": "",
+          "isHLtitle": "true"
+        },
+        "itemsPath": "announcements",
+        "titlePaths": ["announcementTitle"],
+        "publishedAtPath": "announcementTime",
+        "publishedAtUnit": "epoch_ms",
+        "urlTemplate": "http://static.cninfo.com.cn/{raw:adjunctUrl}",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": ["独立董事", "监事会", "法律意见书", "股票交易异常波动", "提示性公告", "无偿捐赠", "一致行动人"]
+        },
+        "_aihot": { "initialBackfillLimit": 8 }
+      }
+    },
+    {
+      "id": "web-mot-normative",
+      "name": "交通运输部 · 行政规范性文件",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://xxgk.mot.gov.cn/xzgfxwj/",
+        "itemSelector": "a[href*='t20'][href$='.html']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{6})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": [
+          "https://xxgk.mot.gov.cn/xzgfxwj/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "道路",
+            "货运",
+            "货车",
+            "营运",
+            "客车",
+            "客运",
+            "公交",
+            "挂车",
+            "汽车",
+            "车辆",
+            "物流",
+            "超限",
+            "治超",
+            "出租",
+            "新能源",
+            "公路",
+            "运输车"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-mee-standards",
+      "name": "生态环境部 · 标准发布",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.mee.gov.cn/ywgz/fgbz/bz/bzfb/",
+        "itemSelector": "a[href*='/xxgk2018/']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{6})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": [
+          "https://www.mee.gov.cn/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "汽车",
+            "机动车",
+            "货车",
+            "柴油",
+            "重型",
+            "轻型汽车",
+            "非道路"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-mee-normative",
+      "name": "生态环境部 · 行政规范性文件",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xzgfxwj/",
+        "itemSelector": "a[href*='xxgk0']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{6})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": [
+          "https://www.mee.gov.cn/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "汽车",
+            "机动车",
+            "货车",
+            "柴油",
+            "重型",
+            "轻型汽车",
+            "非道路"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-samr-recall",
+      "name": "市场监管总局召回中心 · 汽车召回",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.samrdprc.org.cn/qczh/qczhgg1/",
+        "itemSelector": "a[href*='t20']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{6})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": [
+          "https://www.samrdprc.org.cn/qczh/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "货车",
+            "客车",
+            "牵引",
+            "挂车",
+            "商用",
+            "重卡",
+            "轻卡",
+            "专用",
+            "半挂",
+            "仓栅",
+            "自卸",
+            "校车",
+            "载货",
+            "冷藏",
+            "卡车"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-mofcom-policy",
+      "name": "商务部 · 政策发布",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.mofcom.gov.cn/zcfb/index.html",
+        "itemSelector": "a[href*='/art/20']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "https://www.mofcom.gov.cn/zcfb/",
+          "http://www.mofcom.gov.cn/zcfb/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "汽车",
+            "车辆",
+            "商用",
+            "货车",
+            "摩托车",
+            "二手车",
+            "出口许可"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-crta-notices",
+      "name": "中国道路运输协会 · 通知公告",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "机构",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.crta.org.cn/news.html?id=28",
+        "baseUrl": "https://www.crta.org.cn/news.html?id=28",
+        "itemSelector": "a[href*='details.html']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "https://www.crta.org.cn/",
+          "http://www.crta.org.cn/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-sd-gxt-notices",
+      "name": "山东省工业和信息化厅 · 通知",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "http://gxt.shandong.gov.cn/module/web/jpage/dataproxy.jsp",
+        "method": "POST",
+        "headers": {
+          "Referer": "http://gxt.shandong.gov.cn/col/col15201/index.html"
+        },
+        "bodyEncoding": "form",
+        "bodyJson": {
+          "col": "1",
+          "webid": "78",
+          "path": "http://gxt.shandong.gov.cn/",
+          "columnid": "15201",
+          "unitid": "586830",
+          "permissiontype": "0",
+          "startrecord": "1",
+          "endrecord": "45",
+          "perpage": "15"
+        },
+        "unwrapCdata": true,
+        "baseUrl": "http://gxt.shandong.gov.cn/col/col15201/index.html",
+        "itemSelector": "a[href*='/art/']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "art/(20\\d{2}/\\d{1,2}/\\d{1,2})/",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": [
+          "http://gxt.shandong.gov.cn/art/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "商用车",
+            "货车",
+            "卡车",
+            "客车",
+            "挂车",
+            "重卡",
+            "轻卡",
+            "微卡",
+            "新能源",
+            "汽车",
+            "车辆",
+            "物流",
+            "货运",
+            "道路运输",
+            "营运"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-gd-gxt-notices",
+      "name": "广东省工业和信息化厅 · 通知公告",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://gdii.gd.gov.cn/zwgk/tzgg1011/index.html",
+        "itemSelector": "a[href*='/content/post_']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "https://gdii.gd.gov.cn/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "商用车",
+            "货车",
+            "卡车",
+            "客车",
+            "挂车",
+            "重卡",
+            "轻卡",
+            "微卡",
+            "新能源",
+            "汽车",
+            "车辆",
+            "物流",
+            "货运",
+            "道路运输",
+            "营运"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-jl-gxt-notices",
+      "name": "吉林省工业和信息化厅 · 通知公告",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "http://gxt.jl.gov.cn/xxgk/tzgg/",
+        "itemSelector": "a[href*='t20']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "http://gxt.jl.gov.cn/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "商用车",
+            "货车",
+            "卡车",
+            "客车",
+            "挂车",
+            "重卡",
+            "轻卡",
+            "微卡",
+            "新能源",
+            "汽车",
+            "车辆",
+            "物流",
+            "货运",
+            "道路运输",
+            "营运"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-hb-gxt-notices",
+      "name": "湖北省经济和信息化厅 · 公文发布",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "http://jxt.hubei.gov.cn/fbjd/zc/qtzdgkwj/gwfb/",
+        "itemSelector": "a[href*='t20']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "http://jxt.hubei.gov.cn/",
+          "https://jxt.hubei.gov.cn/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "商用车",
+            "货车",
+            "卡车",
+            "客车",
+            "挂车",
+            "重卡",
+            "轻卡",
+            "微卡",
+            "新能源",
+            "汽车",
+            "车辆",
+            "物流",
+            "货运",
+            "道路运输",
+            "营运"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "web-bj-jxj-notices",
+      "name": "北京市经济和信息化局 · 通知公告",
+      "kind": "web_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://jxj.beijing.gov.cn/jxdt/tzgg/",
+        "itemSelector": "a[href*='t20']",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtRegex": "(20\\d{6})",
+        "publishedAtUtcOffset": "+08:00",
+        "allowUrlPrefixes": [
+          "https://jxj.beijing.gov.cn/",
+          "http://jxj.beijing.gov.cn/"
+        ],
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "商用车",
+            "货车",
+            "卡车",
+            "客车",
+            "挂车",
+            "重卡",
+            "轻卡",
+            "微卡",
+            "新能源",
+            "汽车",
+            "车辆",
+            "物流",
+            "货运",
+            "道路运输",
+            "营运"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "json-gov-truck-policy",
+      "name": "中国政府网政策库 · 标题含货车",
+      "kind": "json_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "政策"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://sousuo.www.gov.cn/search-gov/data?t=zhengcelibrary&q=%E8%B4%A7%E8%BD%A6&sort=pubtime&sortType=1&searchfield=title&p=1&n=20&type=gwyzcwjk",
+        "itemsPath": "searchVO.catMap.bumenfile.listVO",
+        "titlePaths": [
+          "title"
+        ],
+        "urlTemplate": "{raw:url}",
+        "publishedAtPath": "ptime",
+        "publishedAtUnit": "epoch_ms",
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "货车"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "json-cninfo-foton",
+      "name": "福田汽车 · 产销快报",
+      "kind": "json_list",
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 720,
+      "tags": [
+        "官方",
+        "数据"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+        "method": "POST",
+        "headers": {
+          "Referer": "https://www.cninfo.com.cn/",
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        "bodyEncoding": "form",
+        "bodyJson": {
+          "pageNum": "1",
+          "pageSize": "20",
+          "column": "sse",
+          "tabName": "fulltext",
+          "plate": "",
+          "stock": "600166,gssh0600166",
+          "searchkey": "产销",
+          "secid": "",
+          "category": "",
+          "trade": "",
+          "seDate": "",
+          "sortName": "",
+          "sortType": "",
+          "isHLtitle": "true"
+        },
+        "itemsPath": "announcements",
+        "titlePaths": [
+          "announcementTitle"
+        ],
+        "publishedAtPath": "announcementTime",
+        "publishedAtUnit": "epoch_ms",
+        "urlTemplate": "http://static.cninfo.com.cn/{raw:adjunctUrl}",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "独立董事",
+            "监事会",
+            "法律意见书",
+            "股票交易异常波动",
+            "提示性公告"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "rss-gnews-mps",
+      "name": "Google 新闻 · 公安部交管（转载）",
+      "kind": "rss",
+      "tier": "T2",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "政策",
+        "转载"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=site%3Amps.gov.cn%20%E8%B4%A7%E8%BD%A6%20OR%20%E6%9C%BA%E5%8A%A8%E8%BD%A6%20OR%20%E6%8C%82%E8%BD%A6%20OR%20%E6%B2%BB%E8%B6%85&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "ingestNoiseFilter": {
+          "requireTitleMatch": [
+            "货车",
+            "机动车",
+            "挂车",
+            "交管",
+            "治超",
+            "超限",
+            "商用车"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
     }
   ]
 }

@@ -1,4 +1,5 @@
-import { SITE, withSubject } from "@aihot/industry/site";
+import { NAV, SITE, withSubject } from "@aihot/industry/site";
+import { policyNoticeLine } from "@aihot/industry/notices";
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLoaderData, useNavigate } from "react-router";
 import type { Route } from "./+types/item";
@@ -19,6 +20,23 @@ import { MediaGallery } from "../features/item/MediaGallery";
 import { QuotedPost } from "../features/item/QuotedPost";
 import { IconArrowLeft, IconCopy, IconDownload, IconExternal, IconImage, IconMenu, IconShare } from "../components/icons";
 
+const RESEARCH_LABELS = ["业务模式概述", "关键数据与做法", "竞争与风险", "对国内的启示", "模式要点与可借鉴之处"];
+
+/** Long cases are stored as one summary with labeled paragraphs. Short news stays one paragraph. */
+function researchSections(summary: string): Array<{ label: string; body: string }> | null {
+  const re = new RegExp(`(${RESEARCH_LABELS.join("|")})\\s*[:：]`, "g");
+  const marks = [...summary.matchAll(re)];
+  if (marks.length < 2) return null;
+  const parts: Array<{ label: string; body: string }> = [];
+  for (let i = 0; i < marks.length; i++) {
+    const start = (marks[i]!.index ?? 0) + marks[i]![0].length;
+    const end = marks[i + 1]?.index ?? summary.length;
+    const body = summary.slice(start, end).trim();
+    if (body) parts.push({ label: marks[i]![1]!, body });
+  }
+  return parts.length >= 2 ? parts : null;
+}
+
 const PosterSheet = lazy(() => import("../features/item/PosterSheet"));
 
 export async function loader({ params, request }: Route.LoaderArgs) {
@@ -38,7 +56,7 @@ export function meta({ loaderData }: Route.MetaArgs) {
     noindex: !item.indexable,
     jsonLd: breadcrumbLd([
       { name: SITE.name, path: "/" },
-      { name: item.selected ? "精选" : "全部动态", path: item.selected ? "/" : "/all" },
+      { name: item.selected ? NAV.selected : NAV.all, path: item.selected ? "/" : "/all" },
       { name: item.title, path: `/items/${item.id}` },
     ]),
   });
@@ -97,6 +115,7 @@ async function shareOrCopy(item: Pick<SiteItemDetail, "id" | "title">): Promise<
 
 export default function ItemPage() {
   const { item } = useLoaderData<typeof loader>();
+  const sections = item.summary ? researchSections(item.summary) : null;
   const navigate = useNavigate();
   const hasTranslation = item.hasTranslation;
   const lang = item.bodyLanguage;
@@ -301,12 +320,26 @@ export default function ItemPage() {
             )}
           </div>
           {!isX && <h1 className="text-[26px] font-bold leading-[1.38] tracking-[-0.01em] text-ink lg:text-[32px] lg:leading-[1.34] xl:text-[36px] xl:leading-[1.3]">{item.title}</h1>}
+          {!isX && item.category === "policy" && (
+            <p className="mt-2 text-[13px] text-ink-4">{policyNoticeLine(item.title, item.source.name, item.publishedAt)}</p>
+          )}
           {!isX && item.originalTitle && <p className="mt-2.5 text-[14px] leading-relaxed text-ink-4">{item.originalTitle}</p>}
 
           {item.summary && (
             <section className={isX ? "mt-4" : "mt-7 xl:mt-8"}>
               <div className="mb-2 text-[12px] font-semibold text-accent">{summaryOnly ? "摘要" : "AI 导读"}</div>
-              <p className="text-[18px] leading-[1.7] text-ink xl:text-[20px] xl:leading-[1.7]">{item.summary}</p>
+              {sections ? (
+                <div className="space-y-5">
+                  {sections.map((part) => (
+                    <div key={part.label}>
+                      <div className="mb-1 text-[13px] font-semibold text-ink-3">{part.label}</div>
+                      <p className="text-[18px] leading-[1.7] text-ink xl:text-[20px] xl:leading-[1.7]">{part.body}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-[18px] leading-[1.7] text-ink xl:text-[20px] xl:leading-[1.7]">{item.summary}</p>
+              )}
             </section>
           )}
 

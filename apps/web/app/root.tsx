@@ -1,5 +1,5 @@
 import { titled } from "./lib/seo";
-import { SITE } from "@aihot/industry/site";
+import { NAV, SITE } from "@aihot/industry/site";
 import {
   isRouteErrorResponse, Link, Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData, useLocation, useNavigation, useRouteError, useRouteLoaderData,
   type ShouldRevalidateFunction,
@@ -21,7 +21,7 @@ export const links: Route.LinksFunction = () => [
   { rel: "icon", type: "image/png", href: "/icon.png" },
   { rel: "apple-touch-icon", href: "/apple-icon.png" },
   { rel: "manifest", href: "/manifest.webmanifest" },
-  { rel: "alternate", type: "application/rss+xml", title: `${SITE.name} — 精选`, href: "/feed.xml" },
+  { rel: "alternate", type: "application/rss+xml", title: `${SITE.name} — ${NAV.selected}`, href: "/feed.xml" },
 ];
 
 interface SiteMeta {
@@ -117,10 +117,10 @@ export function ErrorBoundary() {
         </p>
         <div className="mt-6 flex justify-center gap-2.5">
           <Link to="/" className={buttonClass("primary")}>
-            回到精选
+            回到{NAV.selected}
           </Link>
           <Link to="/all" className={buttonClass("secondary")}>
-            浏览全部动态
+            浏览{NAV.all}
           </Link>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { SITE, withSubject } from "@aihot/industry/site";
+import { NAV, SITE } from "@aihot/industry/site";
 import { Link, redirect, useLoaderData } from "react-router";
 import type { Route } from "./+types/topic";
 import type { FeedItemSummary } from "@aihot/contracts/site";
@@ -29,7 +29,7 @@ export async function loader({ params, request }: Route.LoaderArgs) {
 }
 
 export function meta({ loaderData }: Route.MetaArgs) {
-  if (!loaderData) return [{ title: titled("主题不存在") }, { name: "robots", content: "noindex" }];
+  if (!loaderData) return [{ title: titled(`${NAV.topics}不存在`) }, { name: "robots", content: "noindex" }];
   const { topic, page } = loaderData.data;
   const path = page > 1 ? `/topics/${topic.slug}/page/${page}` : `/topics/${topic.slug}`;
   return pageMeta({
@@ -38,7 +38,7 @@ export function meta({ loaderData }: Route.MetaArgs) {
     path,
     image: `/og/topics/${topic.slug}.png`,
     noindex: !topic.indexable,
-    jsonLd: breadcrumbLd([{ name: SITE.name, path: "/" }, { name: "主题", path: "/topics" }, { name: topic.name, path: `/topics/${topic.slug}` }]),
+    jsonLd: breadcrumbLd([{ name: SITE.name, path: "/" }, { name: NAV.topics, path: "/topics" }, { name: topic.name, path: `/topics/${topic.slug}` }]),
   });
 }
 
@@ -54,7 +54,7 @@ export default function TopicPage() {
         <div className="flex items-start justify-between gap-4">
           <h1 className="text-[22px] font-bold leading-[1.35] text-ink">{topic.name}</h1>
           <span className="hidden pt-2 lg:block">
-            <MoreLink to="/topics">全部主题</MoreLink>
+            <MoreLink to="/topics">全部{NAV.topics}</MoreLink>
           </span>
         </div>
         <p className="mt-1 max-w-[640px] text-[13px] leading-relaxed text-ink-3">{topic.definition}</p>
@@ -64,7 +64,7 @@ export default function TopicPage() {
           </span>
           {topic.related.length > 0 && (
             <span className="flex flex-wrap items-center gap-1.5 text-[12.5px]">
-              <span className="text-ink-4">相关主题</span>
+              <span className="text-ink-4">相关{NAV.topics}</span>
               {topic.related.map((r) => (
                 <Link key={r.slug} to={`/topics/${r.slug}`} className="chip">
                   {r.name}
@@ -85,7 +85,7 @@ export default function TopicPage() {
       </div>
       {items.length === 0 ? (
         <div className="lg:card">
-          <EmptyState title="这个主题暂时还没有精选内容" />
+          <EmptyState title={`这个${NAV.topics}暂时还没有内容`} />
         </div>
       ) : (
         <DayList items={items} />

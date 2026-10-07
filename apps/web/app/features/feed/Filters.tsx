@@ -19,8 +19,8 @@ export function hrefWith(base: string, params: URLSearchParams, patch: Record<st
 }
 
 /**
- * The feed's one filter row (精选 and 全部动态 alike): 全部, 一手, then the categories. One choice at a
- * time: picking 一手 clears the category and picking a category clears 一手. Older 资讯 / X links
+ * The feed's one filter row (精选 and 全部动态 alike): 全部, 官方, then the categories. One choice at a
+ * time: picking 官方 clears the category and picking a category clears 官方. Older 资讯 / X links
  * still filter; the row then shows 全部.
  */
 export function CategoryTabs({ base, category, channel = "all", layoutId, size = "md", className = "" }: { base: string; category: CategoryKey | null; channel?: ChannelKey; layoutId: string; size?: "md" | "sm"; className?: string }) {

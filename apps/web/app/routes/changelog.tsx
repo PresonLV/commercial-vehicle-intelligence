@@ -8,9 +8,9 @@ import { AsideCard, ReadingLayout } from "../components/ui/Page";
 import { IconChevronRight } from "../components/icons";
 import { Inline, dateHeading } from "../features/changelog/text";
 
-/** Shared caches may keep this page for five minutes. */
+/** 只在后台打开，不进公开缓存。 */
 export function headers() {
-  return { "Cache-Control": "public, max-age=0, s-maxage=300, stale-while-revalidate=600" };
+  return { "Cache-Control": "private, no-store", "X-Robots-Tag": "noindex, nofollow" };
 }
 
 interface Release {
@@ -26,7 +26,7 @@ export async function loader({ request }: { request: Request }) {
 }
 
 export function meta() {
-  return pageMeta({ title: "更新日志", description: `${SITE.name} 的功能更新、优化、公告与下线记录。`, path: "/changelog", image: "/og/pages/changelog.png" });
+  return pageMeta({ title: "更新日志", description: `${SITE.name} 的功能更新、优化、公告与下线记录。`, path: "/admin/changelog", noindex: true });
 }
 
 const KIND_DOT: Record<Release["kind"], string> = {

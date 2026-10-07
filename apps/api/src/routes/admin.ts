@@ -13,6 +13,8 @@ import { listMonitorEvents, listMonitorPosts, relinkPost, resolveMonitorPost, re
 import { releaseReceipt, requeueFailedArticles, resolveDelivery, runsOverview } from "@aihot/backend/admin/runs";
 import { listBudgets, listTargets, replaceContactQr, setTargetEnabled, updateBudget } from "@aihot/backend/admin/settings";
 import { createSource, fetchNow, listSources, previewSource, sourceDetail, updateSource } from "@aihot/backend/admin/sources";
+import { addManualMetric, approveMetric, importMetricCsv, listAdminMetrics } from "@aihot/backend/admin/metrics";
+import { addManualQuote, approveQuote, importQuoteCsv, listAdminQuotes } from "@aihot/backend/admin/quotes";
 import { sql } from "@aihot/backend/db";
 import { loadContact } from "@aihot/backend/site/contact";
 import { sendProblem } from "../http/respond.ts";
@@ -52,6 +54,22 @@ export function registerAdmin(app: FastifyInstance) {
   app.post("/api/admin/sources/:id/fetch", adminHandler(async (req, reply, admin) => orNotFound(req, reply, await fetchNow(param(req, "id"), actorOf(admin)))));
 
   // Content and events (F19)
+  app.get("/api/admin/metrics", adminHandler(async () => listAdminMetrics()));
+  app.post("/api/admin/metrics", adminHandler(async (req, _reply, admin) => addManualMetric(body(req) as never, actorOf(admin))));
+  app.post("/api/admin/metrics/import", adminHandler(async (req, _reply, admin) => {
+    const payload = body<{ csv?: string; reason?: string }>(req);
+    return importMetricCsv(String(payload.csv ?? ""), String(payload.reason ?? ""), actorOf(admin));
+  }));
+  app.post("/api/admin/metrics/:id/approve", adminHandler(async (req, reply, admin) => orNotFound(req, reply, await approveMetric(param(req, "id"), String(body(req).reason ?? ""), actorOf(admin)))));
+
+  app.get("/api/admin/quotes", adminHandler(async () => listAdminQuotes()));
+  app.post("/api/admin/quotes", adminHandler(async (req, _reply, admin) => addManualQuote(body(req) as never, actorOf(admin))));
+  app.post("/api/admin/quotes/import", adminHandler(async (req, _reply, admin) => {
+    const payload = body<{ csv?: string; reason?: string }>(req);
+    return importQuoteCsv(String(payload.csv ?? ""), String(payload.reason ?? ""), actorOf(admin));
+  }));
+  app.post("/api/admin/quotes/:id/approve", adminHandler(async (req, reply, admin) => orNotFound(req, reply, await approveQuote(param(req, "id"), String(body(req).reason ?? ""), actorOf(admin)))));
+
   app.get("/api/admin/content", adminHandler(async (req) => ({ rows: await searchContent(q(req).q ?? "") })));
   app.get("/api/admin/content/:id", adminHandler(async (req, reply) => orNotFound(req, reply, await contentChain(param(req, "id")))));
   app.post("/api/admin/content/:id/visibility", adminHandler(async (req, _reply, admin) => setVisibility(param(req, "id"), body(req) as never, actorOf(admin))));

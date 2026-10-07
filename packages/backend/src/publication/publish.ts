@@ -9,6 +9,7 @@ import { sha256, stableJson } from "../lib/ids.ts";
 import { collapseWhitespace } from "../lib/text.ts";
 import { itemUrl } from "./links.ts";
 import { enqueue, QUEUES, shutdownSignal } from "../jobs/queue.ts";
+import { syncMetricPoints } from "../metrics/store.ts";
 import {
   bodyModeOf, channelOf, displayTags, isIndexable, isPoolEligible, isSelectable, mayRedistribute, type SourceFacts,
 } from "./rules.ts";
@@ -25,6 +26,7 @@ interface ArticleRow {
   backfill: boolean;
   body_status: string;
   body_text: string | null;
+  body_html: string | null;
   x_post: unknown;
   grouped_at: Date | null;
 }
@@ -148,7 +150,7 @@ export async function publishArticle(articleId: string, options: PublishOptions 
 export async function publishArticleTx(tx: Tx, articleId: string, options: PublishOptions = {}): Promise<PublishResult | null> {
   const [article] = await tx<ArticleRow[]>`
     SELECT id, source_id, url, title, language, published_at, discovered_at, timeline_at, backfill, body_status,
-           body_text, x_post, grouped_at
+           body_text, body_html, x_post, grouped_at
     FROM articles WHERE id = ${articleId} FOR UPDATE`;
   if (!article) return null;
   // Reports take this lock exclusively while reading candidates. Hold it through commit so a
@@ -321,6 +323,16 @@ export async function publishArticleTx(tx: Tx, articleId: string, options: Publi
     await tx`UPDATE selected_state SET in_set = false, payload_hash = NULL, last_seq = ${seq} WHERE article_id = ${articleId}`;
     ledger = "remove";
   }
+
+  await syncMetricPoints(tx, {
+    articleId,
+    category,
+    tags,
+    text: [next.title, summary, article.body_text].filter(Boolean).join("\n"),
+    html: article.body_html ?? "",
+    sourceName: source.name,
+    url: article.url,
+  });
 
   const wasPublic = !!previous && previous.visibility !== "withdrawn" && previous.eligible;
   const reduced =

@@ -27,6 +27,7 @@ export function parseLooseDate(value: string | null | undefined, utcOffset = "+0
   if (!value) return null;
   const v = value.trim();
   if (!v) return null;
+  if (/^\d{8}$/.test(v)) return atOffset(v.slice(0, 4), v.slice(4, 6), v.slice(6, 8), "00", "00", "00", utcOffset);
   if (EXPLICIT_ZONE.test(v) || /^\d{4}-\d{2}-\d{2}$/.test(v)) {
     const direct = Date.parse(v);
     if (Number.isFinite(direct) && /\d{4}/.test(v)) return new Date(direct);
@@ -119,9 +120,50 @@ async function fetchListingText(source: SourceRow): Promise<{ text: string; viaJ
     const page = await jinaRead(target, { purpose: "source_listing", subject: `source:${source.id}`, cacheToleranceSeconds: source.config.cacheToleranceSeconds, perRead: true });
     return { text: page.markdown, viaJina: true, base: source.config.baseUrl ?? target };
   }
-  const res = await guardedFetch(url, { headers: { accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8" }, timeoutMs: 25_000 });
+  const form = source.config.bodyEncoding === "form" && source.config.bodyJson && typeof source.config.bodyJson === "object";
+  const body = source.config.bodyJson
+    ? form
+      ? new URLSearchParams(Object.entries(source.config.bodyJson as Record<string, unknown>).map(([k, v]) => [k, v == null ? "" : String(v)])).toString()
+      : JSON.stringify(source.config.bodyJson)
+    : undefined;
+  const res = await guardedFetch(url, {
+    method: source.config.method ?? "GET",
+    headers: {
+      accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
+      ...(source.config.headers ?? {}),
+      ...(body ? { "content-type": form ? "application/x-www-form-urlencoded" : "application/json" } : {}),
+    },
+    body,
+    timeoutMs: 25_000,
+  });
   if (res.status !== 200) throw new FetchError(`HTTP ${res.status}`, res.status);
-  return { text: res.text(), viaJina: false, base: source.config.baseUrl ?? url };
+  let raw = res.text();
+  if (source.config.unwrapCdata === true) raw = unwrapCdata(raw);
+  const path = source.config.htmlJsonPath;
+  if (typeof path === "string" && path) return { text: htmlAtJsonPath(raw, path), viaJina: false, base: source.config.baseUrl ?? url };
+  return { text: raw, viaJina: false, base: source.config.baseUrl ?? url };
+}
+
+/** Hanweb list proxies return the rows as CDATA, which a selector cannot see until they are unwrapped. */
+export function unwrapCdata(raw: string): string {
+  const parts = [...raw.matchAll(/<!\[CDATA\[([\s\S]*?)\]\]>/g)].map((match) => match[1]!).filter(Boolean);
+  return parts.length ? parts.join("\n") : raw;
+}
+
+/** A listing wrapped as JSON, used when a ministry page renders its list from an HTML field. */
+export function htmlAtJsonPath(raw: string, path: string): string {
+  let cur: unknown;
+  try {
+    cur = JSON.parse(raw);
+  } catch {
+    throw new FetchError("htmlJsonPath: response is not JSON");
+  }
+  for (const part of path.split(".")) {
+    if (!cur || typeof cur !== "object") throw new FetchError("htmlJsonPath did not resolve to HTML");
+    cur = (cur as Record<string, unknown>)[part];
+  }
+  if (typeof cur !== "string" || !cur.trim()) throw new FetchError("htmlJsonPath did not resolve to HTML");
+  return cur;
 }
 
 export function fromMarkdown(md: string, base: string, source: SourceRow): Candidate[] {
