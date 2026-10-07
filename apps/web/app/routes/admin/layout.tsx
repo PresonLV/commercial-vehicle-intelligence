@@ -29,6 +29,7 @@ const NAV: Array<{ group: string; items: Array<{ to: string; label: string; coun
     items: [
       { to: "/admin/content", label: "内容诊断" },
       { to: "/admin/metrics", label: "数据录入" },
+      { to: "/admin/quotes", label: "卡车报价" },
       { to: "/admin/sources", label: "信源", count: "sources", tone: "bad" },
       ...(FEATURES.codexResetMonitor ? [{ to: "/admin/monitor", label: "Codex 重置", count: "monitor" as const, tone: "accent" as const }] : []),
       { to: "/admin/feedback", label: "反馈", count: "feedback", tone: "accent" },

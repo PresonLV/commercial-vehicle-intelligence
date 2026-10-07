@@ -8,6 +8,7 @@ import { InvalidCursorError } from "@aihot/backend/lib/cursor";
 import { exportMarkdown, loadItemDetail, siteItemDetail } from "@aihot/backend/publication/detail";
 import { loadPool, SearchBusyError } from "@aihot/backend/publication/pool";
 import { loadMetricPoints } from "@aihot/backend/publication/metrics";
+import { loadTruckQuotes } from "@aihot/backend/publication/quotes";
 import { loadTimeline } from "@aihot/backend/publication/timeline";
 import { loadStoryFollowups } from "@aihot/backend/publication/followups";
 import { loadDevelopments, loadGroupReports } from "@aihot/backend/publication/groups";
@@ -105,6 +106,11 @@ export function registerSite(app: FastifyInstance) {
   app.get("/api/site/metrics", siteHandler(async (req, reply) => {
     const points = await loadMetricPoints();
     return sendJsonWithEtag(req, reply, { points }, { etagPrefix: "metrics", cacheControl: "public, max-age=60, s-maxage=60" });
+  }));
+
+  app.get("/api/site/quotes", siteHandler(async (req, reply) => {
+    const points = await loadTruckQuotes();
+    return sendJsonWithEtag(req, reply, { points }, { etagPrefix: "quotes", cacheControl: "public, max-age=60, s-maxage=60" });
   }));
 
   app.get("/api/site/pool", siteHandler(async (req, reply) => {
